@@ -1,0 +1,28 @@
+.nav_button{
+    margin: 5px;
+    background-color: rgb(196, 180, 9);
+    border-color: transparent;
+    border-radius: 5px;
+    width: 23%;
+    font-weight: bold;
+    color: rgb(53, 53, 51);
+}
+
+@media (min-width: 1025px)  {
+    #bnav{
+        padding-top: 50px;
+    }
+    .nav_button{
+        height: 50px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+
+}
+
+@media (min-width: 320px) and (max-width: 480px) {}

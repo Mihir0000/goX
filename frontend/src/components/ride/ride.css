@@ -1,0 +1,73 @@
+.ride_form {
+    text-align: left;
+}
+
+@media (min-width: 1025px) {
+    .ride_body {
+        background-image: url(../../assets/bgac.webp);
+        background-position: left bottom;
+        background-repeat: no-repeat;
+        background-size: 40% !important;
+        background-color: rgb(8, 107, 102);
+        background-attachment: fixed;
+        padding: 40px;
+        margin: 0px !important;
+        padding-top: 5% !important;
+        padding-bottom: 8%;
+
+    }
+
+    .ride_body h5 {
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    .ride_form {
+        background-color: rgba(240, 248, 255, 0.809);
+        border-radius: 7px;
+        margin-left: 35%;
+    }
+
+    .ride_input {
+        margin-right: 15px;
+        margin-left: 5%;
+        border-color: rgb(30, 120, 177) !important;
+    }
+
+    .ride_label {
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: rgb(8, 107, 102);
+    }
+
+    .ride_btn {
+        background-color: rgb(30, 120, 177) !important;
+        width: 30%;
+        margin: 20px;
+        color: aliceblue !important;
+    }
+    .ride2_btn {
+        background-color: rgb(30, 120, 177) !important;
+        width: 30%;
+        margin-left: 35%;
+        margin-bottom: 35px;
+        color: aliceblue !important;
+    }
+
+    .ride_btn:hover {
+        background-color: rgb(22, 61, 85) !important;
+    }
+    .location_input {
+        margin-left: 27% ;
+        margin-bottom: 25px;
+        margin-top: 25px;
+        border-color: transparent;
+        border-radius: 3px;
+      }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {}
+
+@media (min-width: 481px) and (max-width: 767px) {}
+
+@media (min-width: 320px) and (max-width: 480px) {}

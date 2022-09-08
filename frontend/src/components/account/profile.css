@@ -1,0 +1,47 @@
+.profile_section {
+  text-align: left;
+  padding-top: 60px;
+  /* margin-top: 90px; */
+}
+
+.profile_section h4 {
+  text-align: center;
+  color: rgb(100, 99, 99);
+}
+
+.profile_icon {
+  height: 25px;
+}
+
+@media (min-width: 1025px) {
+  #profile_body {
+    background-image: url(../../assets/bgac.webp);
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    background-size: 40% !important;
+    background-color: rgb(8, 107, 102);
+    background-attachment: fixed;
+    padding: 40px !important;
+    margin: 0px !important;
+  }
+  .profile_section {
+    width: 40%;
+    margin-left: 35rem;
+    padding: 25px !important;
+  }
+  .profile_div {
+    margin-bottom: 25px !important;
+  }
+  #account_heading {
+    padding-bottom: 30px;
+    padding-top: 20px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+}
+
+@media (min-width: 320px) and (max-width: 480px) {}

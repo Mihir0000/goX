@@ -1,0 +1,53 @@
+.card {
+    margin-bottom: 8px;
+    background-color: rgb(0, 4, 8);
+    text-align: left;
+    color: white !important;
+    margin-right: 0 !important;
+}
+
+a:hover {
+    color: rgb(81, 182, 213) !important;
+}
+#body_heading{
+    padding-top: 70px;
+    color: rgb(85, 83, 83);
+}
+
+
+
+@media (min-width: 1025px) {
+    .card {
+        width: 55%;
+        height: 90px;
+        padding: 8px;
+        padding-top: 18px;
+        padding-left: 45px;
+    }
+
+    #booking_section {
+        padding-left: 31%;
+        padding-top: 90px;
+    }
+    .lottie{
+        padding-right: 48%;
+    }
+    #home_body{
+        background-image: url(../../assets/bg1.webp);
+        background-position: bottom;
+        background-repeat: no-repeat;
+        background-size:cover;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {}
+
+@media (min-width: 481px) and (max-width: 767px) {}
+
+@media (min-width: 320px) and (max-width: 480px) {}
+
+span {
+    font-weight: bold;
+}
+
+
