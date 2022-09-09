@@ -10,6 +10,7 @@ export const Bnav = () => {
         <Link to="/profile"><button className='nav_button'>Account</button></Link>
         <Link to="/"><button className='nav_button'>Home</button></Link>
         <Link to="/bookings"><button className='nav_button'>Bookings</button></Link>
+        <Link to="/"><button className='nav_button'>Admin Dashbord</button></Link>
       </div>
     </>
   )

@@ -20,9 +20,9 @@ function App() {
           exact
           path="/"
           element={
-            <Protect>
+            // <Protect>
               <Home />
-            </Protect>
+            // </Protect>
           }
         />
         <Route path="/login" element={<Login />} />
@@ -30,17 +30,17 @@ function App() {
         <Route
           path="/profile"
           element={
-            <Protect>
+            // <Protect>
               <Profile />
-            </Protect>
+            // </Protect>
           }
         />
         <Route
           path="/bookings"
           element={
-            <Protect>
+            // <Protect>
               <Booking />
-            </Protect>
+            // </Protect>
           }
         />
         <Route path="/info" element={<Info />} />

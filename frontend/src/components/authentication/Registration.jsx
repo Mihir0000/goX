@@ -13,23 +13,22 @@ export default function Registration() {
   const validPassword = RegExp(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,20}$/);
 
   const [inputState, setInputState] = useState({
-    isError: {
-      userName: "",
-      userEmail: "",
-      password: "",
-      // confirmPassword:""
-    },
+    userName: "",
+    userEmail: "",
+    password: "",
+    // confirmPassword:""
   });
   const [error, setError] = useState({});
-  const [confirm, setConfirm] = useState()
+  const [confirm, setConfirm] = useState();
   let name, value;
   const handleChange = (event) => {
     event.persist();
     name = event.target.name;
     value = event.target.value;
     setInputState({ ...inputState, [name]: value });
-    setConfirm(event.target.value)
+    setConfirm(event.target.value);
   };
+  console.log(value, "lk");
 
   const validation = () => {
     let error = {};
@@ -47,16 +46,15 @@ export default function Registration() {
     }
     if (!inputState.password) {
       error.password = "Enter password";
-    } 
+    }
     // else if (!validPassword.test(inputState.password)) {
     //   error.password =
     //     "atleast 1 uppercase 1 lowercase and 1 number minimum 8 characters";
     // }
     if (!confirm) {
       error.confirm = "Confirm password";
-    } else if (inputState.password !== confirm) {
-      error.confirm =
-        "password doesn't match";
+    } else if (inputState.password !== confirm && confirm.length > 0) {
+      error.confirm = "password doesn't match";
     }
 
     return error;
@@ -70,29 +68,33 @@ export default function Registration() {
     setError(validation());
     if (Object.keys(ErrorList).length !== 0) {
     } else {
-    axios
-      .post("http://localhost:5000/register", value)
-      .then((res) => {
-        console.log("Axios res: ", res);
-        swal(
-          "Good job!",
-          "A Verification Code has been sent to your userEmail",
-          "success"
-        );
-        setInputState({
-          userName: "",
-          userEmail: "",
-          password: "",
+      axios
+        .post("http://localhost:5000/register", inputState, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((res) => {
+          console.log("Axios res: ", res);
+          swal(
+            "Good job!",
+            "A Verification Code has been sent to your userEmail",
+            "success"
+          );
+          setInputState({
+            userName: "",
+            userEmail: "",
+            password: "",
+          });
+          setConfirm("");
+          navigate("/login");
+        })
+        .catch((err) => {
+          console.log(err);
+          swal("Already Registered");
         });
-        setConfirm("")
-        navigate("/login");
-      })
-      .catch((err) => {
-        console.log(err);
-        swal("Already Registered");
-      });
+    }
   };
-}
 
   // const submitHandler1 = (event) => {
   //   event.preventDefault();
