@@ -53,7 +53,7 @@ export default function Registration() {
         "A Verification Code has been sent to your email",
         "success"
       );
-      navigate("/verification");
+      navigate("/login");
     }
   };
 
@@ -109,7 +109,7 @@ export default function Registration() {
             </form>
           </div>
           <div className="flex2">
-            <h2>Please Login to get access into CabService</h2>
+            <h2>Please Login to get access into goX</h2>
           </div>
         </div>
       </div>

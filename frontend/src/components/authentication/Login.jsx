@@ -113,7 +113,7 @@ export default function Login() {
             </form>
           </div>
           <div className="flex2">
-            <h2>Please Login to get access into CabService</h2>
+            <h2>Please Login to get access into goX</h2>
           </div>
         </div>
       </div>
