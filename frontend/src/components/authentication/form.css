@@ -93,6 +93,7 @@ a:hover {
   form {
     width: 450px;
     padding: 30px;
+    display: block !important;
   }
 
   .input {
@@ -148,18 +149,13 @@ a:hover {
   #radio p{
     margin-bottom: 2px!important;
   }
-  .Lerror{
+  .err{
     color: rgb(249, 91, 59);
     text-align: left;
     margin-left: 70px;
     font-size: 13px;
   }
-  .error{
-    color: rgb(249, 91, 59);
-    text-align: left;
-    margin-left: 15px;
-    font-size: 13px;
-  }
+
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {}

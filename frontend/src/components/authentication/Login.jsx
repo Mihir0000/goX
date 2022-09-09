@@ -3,32 +3,32 @@ import { Container, Modal, Button } from "react-bootstrap";
 import "./form.css";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import axios from "axios";
 
 export default function Login() {
- 
   const validateEmail = RegExp(
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   );
-  
 
   const [inputState, setInputState] = useState({
-    email: "",
+    userEmail: "",
     password: "",
   });
   const [error, setError] = useState({});
-  console.log("error", error);
+  // console.log("error", error);
   let name, value;
   const handleChange = (event) => {
+    // event.persist();
     name = event.target.name;
     value = event.target.value;
     setInputState({ ...inputState, [name]: value });
   };
   const validation = () => {
     let error = {};
-    if (!inputState.email) {
-      error.email = "Email is required";
-    } else if (!validateEmail.test(inputState.email)) {
-      error.email = "InvalclassName Email";
+    if (!inputState.userEmail) {
+      error.userEmail = "Email is required";
+    } else if (!validateEmail.test(inputState.userEmail)) {
+      error.userEmail = "Invalid Email";
     }
     if (!inputState.password) {
       error.password = "Enter password";
@@ -40,24 +40,35 @@ export default function Login() {
   };
 
   const navigate = useNavigate();
+  // console.log(value,"value");
 
   const submitHandler = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     let ErrorList = validation();
     setError(validation());
+    // navigate("/home");
     if (Object.keys(ErrorList).length !== 0) {
     } else {
-      if (
-        localStorage.getItem("email") === inputState.email &&
-        localStorage.getItem("password") === inputState.password
-      ) {
-        swal("Login Successfull !", "Enjoy your Ride", "success");
-        sessionStorage.setItem("email", inputState.email);
-        sessionStorage.setItem("password", inputState.password);
-        navigate("/");
-      } else  {
-        swal("Email or password doesn't match");
-      }
+      axios
+        .post("http://localhost:5000/login", inputState, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((res) => {
+          console.log("Axios res: ", res);
+          // swal("Yayy! Login Successful!", "Enjoy your ride", "success");
+          window.localStorage.setItem("email", inputState.userEmail)
+          setInputState({
+            userEmail: "",
+            password: "",
+          });
+          navigate("/");
+        })
+        .catch((err) => {
+          console.log(err);
+          swal("wrong email or password");
+        });
     }
   };
 
@@ -72,8 +83,8 @@ export default function Login() {
               <input
                 className="input"
                 type="email"
-                name="email"
-                value={inputState.email}
+                name="userEmail"
+                value={inputState.userEmail}
                 onChange={handleChange}
                 fullWclassNameth
                 placeholder="Email"
@@ -83,7 +94,7 @@ export default function Login() {
                 }}
                 variant="standard"
               />
-              <p className="Lerror">{error.email}</p>
+              <p className="Lerror">{error.userEmail}</p>
 
               <input
                 className="input"
@@ -113,7 +124,7 @@ export default function Login() {
             </form>
           </div>
           <div className="flex2">
-            <h2>Please Login to get access into CabService</h2>
+            <h2>Please Login to get access into goX</h2>
           </div>
         </div>
       </div>
