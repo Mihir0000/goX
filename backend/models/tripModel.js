@@ -1,6 +1,14 @@
 const mongoose = require('mongoose');
 
 const tripSchema = new mongoose.Schema({
+    userEmail: {
+        type: String,
+        required: true,
+    },
+    id: {
+        type: Number,
+        default: Date.now(),
+    },
     source: {
         type: String,
         require: true,
@@ -15,7 +23,7 @@ const tripSchema = new mongoose.Schema({
     },
     amount: {
         type: Number,
-        required: true,
+        default: 0,
     },
     carType: {
         type: String,
