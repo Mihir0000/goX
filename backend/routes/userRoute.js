@@ -35,4 +35,9 @@ router.route('/login').post(async (req, res) => {
     }
 });
 
+router.route('/admin/dashboard').get(async (req, res) => {
+    const {role} = req.body;
+    
+});
+
 module.exports = router;
