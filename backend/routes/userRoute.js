@@ -97,8 +97,8 @@ router.route('/trip').post(async (req, res) => {
 });
 
 router.route('/me').get(async (req, res) => {
-    const { userId } = req.body;
-    const user = await userModel.findOne({ userId });
+    const { userEmail } = req.body;
+    const user = await userModel.findOne({ userEmail });
     if (user) {
         res.status(200).send({ user });
     } else {
