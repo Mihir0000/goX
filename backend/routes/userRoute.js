@@ -40,7 +40,7 @@ router.route('/login').post(async (req, res) => {
     }
 });
 
-router.route('/admin/dashboard').post(async (req, res) => {
+router.route('/admin/setPrice').post(async (req, res) => {
     const { userEmail, basePrice, rain, frost } = req.body;
     const user = await userModel.findOne({ userEmail });
     if (!user) {
@@ -62,6 +62,7 @@ router.route('/admin/dashboard').post(async (req, res) => {
                     basePrice,
                     rain,
                     frost,
+                    updateAt: Date.now(),
                     lastUpdate: userEmail,
                 }
             );
@@ -115,6 +116,43 @@ router.route('/me').get(async (req, res) => {
     } else {
         res.status(402).send({ message: 'User Not Found' });
     }
+});
+
+router.route('/admin/allUsers').get(async (req, res) => {
+    const { userEmail } = req.query;
+    const user = await userModel.findOne({ userEmail });
+    if (user && user.role === 'admin') {
+        const alluser = await userModel.find({});
+        res.status(200).send(alluser);
+    } else {
+        res.status(404).send({ message: 'Users Not Found' });
+    }
+});
+
+router.route('/admin/information').get(async (req, res) => {
+    const allTrip = await tripModel.find({});
+    const alluser = await userModel.find({});
+    let totalBookedPrice = 0;
+    for (let i = 0; i < allTrip.length; i++) {
+        totalBookedPrice += allTrip[i].amount;
+    }
+    res.send({
+        totalBookedPrice,
+        totalTrips: allTrip.length,
+        totalUsers: alluser.length,
+    });
+});
+
+router.route('/admin/last10Trip').get(async (req, res) => {
+    const allTrip = await tripModel.find({});
+    allTrip.sort((a, b) => b.id - a.id);
+    let tenTrip = [];
+    for (let i = 0; i < 10; i++) {
+        if (allTrip[i]) {
+            tenTrip.push(allTrip[i]);
+        }
+    }
+    res.status(200).send(tenTrip);
 });
 
 module.exports = router;
