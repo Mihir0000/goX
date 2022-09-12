@@ -7,7 +7,7 @@ import "./profile.css";
 export const Profile = () => {
 
   const [userData, setUserData] = useState()
-  console.log(userData, "userData");
+  console.log(userData, "userData"); 
 
   useEffect(() => {
     const userEmail = localStorage.getItem("email")
