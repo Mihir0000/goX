@@ -31,7 +31,10 @@ router.route('/login').post(async (req, res) => {
     } else if (!user) {
         res.status(401).send({ message: 'Please Register First' });
     } else if (userEmail === user.userEmail && password === user.password) {
-        res.status(200).send({ message: 'Login Successfully !' });
+        res.status(200).send({
+            message: 'Login Successfully !',
+            id: user.userId,
+        });
     } else {
         res.status(403).send({ message: 'Invalid Login' });
     }
@@ -96,8 +99,16 @@ router.route('/trip').post(async (req, res) => {
     }
 });
 
+router.route('/trip/singleUser').get(async (req, res) => {
+    const { userEmail } = req.query;
+    const allTrip = await tripModel.find({ userEmail });
+    allTrip.sort((a, b) => b.id - a.id);
+    console.log(allTrip.length);
+    res.send({ allTrip });
+});
+
 router.route('/me').get(async (req, res) => {
-    const { userEmail } = req.body;
+    const { userEmail } = req.query;
     const user = await userModel.findOne({ userEmail });
     if (user) {
         res.status(200).send({ user });
