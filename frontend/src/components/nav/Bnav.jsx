@@ -1,16 +1,35 @@
 import { Container } from '@mui/system'
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import "./nav.css"
 
 export const Bnav = () => {
+  const [userData, setUserData] = useState()
+  // console.log(userData, "userData");
+
+  useEffect(() => {
+    const userEmail = localStorage.getItem("email")
+    axios
+      .get(`http://localhost:5000/me`, { params: { userEmail } })
+      .then((res) => {
+        console.log(res);
+        setUserData(res.data.user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+
   return (
     <>
       <div id='bnav'>
         <Link to="/profile"><button className='nav_button'>Account</button></Link>
         <Link to="/"><button className='nav_button'>Home</button></Link>
         <Link to="/bookings"><button className='nav_button'>Bookings</button></Link>
-        <Link to="/"><button className='nav_button'>Admin Dashbord</button></Link>
+        {userData?.role === 'admin' && <Link to="/"><button className='nav_button'>Admin Dashbord</button></Link>}
+
       </div>
     </>
   )
