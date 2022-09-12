@@ -40,7 +40,7 @@ router.route('/login').post(async (req, res) => {
     }
 });
 
-router.route('/admin/dashboard').post(async (req, res) => {
+router.route('/admin/setPrice').post(async (req, res) => {
     const { userEmail, basePrice, rain, frost } = req.body;
     const user = await userModel.findOne({ userEmail });
     if (!user) {
@@ -62,6 +62,7 @@ router.route('/admin/dashboard').post(async (req, res) => {
                     basePrice,
                     rain,
                     frost,
+                    updateAt: Date.now(),
                     lastUpdate: userEmail,
                 }
             );
@@ -114,6 +115,17 @@ router.route('/me').get(async (req, res) => {
         res.status(200).send({ user });
     } else {
         res.status(402).send({ message: 'User Not Found' });
+    }
+});
+
+router.route('/admin/allUsers').get(async (req, res) => {
+    const { userEmail } = req.query;
+    const user = await userModel.findOne({ userEmail });
+    if (user && user.role === 'admin') {
+        const alluser = await userModel.find({});
+        res.status(200).send(alluser);
+    } else {
+        res.status(404).send({ message: 'Users Not Found' });
     }
 });
 
