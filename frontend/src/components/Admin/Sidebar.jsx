@@ -83,11 +83,40 @@ const Sidebar = () => {
                                 </div>
                             </div>
                             <div className="navbar-nav w-100">
-                                <a href="/admin_dashboard" className="nav-item nav-link active"><i className="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                                <a href="/admin_dashboard" className="nav-item nav-link"><i className="fa fa-th me-2"></i>Widgets</a>
-                                <a href="/admin_dashboard/controls" className="nav-item nav-link"><i className="fa fa-keyboard me-2"></i>Controls</a>
-                                <a href="/all_users" className="nav-item nav-link"><i className="fa fa-table me-2"></i>Tables</a>
-                                <a href="/admin_dashboard" className="nav-item nav-link"><i className="fa fa-chart-bar me-2"></i>Charts</a>
+                                <a
+                                    href="/admin_dashboard"
+                                    className="nav-item nav-link active"
+                                >
+                                    <i className="fa fa-tachometer-alt me-2"></i>
+                                    Dashboard
+                                </a>
+                                <a
+                                    href="/admin_dashboard"
+                                    className="nav-item nav-link"
+                                >
+                                    <i className="fa fa-th me-2"></i>Widgets
+                                </a>
+                                <a
+                                    href="/admin_dashboard/controls"
+                                    className="nav-item nav-link"
+                                >
+                                    <i className="fa fa-keyboard me-2"></i>
+                                    Change Price
+                                </a>
+                                <a
+                                    href="/all_users"
+                                    className="nav-item nav-link"
+                                >
+                                    <i className="fa fa-table me-2"></i>All
+                                    Users
+                                </a>
+                                <a
+                                    href="/admin_dashboard"
+                                    className="nav-item nav-link"
+                                >
+                                    <i className="fa fa-chart-bar me-2"></i>
+                                    Charts
+                                </a>
                             </div>
                         </nav>
                     </div>

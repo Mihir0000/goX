@@ -54,7 +54,7 @@ const Controls = () => {
                 </h3>
             </div>
             <div>
-                <div className='mb-3'>
+                <div className="mb-3">
                     <h3>Hey! Do You want to update todays price?</h3>
                 </div>
                 <Container className="border shadow py-5 bg-white text-muted">
