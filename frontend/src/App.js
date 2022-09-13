@@ -14,7 +14,7 @@ import Protect from './protect';
 import Dashboard from './components/Admin/Dashboard';
 import Controls from './components/Admin/Controls';
 import UserTable from './components/Admin/UserTable';
-import ActiveTrip from './components/Admin/ActiceTrip';
+import ActiveTrip from './components/Admin/ActiveTrip';
 
 function App() {
     return (
@@ -57,7 +57,7 @@ function App() {
                     element={<Controls />}
                 />
                 <Route path="/all_users" element={<UserTable />} />
-                <Route path="/admin/actice_trip" element={<ActiveTrip />} />
+                <Route path="/admin/active_trip" element={<ActiveTrip />} />
             </Routes>
         </div>
     );

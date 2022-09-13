@@ -91,7 +91,7 @@ const Sidebar = () => {
                                     Dashboard
                                 </a>
                                 <a
-                                    href="/admin/actice_trip"
+                                    href="/admin/active_trip"
                                     className="nav-item nav-link"
                                 >
                                     <i className="fa fa-th me-2"></i>Active

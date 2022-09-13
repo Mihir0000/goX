@@ -88,6 +88,8 @@ router.route('/trip').post(async (req, res) => {
             distance *
             (admin.basePrice + isRainPrice + isFrostPrice + isWeekend);
         await tripModel.create({
+            createdAt: Date.now(),
+            id: Date.now(),
             userEmail,
             source,
             destination,
@@ -159,6 +161,13 @@ router.route('/admin/updateRole').put(async (req, res) => {
     } else {
         res.status(404).send({ message: 'Update Failed' });
     }
+});
+
+router.route('/admin/bookedTrip').get(async (req, res) => {
+    let bookedTrip = await tripModel.find({ tripStatus: 'startTrip' });
+    const onTheWay = await tripModel.find({ tripStatus: 'onTheWay' });
+    bookedTrip.push(...onTheWay);
+    res.send(bookedTrip);
 });
 
 module.exports = router;

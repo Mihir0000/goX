@@ -8,11 +8,12 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Sidebar from './Sidebar';
+import axios from 'axios';
 
-const ActiceTrip = () => {
+const ActiveTrip = () => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
-    const [activeTrip, setActiveTrip] = useState();
+    const [activeTrip, setActiveTrip] = useState([]);
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -21,14 +22,24 @@ const ActiceTrip = () => {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
+    useEffect(() => {
+        axios
+            .get('http://localhost:5000/admin/bookedTrip')
+            .then((data) => {
+                setActiveTrip(data.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
 
     const label = [
         'TripID',
         'UserEmail',
         'Distance',
         'Amount',
-        'Select Driver',
-        'Set Driver',
+        'Selected Driver',
+        'Trip Status',
     ];
     return (
         <div className="all_users">
@@ -54,7 +65,7 @@ const ActiceTrip = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {activeTrip?.map((user, index) => {
+                                {activeTrip?.map((trip, index) => {
                                     return (
                                         <TableRow
                                             hover
@@ -63,18 +74,23 @@ const ActiceTrip = () => {
                                             key={index}
                                         >
                                             <TableCell align="center">
-                                                {user.userId}
+                                                {trip.id}
                                             </TableCell>
                                             <TableCell align="center">
-                                                {user.userName}
+                                                {trip.userEmail}
                                             </TableCell>
                                             <TableCell align="center">
-                                                {user.userEmail}
+                                                {trip.distance} Km
                                             </TableCell>
                                             <TableCell align="center">
-                                                {user.role}
+                                                ₹ {trip.amount}
                                             </TableCell>
-                                            <TableCell align="center"></TableCell>
+                                            <TableCell align="center">
+                                                {trip?.assignDriver}
+                                            </TableCell>
+                                            <TableCell align="center">
+                                                {trip.tripStatus}
+                                            </TableCell>
                                         </TableRow>
                                     );
                                 })}
@@ -100,4 +116,4 @@ const ActiceTrip = () => {
     );
 };
 
-export default ActiceTrip;
+export default ActiveTrip;
