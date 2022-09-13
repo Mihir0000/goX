@@ -149,4 +149,18 @@ router.route('/admin/last10Trip').get(async (req, res) => {
     res.status(200).send(tenTrip);
 });
 
+router.route('/admin/updateRole').put(async (req, res) => {
+    const { userId, updateRole } = req.body;
+    const user = await userModel.findOne({ userId });
+    if (user) {
+        await userModel.updateOne(
+            { userId: userId },
+            { $set: { role: updateRole } }
+        );
+        res.status(200).send({ message: 'Update Successfully !' });
+    } else {
+        res.status(404).send({ message: 'Update Failed' });
+    }
+});
+
 module.exports = router;

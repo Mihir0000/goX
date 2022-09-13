@@ -27,16 +27,16 @@ export const Booking = () => {
 
 
   return (
-    <div id="booking_body">
+    <div id="booking_body" style={{height:"100vh"}}>
       <Header />
-      <Bnav />
+      
       <div id="booking_info">
-        {bookingData?.allTrip !== null ? (
+        {bookingData?.allTrip?.length !== 0 ? (
           <>
             <h5>Booking Details</h5><hr /><br />
             
 
-              <Box sx={{ flexGrow: 1 }}>
+              <Box sx={{ flexGrow: 1 }} style={{overflowY: "scroll", height:"80vh"}}>
                 <Grid container spacing={2}>
                 {bookingData?.allTrip?.map((e) => (
                   <Grid item xs={4}>
@@ -61,7 +61,7 @@ export const Booking = () => {
           </>
 
         ) : (
-          <div>
+          <div >
             <div id="booking_lottie">
               <lottie-player
                 src="https://assets8.lottiefiles.com/packages/lf20_mmwivxcd.json"
@@ -76,7 +76,7 @@ export const Booking = () => {
           </div>
         )}
       </div>
-
+      <Bnav />
     </div>
   );
 };
