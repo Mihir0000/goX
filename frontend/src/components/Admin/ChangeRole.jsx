@@ -23,6 +23,7 @@ const ChangeRole = ({ userId }) => {
             .put('http://localhost:5000/admin/updateRole', data, config)
             .then(() => {
                 swal('Update Successfully!');
+                window.location.reload();
             })
             .catch((err) => {
                 console.log(err);
