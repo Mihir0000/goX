@@ -84,7 +84,15 @@
 
 .form-switch .form-check-input {
     height: 25px;
-    width: 40px;
+    width: 50px;
+}
+
+.basePriceInput {
+    border: 1px solid gray;
+    border-radius: 8px;
+    height: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 /*** Layout ***/

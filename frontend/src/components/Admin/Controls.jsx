@@ -28,6 +28,10 @@ const Controls = () => {
     const setPrice = () => {
         const userEmail = localStorage.getItem('email');
         const basePrice = basePriceRef.current.value;
+        if (basePrice < 1) {
+            console.log('Base Price cannot set negetive or Zero');
+            return;
+        }
         const isRain = rainRef.current.checked;
         const isFrost = frostRef.current.checked;
         console.log(userEmail, basePrice, isRain, isFrost);
@@ -50,29 +54,19 @@ const Controls = () => {
                 </h3>
             </div>
             <div>
-                <div>
+                <div className='mb-3'>
                     <h3>Hey! Do You want to update todays price?</h3>
                 </div>
-                <div class="form-check form-switch">
-                    {/* <input
-                        class="form-check-input"
-                        type="checkbox"
-                        role="switch"
-                        id="flexSwitchCheckDefault"
-                    />
-                    <label
-                        class="form-check-label"
-                        for="flexSwitchCheckDefault"
-                    >
-                        Rainy
-                    </label> */}
-                </div>
-                <Container>
+                <Container className="border shadow py-5 bg-white text-muted">
                     <Row>
                         <Col className="col-4">
                             <div>
                                 <h5>Today's Base Price?</h5>
-                                <input type="number" ref={basePriceRef} />
+                                <input
+                                    type="number"
+                                    ref={basePriceRef}
+                                    className="basePriceInput"
+                                />
                             </div>
                         </Col>
                         <Col className="col-4">
