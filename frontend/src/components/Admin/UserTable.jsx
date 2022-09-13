@@ -77,21 +77,22 @@ const UserTable = () => {
                                             role="checkbox"
                                             tabIndex={-1}
                                             key={index}
+                                            
                                         >
-                                            <TableCell align="center">
+                                            <TableCell align="center" className='tablecell'>
                                                 {user.userId}
                                             </TableCell>
-                                            <TableCell align="center">
+                                            <TableCell align="center" className='tablecell'>
                                                 {user.userName}
                                             </TableCell>
-                                            <TableCell align="center">
+                                            <TableCell align="center" className='tablecell'>
                                                 {user.userEmail}
                                             </TableCell>
-                                            <TableCell align="center">
+                                            <TableCell align="center" className='tablecell'>
                                                 {user.role}
                                             </TableCell>
-                                            <TableCell align="center">
-                                                <ChangeRole
+                                            <TableCell align="center" >
+                                                <ChangeRole 
                                                     userId={user.userId}
                                                 />
                                             </TableCell>
