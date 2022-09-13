@@ -13,6 +13,7 @@ import { Route, Routes } from "react-router-dom";
 import Protect from "./protect";
 import Dashboard from "./components/Admin/Dashboard";
 import Controls from "./components/Admin/Controls";
+import UserTable from "./components/Admin/UserTable";
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
         <Route path="/location" element={<Ride2 />} />
         <Route path="/admin_dashboard" element={<Dashboard />} />
         <Route path="/admin_dashboard/controls" element={<Controls />} />
+        <Route path="/all_users" element={<UserTable />} />
       </Routes>
       
     </div>

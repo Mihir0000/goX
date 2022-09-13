@@ -1,123 +1,122 @@
-import React, { useState } from 'react'
-import './admin.css'
-import Sidebar from './Sidebar'
-
+import React, { useState, useEffect } from "react";
+import "./admin.css";
+import Sidebar from "./Sidebar";
+import axios from "axios";
 
 const Dashboard = () => {
+  const [dashboardData, setDashboardData] = useState();
+  // console.log(dashboardData, "dashboardData");
+  const [lastTrips, setLastTrips] = useState()
+  console.log(lastTrips,"lastTrips");
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/admin/information`)
+      .then((res) => {
+        console.log(res);
+        setDashboardData(res?.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+      axios
+      .get(`http://localhost:5000/admin/last10Trip`)
+      .then((res) => {
+        console.log(res);
+        setLastTrips(res?.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const revenew = (dashboardData?.totalBookedPrice)-(dashboardData?.totalBookedPrice)/10;
+  console.log(revenew);
 
   return (
-    <div className='dashboard'>
-      
-      <Sidebar/>
-      <div className='dashboard_content'>
+    <div className="dashboard">
+      <Sidebar />
+      <div className="dashboard_content">
         <div className="container-fluid pt-4 px-4">
-          <div className="row g-4">
-            <div className="col-sm-6 col-xl-3">
-              <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                <i className="fa fa-chart-line fa-3x text-warning"></i>
-                <div className="ms-3">
-                  <p className="mb-2">Total Sale</p>
-                  <h6 className="mb-0">$1234</h6>
+            <div className="row g-4">
+              <div className="col-sm-6 col-xl-3">
+                <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                  <i className="fa fa-chart-line fa-3x text-warning"></i>
+                  <div className="ms-3">
+                    <p className="mb-2">Total Sale</p>
+                    <h6 className="mb-0">Rs. {dashboardData?.totalBookedPrice}</h6>
+                  </div>
+                </div>
+              </div>
+              <div className="col-sm-6 col-xl-3">
+                <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                  <i className="fa fa-chart-bar fa-3x text-warning"></i>
+                  <div className="ms-3">
+                    <p className="mb-2">Total Bookings</p>
+                    <h6 className="mb-0">Rs. {dashboardData?.totalTrips}</h6>
+                  </div>
+                </div>
+              </div>
+              <div className="col-sm-6 col-xl-3">
+                <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                  <i className="fa fa-chart-area fa-3x text-warning"></i>
+                  <div className="ms-3">
+                    <p className="mb-2">Total Users</p>
+                    <h6 className="mb-0">{dashboardData?.totalUsers}</h6>
+                  </div>
+                </div>
+              </div>
+              <div className="col-sm-6 col-xl-3">
+                <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                  <i className="fa fa-chart-pie fa-3x text-warning"></i>
+                  <div className="ms-3">
+                    <p className="mb-2">Total Revenew</p>
+                    <h6 className="mb-0">Rs. {revenew}</h6>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="col-sm-6 col-xl-3">
-              <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                <i className="fa fa-chart-bar fa-3x text-warning"></i>
-                <div className="ms-3">
-                  <p className="mb-2">Total Bookings</p>
-                  <h6 className="mb-0">$1234</h6>
-                </div>
-              </div>
-            </div>
-            <div className="col-sm-6 col-xl-3">
-              <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                <i className="fa fa-chart-area fa-3x text-warning"></i>
-                <div className="ms-3">
-                  <p className="mb-2">Total Users</p>
-                  <h6 className="mb-0">$1234</h6>
-                </div>
-              </div>
-            </div>
-            <div className="col-sm-6 col-xl-3">
-              <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                <i className="fa fa-chart-pie fa-3x text-warning"></i>
-                <div className="ms-3">
-                  <p className="mb-2">Total Revenew</p>
-                  <h6 className="mb-0">$1234</h6>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-
-
 
         <div className="container-fluid pt-4 px-4">
           <div className="bg-secondary text-center rounded p-4">
             <div className="d-flex align-items-center justify-content-between mb-4">
               <h6 className="mb-0">Recent Salse</h6>
-              <a href="">Show All</a>
+              {/* <a href="">Show All</a> */}
             </div>
             <div className="table-responsive">
               <table className="table text-start align-middle table-bordered table-hover mb-0">
                 <thead>
                   <tr className="text-white">
-                    <th scope="col"><input className="form-check-input" type="checkbox" /></th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Invoice</th>
-                    <th scope="col">Customer</th>
+                    <th scope="col">Trip ID</th>
+                    <th scope="col">User Email</th>
+                    <th scope="col">Pickup Location</th>
+                    <th scope="col">Drop Location</th>
+                    <th scope="col">Distance(km)</th>
                     <th scope="col">Amount</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
+                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td><input className="form-check-input" type="checkbox" /></td>
-                    <td>01 Jan 2045</td>
-                    <td>INV-0123</td>
-                    <td>Jhon Doe</td>
-                    <td>$123</td>
-                    <td>Paid</td>
-                    <td><a className="btn btn-sm btn-warning" href="">Detail</a></td>
+                  {/* <tr>
+                  </tr> */}
+                  {lastTrips?.map((e)=>(
+                    <tr>
+                    <td>{e?.id}</td>
+                    <td>{e?.userEmail}</td>
+                    <td>{e?.source}</td>
+                    <td>{e?.destination}</td>
+                    <td>{e?.distance}</td>
+                    <td>{e?.amount}</td>
+                    <td>
+                      <a className="btn btn-sm btn-warning" href="">
+                        Detail
+                      </a>
+                    </td>
                   </tr>
-                  <tr>
-                    <td><input className="form-check-input" type="checkbox" /></td>
-                    <td>01 Jan 2045</td>
-                    <td>INV-0123</td>
-                    <td>Jhon Doe</td>
-                    <td>$123</td>
-                    <td>Paid</td>
-                    <td><a className="btn btn-sm btn-primary" href="">Detail</a></td>
-                  </tr>
-                  <tr>
-                    <td><input className="form-check-input" type="checkbox" /></td>
-                    <td>01 Jan 2045</td>
-                    <td>INV-0123</td>
-                    <td>Jhon Doe</td>
-                    <td>$123</td>
-                    <td>Paid</td>
-                    <td><a className="btn btn-sm btn-primary" href="">Detail</a></td>
-                  </tr>
-                  <tr>
-                    <td><input className="form-check-input" type="checkbox" /></td>
-                    <td>01 Jan 2045</td>
-                    <td>INV-0123</td>
-                    <td>Jhon Doe</td>
-                    <td>$123</td>
-                    <td>Paid</td>
-                    <td><a className="btn btn-sm btn-primary" href="">Detail</a></td>
-                  </tr>
-                  <tr>
-                    <td><input className="form-check-input" type="checkbox" /></td>
-                    <td>01 Jan 2045</td>
-                    <td>INV-0123</td>
-                    <td>Jhon Doe</td>
-                    <td>$123</td>
-                    <td>Paid</td>
-                    <td><a className="btn btn-sm btn-primary" href="">Detail</a></td>
-                  </tr>
+))}
+          
                 </tbody>
               </table>
             </div>
@@ -125,7 +124,7 @@ const Dashboard = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
