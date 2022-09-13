@@ -31,13 +31,16 @@ router.route('/login').post(async (req, res) => {
     } else if (!user) {
         res.status(401).send({ message: 'Please Register First' });
     } else if (userEmail === user.userEmail && password === user.password) {
-        res.status(200).send({ message: 'Login Successfully !' });
+        res.status(200).send({
+            message: 'Login Successfully !',
+            id: user.userId,
+        });
     } else {
         res.status(403).send({ message: 'Invalid Login' });
     }
 });
 
-router.route('/admin/dashboard').post(async (req, res) => {
+router.route('/admin/setPrice').post(async (req, res) => {
     const { userEmail, basePrice, rain, frost } = req.body;
     const user = await userModel.findOne({ userEmail });
     if (!user) {
@@ -59,6 +62,7 @@ router.route('/admin/dashboard').post(async (req, res) => {
                     basePrice,
                     rain,
                     frost,
+                    updateAt: Date.now(),
                     lastUpdate: userEmail,
                 }
             );
@@ -96,14 +100,59 @@ router.route('/trip').post(async (req, res) => {
     }
 });
 
+router.route('/trip/singleUser').get(async (req, res) => {
+    const { userEmail } = req.query;
+    const allTrip = await tripModel.find({ userEmail });
+    allTrip.sort((a, b) => b.id - a.id);
+    console.log(allTrip.length);
+    res.send({ allTrip });
+});
+
 router.route('/me').get(async (req, res) => {
-    const { userId } = req.body;
-    const user = await userModel.findOne({ userId });
+    const { userEmail } = req.query;
+    const user = await userModel.findOne({ userEmail });
     if (user) {
         res.status(200).send({ user });
     } else {
         res.status(402).send({ message: 'User Not Found' });
     }
+});
+
+router.route('/admin/allUsers').get(async (req, res) => {
+    const { userEmail } = req.query;
+    const user = await userModel.findOne({ userEmail });
+    if (user && user.role === 'admin') {
+        const alluser = await userModel.find({});
+        res.status(200).send(alluser);
+    } else {
+        res.status(404).send({ message: 'Users Not Found' });
+    }
+});
+
+router.route('/admin/information').get(async (req, res) => {
+    const allTrip = await tripModel.find({});
+    const alluser = await userModel.find({});
+    let totalBookedPrice = 0;
+    for (let i = 0; i < allTrip.length; i++) {
+        totalBookedPrice += allTrip[i].amount;
+    }
+    res.send({
+        totalBookedPrice,
+        totalTrips: allTrip.length,
+        totalUsers: alluser.length,
+    });
+});
+
+router.route('/admin/last10Trip').get(async (req, res) => {
+    const allTrip = await tripModel.find({});
+    allTrip.sort((a, b) => b.id - a.id);
+    let tenTrip = [];
+    for (let i = 0; i < 10; i++) {
+        if (allTrip[i]) {
+            tenTrip.push(allTrip[i]);
+        }
+    }
+    res.status(200).send(tenTrip);
 });
 
 module.exports = router;
