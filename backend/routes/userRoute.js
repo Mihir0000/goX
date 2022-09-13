@@ -119,14 +119,8 @@ router.route('/me').get(async (req, res) => {
 });
 
 router.route('/admin/allUsers').get(async (req, res) => {
-    const { userEmail } = req.query;
-    const user = await userModel.findOne({ userEmail });
-    if (user && user.role === 'admin') {
-        const alluser = await userModel.find({});
-        res.status(200).send(alluser);
-    } else {
-        res.status(404).send({ message: 'Users Not Found' });
-    }
+    const alluser = await userModel.find({});
+    res.status(200).send(alluser);
 });
 
 router.route('/admin/information').get(async (req, res) => {
