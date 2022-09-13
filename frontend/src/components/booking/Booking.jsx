@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import { Header } from "../header/Header";
 import { Bnav } from "../nav/Bnav";
 import "./booking.css";
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 
 export const Booking = () => {
 
@@ -25,23 +28,35 @@ export const Booking = () => {
 
   return (
     <div id="booking_body">
-      <Header/>
+      <Header />
       <Bnav />
       <div id="booking_info">
         {bookingData?.allTrip !== null ? (
           <>
             <h5>Booking Details</h5><hr /><br />
-            {bookingData?.allTrip?.map((e) => (
-              <div className="booking">
-                <p>{e?.createdAt}</p>
-                <p>from {e?.source}</p>
-                <br />
-                <p>to {e?.destination}</p>
-                <br />
-                <br />
-                <p>Ride Preferred: {e?.carType}</p>
-              </div>
-            ))}
+            
+
+              <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={2}>
+                {bookingData?.allTrip?.map((e) => (
+                  <Grid item xs={4}>
+                    <div className="booking">
+                      <p>{e?.createdAt}</p>
+                      <p>from {e?.source}</p>
+                      <br />
+                      <p>to {e?.destination}</p>
+                      <p>{e?.distance}km</p>
+                      <br />
+                      <br />
+                      <p>Ride Preferred: {e?.carType}</p>
+                    </div>
+                  </Grid>
+))}
+                </Grid>
+              </Box>
+
+
+            
 
           </>
 
@@ -61,7 +76,7 @@ export const Booking = () => {
           </div>
         )}
       </div>
-      
+
     </div>
   );
 };
