@@ -11,6 +11,8 @@ import { Ride2 } from "./components/ride/Ride2";
 import { Home } from "./components/home/Home";
 import { Route, Routes } from "react-router-dom";
 import Protect from "./protect";
+import Dashboard from "./components/Admin/Dashboard";
+import Controls from "./components/Admin/Controls";
 
 function App() {
   return (
@@ -47,7 +49,10 @@ function App() {
         <Route path="/verification" element={<Otp />} />
         <Route path="/ridenow" element={<Ride1 />} />
         <Route path="/location" element={<Ride2 />} />
+        <Route path="/admin_dashboard" element={<Dashboard />} />
+        <Route path="/admin_dashboard/controls" element={<Controls />} />
       </Routes>
+      
     </div>
   );
 }

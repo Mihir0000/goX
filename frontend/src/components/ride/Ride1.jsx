@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { Bnav } from "../nav/Bnav";
 import "./ride.css";
+import LocationPicker from 'react-location-picker';
 
 export const Ride1 = () => {
   const services = [
@@ -34,6 +35,14 @@ export const Ride1 = () => {
   });
 
   console.log(inputState, 'inputState');
+  const [location, setLocation] = useState({
+    address: "",
+    position: {
+      lat: 0,
+      lng: 0
+    }
+  })
+
   const [error, setError] = useState({});
   // console.log("error", error);
   let name, value;
@@ -90,10 +99,13 @@ export const Ride1 = () => {
         });
     }
   };
-
-
-
   console.log(services?.Name, "services");
+
+  const handleLocationChange = ({ position, address, places }) => {
+
+    // Set new location
+    setLocation({ position, address });
+  }
   return (
     <div className="ride_body">
       <div className="ride_logo">
@@ -115,8 +127,14 @@ export const Ride1 = () => {
                 }}
                 variant="standard"
               />
+            
               <p className="error">{error.source}</p>
-
+              <LocationPicker
+                // containerElement={<div style={{ height: '100%' }} />}
+                // mapElement={<div style={{ height: '400px' }} />}
+                // defaultPosition={defaultPosition}
+                onChange={handleLocationChange}
+              />
               <input
                 className="location_input"
                 type="text"
