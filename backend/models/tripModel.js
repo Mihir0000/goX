@@ -29,6 +29,10 @@ const tripSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    tripStatus: {
+        type: String,
+        default: 'booked',
+    },
     createdAt: {
         type: Date,
         default: Date.now(),

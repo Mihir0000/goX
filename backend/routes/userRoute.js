@@ -87,7 +87,6 @@ router.route('/trip').post(async (req, res) => {
         const price =
             distance *
             (admin.basePrice + isRainPrice + isFrostPrice + isWeekend);
-        console.log(price, day);
         await tripModel.create({
             userEmail,
             source,
@@ -104,7 +103,6 @@ router.route('/trip/singleUser').get(async (req, res) => {
     const { userEmail } = req.query;
     const allTrip = await tripModel.find({ userEmail });
     allTrip.sort((a, b) => b.id - a.id);
-    console.log(allTrip.length);
     res.send({ allTrip });
 });
 

@@ -10,8 +10,8 @@ const Sidebar = () => {
     const handleShow = () => setShow(true);
     return (
         <div>
-            <nav class="navbar sticky-top">
-                <div class="container-fluid">
+            <nav className="navbar sticky-top">
+                <div className="container-fluid">
                     <button
                         style={{
                             border: 'none',
@@ -91,10 +91,11 @@ const Sidebar = () => {
                                     Dashboard
                                 </a>
                                 <a
-                                    href="/admin_dashboard"
+                                    href="/admin/actice_trip"
                                     className="nav-item nav-link"
                                 >
-                                    <i className="fa fa-th me-2"></i>Widgets
+                                    <i className="fa fa-th me-2"></i>Active
+                                    Trips
                                 </a>
                                 <a
                                     href="/admin_dashboard/controls"
