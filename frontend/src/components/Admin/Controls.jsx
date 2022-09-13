@@ -48,11 +48,11 @@ const Controls = () => {
     return (
         <div className="controls_container">
             <Sidebar />
-            {/* <div>
+            <div>
                 <h3>
                     {month} {date}
                 </h3>
-            </div> */}
+            </div>
             <div>
                 <div className='mb-3'>
                     <h3>Hey! Do You want to update todays price?</h3>

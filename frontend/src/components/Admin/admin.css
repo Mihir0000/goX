@@ -63,8 +63,10 @@
 }
 
 .controls_container {
-    background-color: rgba(0, 255, 255, 0.603);
+    /* background-color: rgba(0, 255, 255, 0.603); */
+    background-image: url(https://www.pixelstalk.net/wp-content/uploads/2016/07/Weather-Desktop-Photo.jpg);
     height: 100vh;
+    color: white;
 }
 .setPriceBtn {
     border: 1px solid blue;
@@ -318,4 +320,14 @@
 .dashboard_content {
     padding: 20px;
     padding-top: 30px;
+}
+
+.all_users{
+    background-image: url(https://wallpapercave.com/wp/wp2665743.jpg);
+    height: 100vh;
+}
+
+.user_table{
+    padding: 40px;
+    background-color: transparent;
 }
