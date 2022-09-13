@@ -1,10 +1,10 @@
 /********** Template CSS **********/
-.dashboard{
+.dashboard {
     background-color: #1b1e1f;
 }
 :root {
-    --primary: #EB1616;
-    --secondary: #191C24;
+    --primary: #eb1616;
+    --secondary: #191c24;
     --light: #929ac76c;
     --dark: #000000;
 }
@@ -17,25 +17,23 @@
     z-index: 99;
 }
 
-
 /*** Spinner ***/
 #spinner {
     opacity: 0;
     visibility: hidden;
-    transition: opacity .5s ease-out, visibility 0s linear .5s;
+    transition: opacity 0.5s ease-out, visibility 0s linear 0.5s;
     z-index: 99999;
 }
 
 #spinner.show {
-    transition: opacity .5s ease-out, visibility 0s linear 0s;
+    transition: opacity 0.5s ease-out, visibility 0s linear 0s;
     visibility: visible;
     opacity: 1;
 }
 
-
 /*** Button ***/
 .btn {
-    transition: .5s;
+    transition: 0.5s;
 }
 
 .btn-square {
@@ -64,6 +62,28 @@
     border-radius: 50px;
 }
 
+.controls_container {
+    background-color: rgba(0, 255, 255, 0.603);
+    height: 100vh;
+}
+.setPriceBtn {
+    border: 1px solid blue;
+    padding: 10px 25px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px blue;
+    margin: 15px;
+    transition: all 0.5s;
+}
+
+.setPriceBtn:hover {
+    background-color: rgba(0, 0, 255, 0.637);
+    color: white;
+}
+
+.form-switch .form-check-input {
+    height: 25px;
+    width: 40px;
+}
 
 /*** Layout ***/
 .sidebar {
@@ -74,7 +94,7 @@
     width: 250px;
     height: 100vh;
     overflow-y: auto;
-    background: #191C24;
+    background: #191c24;
     transition: 0.5s;
     z-index: 999;
 }
@@ -120,22 +140,21 @@
     }
 }
 
-
 /*** Navbar ***/
 .sidebar .navbar .navbar-nav .nav-link {
     padding: 7px 20px;
     color: #929ac76c;
     font-weight: 500;
-    border-left: 3px solid #191C24;
+    border-left: 3px solid #191c24;
     border-radius: 0 30px 30px 0;
     outline: none;
 }
 
 .sidebar .navbar .navbar-nav .nav-link:hover,
 .sidebar .navbar .navbar-nav .nav-link.active {
-    color: #EB1616;
+    color: #eb1616;
     background: #000000;
-    border-color: #EB1616;
+    border-color: #eb1616;
 }
 
 .sidebar .navbar .navbar-nav .nav-link i {
@@ -150,7 +169,7 @@
 
 .sidebar .navbar .navbar-nav .nav-link:hover i,
 .sidebar .navbar .navbar-nav .nav-link.active i {
-    background: #191C24;
+    background: #191c24;
 }
 
 .sidebar .navbar .dropdown-toggle::after {
@@ -158,13 +177,13 @@
     top: 15px;
     right: 15px;
     border: none;
-    content: "\f107";
-    font-family: "Font Awesome 5 Free";
+    content: '\f107';
+    font-family: 'Font Awesome 5 Free';
     font-weight: 900;
-    transition: .5s;
+    transition: 0.5s;
 }
 
-.sidebar .navbar .dropdown-toggle[aria-expanded=true]::after {
+.sidebar .navbar .dropdown-toggle[aria-expanded='true']::after {
     transform: rotate(-180deg);
 }
 
@@ -188,7 +207,7 @@
 
 .content .navbar .navbar-nav .nav-link:hover,
 .content .navbar .navbar-nav .nav-link.active {
-    color: #EB1616;
+    color: #eb1616;
 }
 
 .content .navbar .sidebar-toggler,
@@ -215,13 +234,13 @@
     margin-left: 6px;
     vertical-align: middle;
     border: none;
-    content: "\f107";
-    font-family: "Font Awesome 5 Free";
+    content: '\f107';
+    font-family: 'Font Awesome 5 Free';
     font-weight: 900;
-    transition: .5s;
+    transition: 0.5s;
 }
 
-.content .navbar .dropdown-toggle[aria-expanded=true]::after {
+.content .navbar .dropdown-toggle[aria-expanded='true']::after {
     transform: rotate(-180deg);
 }
 
@@ -230,7 +249,6 @@
         margin-left: 15px;
     }
 }
-
 
 /*** Date Picker ***/
 .bootstrap-datetimepicker-widget.bottom {
@@ -252,20 +270,18 @@
 
 .bootstrap-datetimepicker-widget table td.active,
 .bootstrap-datetimepicker-widget table td.active:hover {
-    background: #EB1616;
+    background: #eb1616;
 }
 
 .bootstrap-datetimepicker-widget table td.today::before {
-    border-bottom-color: #EB1616;
+    border-bottom-color: #eb1616;
 }
-
 
 /*** Testimonial ***/
 .progress .progress-bar {
     width: 0px;
     transition: 2s;
 }
-
 
 /*** Testimonial ***/
 .testimonial-carousel .owl-dots {
@@ -281,17 +297,17 @@
     margin: 0 5px;
     width: 15px;
     height: 15px;
-    border: 5px solid #EB1616;
+    border: 5px solid #eb1616;
     border-radius: 15px;
-    transition: .5s;
+    transition: 0.5s;
 }
 
 .testimonial-carousel .owl-dot.active {
     background: #000000;
-    border-color: #EB1616;
+    border-color: #eb1616;
 }
 
-.dashboard_content{
+.dashboard_content {
     padding: 20px;
     padding-top: 30px;
 }
