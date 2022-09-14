@@ -2,15 +2,16 @@ import React, { useEffect, useRef, useState } from 'react';
 import Sidebar from './Sidebar';
 import { Form } from 'react-bootstrap';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 const Controls = () => {
     const basePriceRef = useRef();
     const rainRef = useRef();
     const frostRef = useRef();
     const [basePrice, setBasePrice] = useState();
-    // const [frost, setFrost] = useState(null);
-    // const [rain, setRain] = useState(null);
-    // console.log(basePrice, rain, frost);
+    const [frost, setFrost] = useState(false);
+    const [rain, setRain] = useState(false);
+    console.log(basePrice, rain, frost);
 
     const basePriceChange = (e) => {
         console.log(e.target.value);
@@ -37,6 +38,12 @@ const Controls = () => {
     const time =
         today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     // const label = { inputProps: { 'aria-label': 'Switch demo' } };
+    const rainChange = (e) => {
+        e.target.checked ? setRain(true) : setRain(false);
+    };
+    const frostChange = (e) => {
+        e.target.checked ? setFrost(true) : setFrost(false);
+    };
     const setPrice = () => {
         const userEmail = localStorage.getItem('email');
         const basePrice = basePriceRef.current.value;
@@ -47,11 +54,11 @@ const Controls = () => {
         const isRain = rainRef.current.checked;
         const isFrost = frostRef.current.checked;
         console.log(userEmail, basePrice, isRain, isFrost);
-        const data = { userEmail, basePrice, isRain, isFrost };
+        const data = { userEmail, basePrice, rain: isRain, frost: isFrost };
         axios
             .post('http://localhost:5000/admin/setPrice', data)
             .then(() => {
-                console.log('Set Successfullly');
+                swal('Set Successfullly');
                 setBasePrice('');
             })
             .catch((err) => {
@@ -62,8 +69,8 @@ const Controls = () => {
     useEffect(() => {
         axios.get('http://localhost:5000/admin/setPrice').then((data) => {
             setBasePrice(data.data.basePrice);
-            // setRain(data.data.rain);
-            // setFrost(data.data.frost);
+            setRain(data.data.rain);
+            setFrost(data.data.frost);
             console.log(data);
         });
     }, []);
@@ -96,6 +103,9 @@ const Controls = () => {
                             type="switch"
                             id="custom-switc"
                             ref={frostRef}
+                            value={frost}
+                            checked={frost}
+                            onChange={frostChange}
                         />
                     </div>
                     <div className="d-flex justify-content-between pb-5">
@@ -104,6 +114,9 @@ const Controls = () => {
                             type="switch"
                             id="custom-switch"
                             ref={rainRef}
+                            value={rain}
+                            checked={rain}
+                            onChange={rainChange}
                         />
                     </div>
                     <div className="d-flex justify-content-between pb-5">

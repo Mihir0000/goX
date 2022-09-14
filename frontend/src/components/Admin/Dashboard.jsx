@@ -13,7 +13,6 @@ const Dashboard = () => {
         axios
             .get(`http://localhost:5000/admin/information`)
             .then((res) => {
-                console.log(res);
                 setDashboardData(res?.data);
             })
             .catch((err) => {
@@ -23,7 +22,6 @@ const Dashboard = () => {
         axios
             .get(`http://localhost:5000/admin/last10Trip`)
             .then((res) => {
-                console.log(res);
                 setLastTrips(res?.data);
             })
             .catch((err) => {
@@ -89,7 +87,7 @@ const Dashboard = () => {
                 <div className="container-fluid pt-4 px-4">
                     <div className="bg-secondary text-center rounded p-4">
                         <div className="d-flex align-items-center justify-content-between mb-4">
-                            <h6 className="mb-0">Recent Trips</h6>
+                            <h6 className="mb-0">Last 10 Trips</h6>
                             {/* <a href="">Show All</a> */}
                         </div>
                         <div className="table-responsive">
