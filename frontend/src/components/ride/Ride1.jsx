@@ -5,46 +5,46 @@ import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { Bnav } from "../nav/Bnav";
 import "./ride.css";
-import LocationPicker from 'react-location-picker';
+// import LocationPicker from 'react-location-picker';
 
 export const Ride1 = () => {
   const services = [
     {
       Name: "Car Pool",
-      des: "For maximum 4 people"
+      des: "For maximum 4 people",
     },
     {
       Name: "Luxary Car",
-      des: "A luxary car for maximum 4 people"
+      des: "A luxary car for maximum 4 people",
     },
     {
       Name: "Car Prime",
-      des: "For maximum 6 people"
+      des: "For maximum 6 people",
     },
     {
       Name: "Bike",
-      des: "Bike service for one person"
+      des: "Bike service for one person",
     },
-  ]
+  ];
   const [inputState, setInputState] = useState({
-    userEmail: localStorage.getItem('email'),
+    userEmail: localStorage.getItem("email"),
     source: "",
     destination: "",
     distance: "",
     carType: "",
   });
 
-  console.log(inputState, 'inputState');
-  const [location, setLocation] = useState({
-    address: "",
-    position: {
-      lat: 0,
-      lng: 0
-    }
-  })
+  // console.log(inputState, "inputState");
+  // const [location, setLocation] = useState({
+  //   address: "",
+  //   position: {
+  //     lat: 0,
+  //     lng: 0
+  //   }
+  // })
+
 
   const [error, setError] = useState({});
-  // console.log("error", error);
   let name, value;
   const handleChange = (event) => {
     // event.persist();
@@ -52,9 +52,22 @@ export const Ride1 = () => {
     value = event.target.value;
     setInputState({ ...inputState, [name]: value });
   };
-  // const handleCarType = (c) => {
+  const serviceChange = (e) => {
 
-  // }
+
+
+
+    setInputState({
+      userEmail: localStorage.getItem("email"),
+      source: inputState.source,
+      destination: inputState.destination,
+      distance: inputState.distance,
+      carType:  e.target.value,
+    });
+      // console.log(inputState);
+  }
+
+  console.log( "dfdf",inputState);
   const validation = () => {
     let error = {};
     if (!inputState.source) {
@@ -65,6 +78,9 @@ export const Ride1 = () => {
     }
     if (!inputState.carType) {
       error.carType = "Select a car type";
+    }
+    if (!inputState.distance) {
+      error.distance = "please confirm pickup and drop location";
     }
 
     return error;
@@ -84,12 +100,13 @@ export const Ride1 = () => {
           // },
         })
         .then((res) => {
-          console.log("Axios res: ", res);
+          // console.log("Axios res: ", res);
           swal("Ride Booked !", "Happy Journey", "success");
-          window.localStorage.setItem("email", inputState.userEmail)
           setInputState({
-            userEmail: "",
-            password: "",
+            source: "",
+            destination: "",
+            distance: "",
+            carType: "",
           });
           navigate("/bookings");
         })
@@ -99,13 +116,26 @@ export const Ride1 = () => {
         });
     }
   };
-  console.log(services?.Name, "services");
 
-  const handleLocationChange = ({ position, address, places }) => {
-
-    // Set new location
-    setLocation({ position, address });
+  function randomNumberInRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
+
+  const distanceHandler = (event) => {
+    event.preventDefault();
+    if (inputState.source && inputState.destination) {
+      setInputState({
+        userEmail: localStorage.getItem("email"),
+        source: inputState.source,
+        destination: inputState.destination,
+        distance: randomNumberInRange(1, 500),
+      });
+    } else {
+      swal("Please Enter pickup and drop location");
+    }
+  };
+  console.log(inputState.distance);
+
   return (
     <div className="ride_body">
       <div className="ride_logo">
@@ -119,44 +149,51 @@ export const Ride1 = () => {
                 name="source"
                 value={inputState.source}
                 onChange={handleChange}
-                fullWclassNameth
                 placeholder="Pickup Location"
-                sx={{
-                  wclassNameth: "80%",
-                  margin: "40px 0",
-                }}
                 variant="standard"
               />
-            
+
               <p className="error">{error.source}</p>
-              <LocationPicker
-                // containerElement={<div style={{ height: '100%' }} />}
-                // mapElement={<div style={{ height: '400px' }} />}
-                // defaultPosition={defaultPosition}
-                onChange={handleLocationChange}
-              />
               <input
                 className="location_input"
                 type="text"
                 name="destination"
                 value={inputState.destination}
                 onChange={handleChange}
-                fullWclassNameth
-                sx={{ wclassNameth: "80%" }}
                 placeholder="Drop Location"
                 variant="standard"
               />
               <p className="error">{error.destination}</p>
               <br />
             </div>
+            <div>
+              <button onClick={distanceHandler}>
+                Confirm Pickup and Drop Location
+              </button>
+              <p>
+                Total Distance:{inputState.distance}km
+                {/* <input
+                className="location_input"
+                type="text"
+                name="distance"
+                value={inputState.distance}
+                placeholder="Drop Location"
+                variant="standard"
+                /> */}
+              </p>
+            </div>
             <div className="car_type">
-              {services?.map((e) => (
-                <label>
-                  <input type="radio" name="carType" value={e?.Name} onChange={handleChange} />
-                  {e?.Name}
+              {services?.map((e, index) => (
+                <label key={index}>
+                  <input
+                    type="radio"
+                    name="carType"
+                    value={e.Name}
+                    onChange={serviceChange}
+                  />
+                  {e.Name}
                 </label>
               ))}
-
             </div>
           </div>
           <br />
