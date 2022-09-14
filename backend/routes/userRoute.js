@@ -33,7 +33,7 @@ router.route('/login').post(async (req, res) => {
     } else if (userEmail === user.userEmail && password === user.password) {
         res.status(200).send({
             message: 'Login Successfully !',
-            id: user.userId,
+            name: user.userName,
         });
     } else {
         res.status(403).send({ message: 'Invalid Login' });
