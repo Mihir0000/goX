@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { IoIosArrowForward } from 'react-icons/io';
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
     const [show, setShow] = useState(false);
@@ -9,9 +10,9 @@ const Sidebar = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     return (
-        <div >
-            <nav class="navbar sticky-top">
-                <div class="container-fluid">
+        <div>
+            <nav className="navbar sticky-top">
+                <div className="container-fluid">
                     <button
                         style={{
                             border: 'none',
@@ -83,33 +84,34 @@ const Sidebar = () => {
                                 </div>
                             </div>
                             <div className="navbar-nav w-100">
-                                <a
-                                    href="/admin_dashboard"
+                                <Link
+                                    to="/admin_dashboard"
                                     className="nav-item nav-link active"
                                 >
-                                    <i className="fa fa-tachometer-alt me-2"></i>
+                                    <i className="fa fa-tachometer-alt me-2" />
                                     Dashboard
-                                </a>
-                                <a
-                                    href="/admin_dashboard"
+                                </Link>
+                                <Link
+                                    to="/admin/active_trip"
                                     className="nav-item nav-link"
                                 >
-                                    <i className="fa fa-th me-2"></i>Widgets
-                                </a>
-                                <a
-                                    href="/admin_dashboard/controls"
+                                    <i className="fa fa-th me-2" />
+                                    Active Trips
+                                </Link>
+                                <Link
+                                    to="/admin_dashboard/controls"
                                     className="nav-item nav-link"
                                 >
-                                    <i className="fa fa-keyboard me-2"></i>
+                                    <i className="fa fa-keyboard me-2" />
                                     Change Price
-                                </a>
-                                <a
-                                    href="/all_users"
+                                </Link>
+                                <Link
+                                    to="/all_users"
                                     className="nav-item nav-link"
                                 >
-                                    <i className="fa fa-table me-2"></i>All
-                                    Users
-                                </a>
+                                    <i className="fa fa-table me-2" />
+                                    All Users
+                                </Link>
                                 <a
                                     href="/admin_dashboard"
                                     className="nav-item nav-link"

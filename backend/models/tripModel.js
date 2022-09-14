@@ -29,6 +29,14 @@ const tripSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    tripStatus: {
+        type: String,
+        default: 'booked',
+    },
+    assignDriver: {
+        type: String,
+        default: '',
+    },
     createdAt: {
         type: Date,
         default: Date.now(),

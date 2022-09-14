@@ -14,7 +14,6 @@
         margin: 0px !important;
         padding-top: 5% !important;
         padding-bottom: 8%;
-
     }
 
     .ride_body h5 {
@@ -58,16 +57,29 @@
         background-color: rgb(22, 61, 85) !important;
     }
     .location_input {
-        margin-left: 27% ;
-        margin-bottom: 25px;
-        margin-top: 25px;
+        width: 70%;
+        margin-left: 16%;
         border-color: transparent;
         border-radius: 3px;
-      }
+    }
+    .confirmPickup {
+        border: 1px solid blue;
+        margin-left: 16%;
+        padding: 5px;
+        border-radius: 7px;
+        transition: all 0.5s;
+    }
+    .confirmPickup:hover {
+        background-color: rgba(0, 0, 255, 0.397);
+        color: white;
+    }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {}
+@media (min-width: 768px) and (max-width: 1024px) {
+}
 
-@media (min-width: 481px) and (max-width: 767px) {}
+@media (min-width: 481px) and (max-width: 767px) {
+}
 
-@media (min-width: 320px) and (max-width: 480px) {}
+@media (min-width: 320px) and (max-width: 480px) {
+}

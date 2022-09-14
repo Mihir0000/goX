@@ -33,7 +33,7 @@ router.route('/login').post(async (req, res) => {
     } else if (userEmail === user.userEmail && password === user.password) {
         res.status(200).send({
             message: 'Login Successfully !',
-            id: user.userId,
+            name: user.userName,
         });
     } else {
         res.status(403).send({ message: 'Invalid Login' });
@@ -73,6 +73,11 @@ router.route('/admin/setPrice').post(async (req, res) => {
     }
 });
 
+router.route('/admin/setPrice').get(async (req, res) => {
+    let setPrice = await adminDashboardModel.findOne({});
+    res.status(200).send(setPrice);
+});
+
 router.route('/trip').post(async (req, res) => {
     const { userEmail, source, destination, distance, carType } = req.body;
     const user = await userModel.findOne({ userEmail });
@@ -87,8 +92,9 @@ router.route('/trip').post(async (req, res) => {
         const price =
             distance *
             (admin.basePrice + isRainPrice + isFrostPrice + isWeekend);
-        console.log(price, day);
         await tripModel.create({
+            createdAt: Date.now(),
+            id: Date.now(),
             userEmail,
             source,
             destination,
@@ -104,7 +110,6 @@ router.route('/trip/singleUser').get(async (req, res) => {
     const { userEmail } = req.query;
     const allTrip = await tripModel.find({ userEmail });
     allTrip.sort((a, b) => b.id - a.id);
-    console.log(allTrip.length);
     res.send({ allTrip });
 });
 
@@ -161,6 +166,13 @@ router.route('/admin/updateRole').put(async (req, res) => {
     } else {
         res.status(404).send({ message: 'Update Failed' });
     }
+});
+
+router.route('/admin/bookedTrip').get(async (req, res) => {
+    let bookedTrip = await tripModel.find({ tripStatus: 'startTrip' });
+    const onTheWay = await tripModel.find({ tripStatus: 'onTheWay' });
+    bookedTrip.push(...onTheWay);
+    res.send(bookedTrip);
 });
 
 module.exports = router;
