@@ -137,7 +137,7 @@ export const Ride1 = () => {
   console.log(inputState.distance);
 
   return (
-    <div className="ride_body">
+    <div className="ride_body" style={{height:"100vh"}}>
       <div className="ride_logo">
         <form className="ride_form">
           <h5>Select Preferable Ride</h5>

@@ -33,10 +33,10 @@ export const Booking = () => {
       <div id="booking_info">
         {bookingData?.allTrip?.length !== 0 ? (
           <>
-            <h5>Booking Details</h5><hr /><br />
+            <h5>Booking Details</h5><br />
             
 
-              <Box sx={{ flexGrow: 1 }} style={{overflowY: "scroll", height:"80vh"}}>
+              <Box sx={{ flexGrow: 1 }} style={{overflowY: "scroll", height:"70vh"}}>
                 <Grid container spacing={2}>
                 {bookingData?.allTrip?.map((e) => (
                   <Grid item xs={4}>

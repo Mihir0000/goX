@@ -79,7 +79,7 @@ const Controls = () => {
     });
 
   return (
-    <div className="controls_container">
+    <div className="controls_container" style={{height:"100vh"}}>
       <Sidebar />
 
       <div className="mb-3">

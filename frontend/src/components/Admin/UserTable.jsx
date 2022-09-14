@@ -47,7 +47,7 @@ const UserTable = () => {
     }, []);
 
     return (
-        <div className="all_users">
+        <div className="all_users" style={{height:"100vh"}}>
             <Sidebar />
             <div className="user_table">
                 <Paper

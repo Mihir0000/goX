@@ -9,7 +9,7 @@ const Sidebar = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     return (
-        <div>
+        <div >
             <nav class="navbar sticky-top">
                 <div class="container-fluid">
                     <button

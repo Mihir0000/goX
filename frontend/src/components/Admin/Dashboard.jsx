@@ -35,7 +35,7 @@ const Dashboard = () => {
   console.log(revenew);
 
   return (
-    <div className="dashboard">
+    <div className="dashboard" style={{height:"100vh"}}>
       <Sidebar />
       <div className="dashboard_content">
         <div className="container-fluid pt-4 px-4">

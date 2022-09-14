@@ -2,7 +2,9 @@
     border-radius: 50%;
     padding: 8px;
     margin-top: 25px;
-    float:right;
+    position: fixed;
+    top: 30px;
+    right: 60px;
 }
 .dropdown-toggle::after{
     display: none !important;
