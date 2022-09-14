@@ -112,7 +112,7 @@ export const Ride1 = () => {
         })
         .catch((err) => {
           console.log(err);
-          swal("wrong email or password");
+          swal("something went wrong, try again later");
         });
     }
   };
@@ -172,14 +172,6 @@ export const Ride1 = () => {
               </button>
               <p>
                 Total Distance:{inputState.distance}km
-                {/* <input
-                className="location_input"
-                type="text"
-                name="distance"
-                value={inputState.distance}
-                placeholder="Drop Location"
-                variant="standard"
-                /> */}
               </p>
             </div>
             <div className="car_type">

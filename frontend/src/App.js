@@ -14,6 +14,7 @@ import Protect from "./protect";
 import Dashboard from "./components/Admin/Dashboard";
 import Controls from "./components/Admin/Controls";
 import UserTable from "./components/Admin/UserTable";
+import DriverDash from "./components/driver/DriverDash";
 
 function App() {
   return (
@@ -51,11 +52,12 @@ function App() {
         <Route path="/ridenow" element={<Ride1 />} />
         <Route path="/location" element={<Ride2 />} />
         <Route path="/admin_dashboard" element={<Dashboard />} />
+        <Route path="/driver_dashboard" element={<DriverDash />} />
         <Route path="/admin_dashboard/controls" element={<Controls />} />
         <Route path="/all_users" element={<UserTable />} />
       </Routes>
-      
     </div>
+    
   );
 }
 

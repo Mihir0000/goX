@@ -1,12 +1,12 @@
 import React from "react";
 import { Dropdown } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./header.css";
 
 export const Header = () => {
   const navigate = useNavigate();
     const logout=()=>{
-        sessionStorage.clear()
+        localStorage.clear()
         navigate("/login")
     }
   return (
@@ -17,7 +17,8 @@ export const Header = () => {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
+        {localStorage.getItem('email') ? <Dropdown.Item onClick={logout}>Logout</Dropdown.Item> : <Dropdown.Item><Link to='login'>login</Link></Dropdown.Item>}
+        
       </Dropdown.Menu>
     </Dropdown>
     </div>

@@ -78,7 +78,7 @@ const Sidebar = () => {
                                     <div className="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                                 </div>
                                 <div className="ms-3">
-                                    <h6 className="mb-0">Jhon Doe</h6>
+                                    <h6 className="mb-0">{localStorage.getItem('name')}</h6>
                                     <span>Admin</span>
                                 </div>
                             </div>
