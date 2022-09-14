@@ -73,6 +73,11 @@ router.route('/admin/setPrice').post(async (req, res) => {
     }
 });
 
+router.route('/admin/setPrice').get(async (req, res) => {
+    let setPrice = await adminDashboardModel.findOne({});
+    res.status(200).send(setPrice);
+});
+
 router.route('/trip').post(async (req, res) => {
     const { userEmail, source, destination, distance, carType } = req.body;
     const user = await userModel.findOne({ userEmail });
