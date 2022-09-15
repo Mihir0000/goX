@@ -21,6 +21,12 @@ const adminDashboardSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    rainParcent: {
+        type: Number,
+    },
+    frostParcent: {
+        type: Number,
+    },
 });
 
 module.exports = mongoose.model('adminDashboards', adminDashboardSchema);
