@@ -12,6 +12,7 @@ import Dashboard from "./components/Admin/Dashboard";
 import Controls from "./components/Admin/Controls";
 import UserTable from "./components/Admin/UserTable";
 import DriverDash from "./components/driver/DriverDash";
+import ActiceTrip from './components/Admin/ActiveTrip';
 
 function App() {
   return (
@@ -85,8 +86,10 @@ function App() {
           }
         />
       </Routes>
+      <Route path="/admin/active_trip" element={<ActiceTrip />} />
     </div>
   );
+
 }
 
 export default App;
