@@ -11,7 +11,7 @@ import Sidebar from "../sharedModule/Sidebar";
 import axios from "axios";
 import { Header } from "../header/Header";
 
-const ActiveTrip = () => {
+const ActiveTrips = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [activeTrip, setActiveTrip] = useState([]);
@@ -101,4 +101,4 @@ const ActiveTrip = () => {
   );
 };
 
-export default ActiveTrip;
+export default ActiveTrips;

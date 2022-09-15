@@ -107,7 +107,7 @@ const Sidebar = () => {
                     Active Trips
                   </Link>
                 ) : (
-                  <Link to="/admin/active_trip" className="nav-item nav-link">
+                  <Link to="/activeTrip" className="nav-item nav-link">
                     <i className="fa fa-th me-2" />
                     Active Trip
                   </Link>
@@ -127,9 +127,15 @@ const Sidebar = () => {
                     All Users
                   </Link>
                 ) : (
-                  <Link to="/all_users" className="nav-item nav-link">
+                  <Link to="/trip_history" className="nav-item nav-link">
                     <i className="fa fa-table me-2" />
                     Trip History
+                  </Link>
+                )}
+                {role === "admin" && (
+                  <Link to="/admin/allTrips" className="nav-item nav-link">
+                    <i className="fa fa-keyboard me-2" />
+                    All Trips
                   </Link>
                 )}
 

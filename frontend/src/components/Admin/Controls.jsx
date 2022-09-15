@@ -9,10 +9,13 @@ const Controls = () => {
   const basePriceRef = useRef();
   const rainRef = useRef();
   const frostRef = useRef();
+  const rainParcentRef = useRef();
+  const frostParcentRef = useRef();
   const [basePrice, setBasePrice] = useState();
   const [frost, setFrost] = useState(false);
   const [rain, setRain] = useState(false);
-  console.log(basePrice, rain, frost);
+  const [rainParcent, setRainParcent] = useState(0);
+  const [frostParcent, setFrostParcent] = useState(0);
 
   const basePriceChange = (e) => {
     console.log(e.target.value);
@@ -45,7 +48,12 @@ const Controls = () => {
   const frostChange = (e) => {
     e.target.checked ? setFrost(true) : setFrost(false);
   };
-  const rainParcent = () => {};
+  const rainParcentHandle = () => {
+    setRainParcent(rainParcentRef.current.value);
+  };
+  const frostParcentHandle = () => {
+    setFrostParcent(frostParcentRef.current.value);
+  };
   const setPrice = () => {
     const userEmail = localStorage.getItem("email");
     const basePrice = basePriceRef.current.value;
@@ -56,7 +64,14 @@ const Controls = () => {
     const isRain = rainRef.current.checked;
     const isFrost = frostRef.current.checked;
     console.log(userEmail, basePrice, isRain, isFrost);
-    const data = { userEmail, basePrice, rain: isRain, frost: isFrost };
+    const data = {
+      userEmail,
+      basePrice,
+      rain: isRain,
+      frost: isFrost,
+      rainParcent,
+      frostParcent,
+    };
     axios
       .post("http://localhost:5000/admin/setPrice", data)
       .then(() => {
@@ -73,7 +88,8 @@ const Controls = () => {
       setBasePrice(data.data.basePrice);
       setRain(data.data.rain);
       setFrost(data.data.frost);
-      console.log(data);
+      setRainParcent(data.data.rainParcent);
+      setFrostParcent(data.data.frostParcent);
     });
   }, []);
 
@@ -102,7 +118,14 @@ const Controls = () => {
           <div className="d-flex justify-content-between pb-5 mt-2">
             <h5>Is today Frosty?</h5>
             <div>
-              <input type="number" className="rainFrostInput" />
+              <input
+                type="number"
+                className="rainFrostInput"
+                ref={frostParcentRef}
+                onChange={frostParcentHandle}
+                value={frostParcent}
+                disabled={!frost}
+              />
               <span> %</span>
             </div>
             <Form.Check
@@ -120,7 +143,10 @@ const Controls = () => {
               <input
                 type="number"
                 className="rainFrostInput"
-                onChange={rainParcent}
+                onChange={rainParcentHandle}
+                ref={rainParcentRef}
+                value={rainParcent}
+                disabled={!rain}
               />
               <span> %</span>
             </div>
@@ -143,7 +169,7 @@ const Controls = () => {
               onChange={basePriceChange}
               value={basePrice}
             />
-            /km
+            ₹/km
           </div>
           <button className="setPriceBtn" onClick={setPrice}>
             Set Price

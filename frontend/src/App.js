@@ -12,7 +12,10 @@ import Dashboard from "./components/Admin/Dashboard";
 import Controls from "./components/Admin/Controls";
 import UserTable from "./components/Admin/UserTable";
 import DriverDash from "./components/driver/DriverDash";
-import ActiceTrip from "./components/Admin/ActiveTrip";
+import AllTrips from "./components/Admin/AllTrips";
+import TripHistory from "./components/driver/TripHistory";
+import ActiveTrips from "./components/Admin/ActiveTrips";
+import ActiveTrip from "./components/driver/ActiveTrip";
 
 function App() {
   return (
@@ -35,9 +38,7 @@ function App() {
           path="/profile"
           element={
             <Protect>
-              
-                <Profile />
-              
+              <Profile />
             </Protect>
           }
         />
@@ -99,14 +100,37 @@ function App() {
             </Protect>
           }
         />
+
         <Route
           path="/admin/active_trip"
           element={
-            <Protect>
-              <AdminProtect>
-                <ActiceTrip />
-              </AdminProtect>
-            </Protect>
+            <AdminProtect>
+              <ActiveTrips />
+            </AdminProtect>
+          }
+        />
+        <Route
+          path="/admin/allTrips"
+          element={
+            <AdminProtect>
+              <AllTrips />
+            </AdminProtect>
+          }
+        />
+        <Route
+          path="/trip_history"
+          element={
+            <DriverProtect>
+              <TripHistory />
+            </DriverProtect>
+          }
+        />
+        <Route
+          path="/activeTrip"
+          element={
+            <DriverProtect>
+              < ActiveTrip/>
+            </DriverProtect>
           }
         />
       </Routes>

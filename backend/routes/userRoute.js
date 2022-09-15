@@ -41,7 +41,8 @@ router.route('/login').post(async (req, res) => {
 });
 
 router.route('/admin/setPrice').post(async (req, res) => {
-    const { userEmail, basePrice, rain, frost } = req.body;
+    const { userEmail, basePrice, rain, frost, rainParcent, frostParcent } =
+        req.body;
     const user = await userModel.findOne({ userEmail });
     if (!user) {
         res.status(500).send({ message: 'Invalid User' });
@@ -53,17 +54,23 @@ router.route('/admin/setPrice').post(async (req, res) => {
                 rain,
                 frost,
                 lastUpdate: userEmail,
+                rainParcent,
+                frostParcent,
             });
             res.status(200).send({ message: 'Create Successfully.' });
         } else {
             await adminDashboardModel.updateOne(
                 {},
                 {
-                    basePrice,
-                    rain,
-                    frost,
-                    updateAt: Date.now(),
-                    lastUpdate: userEmail,
+                    $set: {
+                        basePrice,
+                        rain,
+                        frost,
+                        updateAt: Date.now(),
+                        lastUpdate: userEmail,
+                        rainParcent,
+                        frostParcent,
+                    },
                 }
             );
             res.status(200).send({ message: 'Update Successfully.' });
@@ -85,14 +92,19 @@ router.route('/trip').post(async (req, res) => {
         res.status(500).send({ message: 'Invalid User' });
     } else {
         const admin = await adminDashboardModel.findOne({});
-        const isRainPrice = admin.rain ? admin.basePrice * 0.2 : 0;
-        const isFrostPrice = admin.frost ? admin.basePrice * 0.3 : 0;
+        const isRainPrice = admin.rain
+            ? (admin.basePrice * admin.rainParcent) / 100
+            : 0;
+        const isFrostPrice = admin.frost
+            ? (admin.basePrice * admin.frostParcent) / 100
+            : 0;
         const day = new Date().getDay();
         const isWeekend = day === 0 || day === 6 ? admin.basePrice * 0.3 : 0;
         const price =
             distance *
             (admin.basePrice + isRainPrice + isFrostPrice + isWeekend);
         await tripModel.create({
+            userName: user.userName,
             createdAt: Date.now(),
             id: Date.now(),
             userEmail,
@@ -109,11 +121,6 @@ router.route('/trip').post(async (req, res) => {
 router.route('/trip/singleUser').get(async (req, res) => {
     const { userEmail } = req.query;
     const allTrip = await tripModel.find({ userEmail });
-    allTrip.sort((a, b) => b.id - a.id);
-    res.send({ allTrip });
-});
-router.route('/trip/AllTrip').get(async (req, res) => {
-    const allTrip = await tripModel.find({});
     allTrip.sort((a, b) => b.id - a.id);
     res.send({ allTrip });
 });
@@ -157,6 +164,11 @@ router.route('/admin/last10Trip').get(async (req, res) => {
         }
     }
     res.status(200).send(tenTrip);
+});
+router.route('/trip/AllTrip').get(async (req, res) => {
+    const allTrip = await tripModel.find({});
+    allTrip.sort((a, b) => b.id - a.id);
+    res.send({ allTrip });
 });
 
 router.route('/admin/updateRole').put(async (req, res) => {
