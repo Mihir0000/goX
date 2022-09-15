@@ -3,6 +3,7 @@ const router = express.Router();
 const userModel = require('../models/userModel');
 const adminDashboardModel = require('../models/adminDashboard');
 const tripModel = require('../models/tripModel');
+const { response } = require('express');
 
 router.route('/').get((req, res) => {
     res.status(200).send({ message: 'Home Page' });
@@ -190,6 +191,36 @@ router.route('/admin/bookedTrip').get(async (req, res) => {
     const onTheWay = await tripModel.find({ tripStatus: 'onTheWay' });
     bookedTrip.push(...onTheWay);
     res.send(bookedTrip);
+});
+
+router.route('/driver/bookedTrip').get(async (req, res) => {
+    let bookedTrip = await tripModel.find({ tripStatus: 'booked' });
+    res.status(200).send(bookedTrip);
+});
+
+router.route('/driver/confirmTrip').put(async (req, res) => {
+    const { id, assignDriver } = req.body;
+    const trip = await tripModel.findOne({ id });
+    if (trip.tripStatus !== 'booked') {
+        res.send({ message: 'Trip is Already taken.' });
+    } else {
+        await tripModel
+            .updateOne(
+                { id },
+                {
+                    $set: {
+                        assignDriver: assignDriver,
+                        tripStatus: 'startTrip',
+                    },
+                }
+            )
+            .then(() => {
+                res.send({ message: 'Successfully start trip', trip });
+            })
+            .catch((err) => {
+                res.send(err);
+            });
+    }
 });
 
 module.exports = router;
