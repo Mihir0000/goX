@@ -2,17 +2,17 @@ import logo from "./logo.svg";
 import "./App.css";
 import Login from "./components/authentication/Login";
 import Registration from "./components/authentication/Registration";
-import { Profile } from "./components/account/Profile";
+import { Profile } from "./components/sharedModule/Profile";
 import { Booking } from "./components/booking/Booking";
 import { Ride1 } from "./components/ride/Ride1";
 import { Home } from "./components/home/Home";
 import { Route, Routes } from "react-router-dom";
-import Protect from "./protect";
+import { AdminProtect, DriverProtect, Protect, UserProtect } from "./protect";
 import Dashboard from "./components/Admin/Dashboard";
 import Controls from "./components/Admin/Controls";
 import UserTable from "./components/Admin/UserTable";
 import DriverDash from "./components/driver/DriverDash";
-import ActiceTrip from './components/Admin/ActiveTrip';
+import ActiceTrip from "./components/Admin/ActiveTrip";
 
 function App() {
   return (
@@ -23,7 +23,9 @@ function App() {
           path="/"
           element={
             <Protect>
-              <Home />
+              <UserProtect>
+                <Home />
+              </UserProtect>
             </Protect>
           }
         />
@@ -33,7 +35,9 @@ function App() {
           path="/profile"
           element={
             <Protect>
-              <Profile />
+              
+                <Profile />
+              
             </Protect>
           }
         />
@@ -49,7 +53,9 @@ function App() {
           path="/ridenow"
           element={
             <Protect>
-              <Ride1 />
+              <UserProtect>
+                <Ride1 />
+              </UserProtect>
             </Protect>
           }
         />
@@ -57,7 +63,9 @@ function App() {
           path="/admin_dashboard"
           element={
             <Protect>
-              <Dashboard />
+              <AdminProtect>
+                <Dashboard />
+              </AdminProtect>
             </Protect>
           }
         />
@@ -65,7 +73,9 @@ function App() {
           path="/driver_dashboard"
           element={
             <Protect>
-              <DriverDash />
+              <DriverProtect>
+                <DriverDash />
+              </DriverProtect>
             </Protect>
           }
         />
@@ -73,7 +83,9 @@ function App() {
           path="/admin_dashboard/controls"
           element={
             <Protect>
-              <Controls />
+              <AdminProtect>
+                <Controls />
+              </AdminProtect>
             </Protect>
           }
         />
@@ -81,15 +93,25 @@ function App() {
           path="/all_users"
           element={
             <Protect>
-              <UserTable />
+              <AdminProtect>
+                <UserTable />
+              </AdminProtect>
+            </Protect>
+          }
+        />
+        <Route
+          path="/admin/active_trip"
+          element={
+            <Protect>
+              <AdminProtect>
+                <ActiceTrip />
+              </AdminProtect>
             </Protect>
           }
         />
       </Routes>
-      <Route path="/admin/active_trip" element={<ActiceTrip />} />
     </div>
   );
-
 }
 
 export default App;

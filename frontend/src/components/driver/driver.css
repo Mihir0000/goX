@@ -1,5 +1,5 @@
 .driver_dashboard {
-  height: 100vh;
+  min-height: 100vh;
   background-image: url(https://i.pinimg.com/originals/eb/80/2c/eb802c071fde1f7b81bf38927893f3f1.jpg);
   background-position: center;
   background-repeat: no-repeat;
@@ -25,7 +25,7 @@
 padding-top: 2px;
 }
 .d_div {
-  padding-top: 80px;
+  padding-top: 120px;
   padding: 40px;
   height: 80vh;
 }

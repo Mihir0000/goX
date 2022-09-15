@@ -6,12 +6,11 @@ import { Bnav } from "../nav/Bnav";
 import "./profile.css";
 
 export const Profile = () => {
-
-  const [userData, setUserData] = useState()
-  console.log(userData, "userData"); 
+  const [userData, setUserData] = useState();
+  console.log(userData, "userData");
 
   useEffect(() => {
-    const userEmail = localStorage.getItem("email")
+    const userEmail = localStorage.getItem("email");
     axios
       .get(`http://localhost:5000/me`, { params: { userEmail } })
       .then((res) => {
@@ -24,9 +23,9 @@ export const Profile = () => {
   }, []);
 
   return (
-    <div id="profile_body" style={{height:"100vh"}}>
-      <Header/>
-      <Container style={{height:"75vh"}}>
+    <div id="profile_body" style={{ height: "100vh" }}>
+      <Header />
+      <Container style={{ height: "75vh" }}>
         <div className="shadow-lg p-3 mb-5 bg-white rounded profile_section ">
           <h4 id="account_heading">Account Information</h4>
 
@@ -59,10 +58,9 @@ export const Profile = () => {
             />
             Email: {userData?.userEmail}
           </div>
-
         </div>
       </Container>
-      <Bnav/>
+      {userData?.role === "user" && <Bnav />}
     </div>
   );
 };

@@ -12,10 +12,10 @@ import Sidebar from "../sharedModule/Sidebar";
 import ChangeRole from "./ChangeRole";
 import { Header } from "../header/Header";
 
-const UserTable = () => {
+const TripHistory = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [allUsers, setAllUsers] = useState();
+  const [tripHistory, setTripHistory] = useState();
   console.log(allUsers, "all");
 
   const handleChangePage = (event, newPage) => {
@@ -28,11 +28,11 @@ const UserTable = () => {
   };
 
   const label = [
-    "userId",
-    "userName",
-    "userEmail",
-    "Current Role",
-    "Change Role",
+    "TripId",
+    "Passenger Name",
+    "From",
+    "To",
+    "Amount"
   ];
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const UserTable = () => {
       .get(`http://localhost:5000/admin/allUsers`)
       .then((res) => {
         console.log(res);
-        setAllUsers(res?.data);
+        setTripHistory(res?.data);
       })
       .catch((err) => {
         console.log(err);
@@ -115,4 +115,4 @@ const UserTable = () => {
   );
 };
 
-export default UserTable;
+export default TripHistory;
