@@ -9,11 +9,10 @@ import "./home.css";
 export const Home = () => {
   return (
     <div id="home_body">
-      <Container>
+      <Container style={{height:"80vh"}}>
         <Header/>
         <div id="body_heading">
-          <h1>Welcome {localStorage.getItem("username")}</h1>
-          <h5>{localStorage.getItem("address")}</h5>
+          <h1>Welcome {localStorage.getItem("name")}</h1>
         </div>
 
         <div id="booking_section">
