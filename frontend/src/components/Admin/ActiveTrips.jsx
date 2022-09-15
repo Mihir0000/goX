@@ -67,18 +67,22 @@ const ActiveTrips = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {activeTrip?.map((trip, index) => {
-                  return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                      <TableCell align="center">{trip.id}</TableCell>
-                      <TableCell align="center">{trip.userEmail}</TableCell>
-                      <TableCell align="center">{trip.distance} Km</TableCell>
-                      <TableCell align="center">₹ {trip.amount}</TableCell>
-                      <TableCell align="center">{trip?.assignDriver}</TableCell>
-                      <TableCell align="center">{trip.tripStatus}</TableCell>
-                    </TableRow>
-                  );
-                })}
+                {activeTrip
+                  ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((trip, index) => {
+                    return (
+                      <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                        <TableCell align="center">{trip.id}</TableCell>
+                        <TableCell align="center">{trip.userEmail}</TableCell>
+                        <TableCell align="center">{trip.distance} Km</TableCell>
+                        <TableCell align="center">₹ {trip.amount}</TableCell>
+                        <TableCell align="center">
+                          {trip?.assignDriver}
+                        </TableCell>
+                        <TableCell align="center">{trip.tripStatus}</TableCell>
+                      </TableRow>
+                    );
+                  })}
               </TableBody>
             </Table>
           </TableContainer>
@@ -102,4 +106,3 @@ const ActiveTrips = () => {
 };
 
 export default ActiveTrips;
-

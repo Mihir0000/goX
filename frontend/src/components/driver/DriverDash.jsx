@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../sharedModule/Sidebar";
 import { Header } from "../header/Header";
 import "./driver.css";
+import axios from "axios";
 
 const DriverDash = () => {
+  const [bookedTrip, setBookedTrip] = useState()
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/driver/bookedTrip")
+      .then((data) => {
+        setBookedTrip(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  console.log(bookedTrip);
   return (
     <div className="driver_dashboard">
       <Sidebar />

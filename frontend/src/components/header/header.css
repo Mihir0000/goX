@@ -3,7 +3,7 @@
     padding: 8px;
     margin-top: 25px;
     position: fixed;
-    top: 30px;
+    top: 20px;
     right: 60px;
 }
 .dropdown-toggle::after{

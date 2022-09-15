@@ -46,6 +46,8 @@
 .trip_card {
   display: flex;
   justify-content: center;
+  padding-top: 80px;
+  
 }
 .trip_card_body {
   color: rgb(34, 33, 33);
@@ -56,6 +58,7 @@
   min-height: 200px;
 }
 .trip_card1 {
-  background-color: #3d3db3;
+  background-color: #a0a0a6;
   height: max-content;
+  width: 40%;
 }

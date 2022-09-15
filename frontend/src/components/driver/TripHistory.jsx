@@ -33,7 +33,14 @@ const TripHistory = () => {
     });
   }, []);
   // console.log(allTrips);
-  const label = ["Trip ID", "Passenger Name", "from", "to", "Amount", "Details"];
+  const label = [
+    "Trip ID",
+    "Passenger Name",
+    "from",
+    "to",
+    "Amount",
+    "Details",
+  ];
 
   return (
     <div className="all_users" style={{ height: "100vh" }}>
@@ -59,33 +66,35 @@ const TripHistory = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {allTrips?.map((trip, index) => {
-                  return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                      <TableCell align="center" className="tablecell">
-                        {trip.id}
-                      </TableCell>
-                      <TableCell
-                        align="center"
-                        className="tablecell text-capitalize"
-                      >
-                        {trip.userName}
-                      </TableCell>
-                      <TableCell align="center" className="tablecell">
-                        {trip.userEmail}
-                      </TableCell>
-                      <TableCell align="center" className="tablecell">
-                        {trip.distance} Km
-                      </TableCell>
-                      <TableCell align="center">₹ {trip.amount}</TableCell>
-                      <TableCell align="center">
-                        <Button variant="warning" onClick={handleShow}>
-                          Details
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
+                {allTrips
+                  ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((trip, index) => {
+                    return (
+                      <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                        <TableCell align="center" className="tablecell">
+                          {trip.id}
+                        </TableCell>
+                        <TableCell
+                          align="center"
+                          className="tablecell text-capitalize"
+                        >
+                          {trip.userName}
+                        </TableCell>
+                        <TableCell align="center" className="tablecell">
+                          {trip.userEmail}
+                        </TableCell>
+                        <TableCell align="center" className="tablecell">
+                          {trip.distance} Km
+                        </TableCell>
+                        <TableCell align="center">₹ {trip.amount}</TableCell>
+                        <TableCell align="center">
+                          <Button variant="warning" onClick={handleShow}>
+                            Details
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
               </TableBody>
             </Table>
           </TableContainer>

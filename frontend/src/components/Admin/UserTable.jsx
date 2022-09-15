@@ -49,6 +49,7 @@ const UserTable = () => {
     return (
         <div className="all_users" style={{ minHeight: '100vh' }}>
             <Sidebar />
+            <Header/>
             <div className="user_table">
                 <Paper
                     sx={{

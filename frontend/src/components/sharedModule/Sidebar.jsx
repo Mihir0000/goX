@@ -141,7 +141,7 @@ const Sidebar = () => {
 
                 <Link to="/profile" className="nav-item nav-link">
                   <i className="fa fa-chart-bar me-2"></i>
-                  Profile
+                  My Profile
                 </Link>
               </div>
             </nav>
