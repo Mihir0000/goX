@@ -1,5 +1,5 @@
 .driver_dashboard {
-  height: 100vh;
+  min-height: 100vh;
   background-image: url(https://i.pinimg.com/originals/eb/80/2c/eb802c071fde1f7b81bf38927893f3f1.jpg);
   background-position: center;
   background-repeat: no-repeat;
@@ -22,10 +22,10 @@
   padding-top: 5px;
 }
 .driver_notification h6 {
-padding-top: 2px;
+  padding-top: 2px;
 }
 .d_div {
-  padding-top: 80px;
+  padding-top: 120px;
   padding: 40px;
   height: 80vh;
 }
@@ -34,4 +34,28 @@ padding-top: 2px;
   background-color: greenyellow;
   border-radius: 5px;
   border-color: transparent;
+}
+
+/* --- active trips ---  */
+
+.active_trip_body {
+  background-image: url(https://wallpapercave.com/wp/wp2665743.jpg);
+  min-height: 100vh;
+  width: 100vw;
+}
+.trip_card {
+  display: flex;
+  justify-content: center;
+}
+.trip_card_body {
+  color: rgb(34, 33, 33);
+  background-image: url(../../assets/bgac.webp);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: 40% !important;
+  min-height: 200px;
+}
+.trip_card1 {
+  background-color: #3d3db3;
+  height: max-content;
 }

@@ -70,7 +70,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+    min-height: 100vh;
     color: white;
 }
 
@@ -389,7 +389,7 @@
 
 .all_users {
     background-image: url(https://wallpapercave.com/wp/wp2665743.jpg);
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .user_table {
