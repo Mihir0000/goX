@@ -17,7 +17,26 @@ const AllTrips = () => {
     const [allTrips, setAllTrips] = useState([]);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [singleTrip, setSingleTrip] = useState();
+
+    const handleShow = (trip) => {
+        setShow(true);
+        setSingleTrip(trip);
+    };
+    const changeDate = (time) => {
+        const d1 = new Date(time);
+        const result = d1.getTime();
+        console.log(result);
+        let todate = new Date(result).getDate();
+        let tomonth = new Date(result).getMonth() + 1;
+        let toyear = new Date(result).getFullYear();
+        let h = new Date(result).getHours();
+        let m = new Date(result).getMinutes();
+        let s = new Date(result).getSeconds();
+        let original_date =
+            todate + '/' + tomonth + '/' + toyear + ' ' + h + ':' + m + ':' + s;
+        return original_date;
+    };
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -32,7 +51,6 @@ const AllTrips = () => {
             setAllTrips(data.data.allTrip);
         });
     }, []);
-    // console.log(allTrips);
     const label = ['Trip ID', 'Name', 'Email', 'Distance', 'Amount', 'Details'];
 
     return (
@@ -59,93 +77,124 @@ const AllTrips = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {allTrips?.map((trip, index) => {
-                                    return (
-                                        <TableRow
-                                            hover
-                                            role="checkbox"
-                                            tabIndex={-1}
-                                            key={index}
-                                        >
-                                            <TableCell
-                                                align="center"
-                                                className="tablecell"
+                                {allTrips
+                                    ?.slice(
+                                        page * rowsPerPage,
+                                        page * rowsPerPage + rowsPerPage
+                                    )
+                                    .map((trip, index) => {
+                                        return (
+                                            <TableRow
+                                                hover
+                                                role="checkbox"
+                                                tabIndex={-1}
+                                                key={index}
                                             >
-                                                {trip.id}
-                                            </TableCell>
-                                            <TableCell
-                                                align="center"
-                                                className="tablecell text-capitalize"
-                                            >
-                                                {trip.userName}
-                                            </TableCell>
-                                            <TableCell
-                                                align="center"
-                                                className="tablecell"
-                                            >
-                                                {trip.userEmail}
-                                            </TableCell>
-                                            <TableCell
-                                                align="center"
-                                                className="tablecell"
-                                            >
-                                                {trip.distance} Km
-                                            </TableCell>
-                                            <TableCell align="center">
-                                                ₹ {trip.amount}
-                                            </TableCell>
-                                            <TableCell align="center">
-                                                <Button
-                                                    variant="primary"
-                                                    onClick={handleShow}
+                                                <TableCell
+                                                    align="center"
+                                                    className="tablecell"
                                                 >
-                                                    Details
-                                                </Button>
-                                                <Modal
-                                                    show={show}
-                                                    onHide={handleClose}
+                                                    {trip.id}
+                                                </TableCell>
+                                                <TableCell
+                                                    align="center"
+                                                    className="tablecell text-capitalize"
                                                 >
-                                                    <Modal.Header closeButton>
-                                                        <Modal.Title>
-                                                            Modal heading
-                                                        </Modal.Title>
-                                                    </Modal.Header>
-                                                    <Modal.Body>
-                                                        Woohoo, you're reading
-                                                        this text in a modal!
-                                                    </Modal.Body>
-                                                    <Modal.Footer>
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={
-                                                                handleClose
-                                                            }
-                                                        >
-                                                            Close
-                                                        </Button>
-                                                    </Modal.Footer>
-                                                </Modal>
-                                            </TableCell>
-                                        </TableRow>
-                                    );
-                                })}
+                                                    {trip.userName}
+                                                </TableCell>
+                                                <TableCell
+                                                    align="center"
+                                                    className="tablecell"
+                                                >
+                                                    {trip.userEmail}
+                                                </TableCell>
+                                                <TableCell
+                                                    align="center"
+                                                    className="tablecell"
+                                                >
+                                                    {trip.distance} Km
+                                                </TableCell>
+                                                <TableCell align="center">
+                                                    ₹ {trip.amount}
+                                                </TableCell>
+                                                <TableCell align="center">
+                                                    <Button
+                                                        variant="primary"
+                                                        onClick={() =>
+                                                            handleShow(trip)
+                                                        }
+                                                    >
+                                                        Details
+                                                    </Button>
+                                                </TableCell>
+                                            </TableRow>
+                                        );
+                                    })}
                             </TableBody>
                         </Table>
                     </TableContainer>
                     <TablePagination
                         rowsPerPageOptions={[10, 25, 100]}
                         component="div"
-                        count={
-                            allTrips.length / rowsPerPage <= 1
-                                ? 1
-                                : Math.ceil(allTrips.length / rowsPerPage)
-                        }
+                        count={allTrips.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}
                         onRowsPerPageChange={handleChangeRowsPerPage}
                     />
                 </Paper>
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Trip Details</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p className="m-0">
+                            <strong>Trip ID : </strong>
+                            <span>{singleTrip?.id}</span>
+                        </p>
+                        <p className="m-0">
+                            <strong>User Name : </strong>
+                            <span>{singleTrip?.userName}</span>
+                        </p>
+                        <p className="m-0">
+                            <strong>User Email : </strong>
+                            <span>{singleTrip?.userEmail}</span>
+                        </p>
+                        <p className="m-0">
+                            <strong>Source : </strong>
+                            <span>{singleTrip?.source}</span>
+                        </p>
+                        <p className="m-0">
+                            <strong>Destination : </strong>
+                            <span>{singleTrip?.destination}</span>
+                        </p>
+                        <p className="m-0">
+                            <strong>Distance : </strong>
+                            <span>{singleTrip?.distance} Km</span>
+                        </p>
+                        <p className="m-0">
+                            <strong>Amount : </strong>
+                            <span>{singleTrip?.amount}</span>
+                        </p>
+                        <p className="m-0">
+                            <strong>Car Type : </strong>
+                            <span>{singleTrip?.id}</span>
+                        </p>
+                        <p className="m-0">
+                            <strong>Driver : </strong>
+                            <span>{singleTrip?.assignDriver}</span>
+                        </p>
+                        <p className="m-0">
+                            <strong>Time : </strong>
+                            <span>{changeDate(singleTrip?.createdAt)}</span>
+                        </p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={handleClose}>
+                            Close
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         </div>
     );

@@ -18,6 +18,9 @@ const ChangeRole = ({ userId }) => {
     const updateRole = () => {
         const data = { userId, updateRole: role };
         console.log(data);
+        if (role === '') {
+            return;
+        }
         const config = { headers: { 'Content-Type': 'application/json' } };
         axios
             .put('http://localhost:5000/admin/updateRole', data, config)

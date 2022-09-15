@@ -70,57 +70,58 @@ const UserTable = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {allUsers?.map((user, index) => {
-                                    return (
-                                        <TableRow
-                                            hover
-                                            role="checkbox"
-                                            tabIndex={-1}
-                                            key={index}
-                                        >
-                                            <TableCell
-                                                align="center"
-                                                className="tablecell"
+                                {allUsers
+                                    ?.slice(
+                                        page * rowsPerPage,
+                                        page * rowsPerPage + rowsPerPage
+                                    )
+                                    .map((user, index) => {
+                                        return (
+                                            <TableRow
+                                                hover
+                                                role="checkbox"
+                                                tabIndex={-1}
+                                                key={index}
                                             >
-                                                {user.userId}
-                                            </TableCell>
-                                            <TableCell
-                                                align="center"
-                                                className="tablecell"
-                                            >
-                                                {user.userName}
-                                            </TableCell>
-                                            <TableCell
-                                                align="center"
-                                                className="tablecell"
-                                            >
-                                                {user.userEmail}
-                                            </TableCell>
-                                            <TableCell
-                                                align="center"
-                                                className="tablecell"
-                                            >
-                                                {user.role}
-                                            </TableCell>
-                                            <TableCell align="center">
-                                                <ChangeRole
-                                                    userId={user.userId}
-                                                />
-                                            </TableCell>
-                                        </TableRow>
-                                    );
-                                })}
+                                                <TableCell
+                                                    align="center"
+                                                    className="tablecell"
+                                                >
+                                                    {user.userId}
+                                                </TableCell>
+                                                <TableCell
+                                                    align="center"
+                                                    className="tablecell"
+                                                >
+                                                    {user.userName}
+                                                </TableCell>
+                                                <TableCell
+                                                    align="center"
+                                                    className="tablecell"
+                                                >
+                                                    {user.userEmail}
+                                                </TableCell>
+                                                <TableCell
+                                                    align="center"
+                                                    className="tablecell"
+                                                >
+                                                    {user.role}
+                                                </TableCell>
+                                                <TableCell align="center">
+                                                    <ChangeRole
+                                                        userId={user.userId}
+                                                    />
+                                                </TableCell>
+                                            </TableRow>
+                                        );
+                                    })}
                             </TableBody>
                         </Table>
                     </TableContainer>
                     <TablePagination
                         rowsPerPageOptions={[10, 25, 100]}
                         component="div"
-                        count={
-                            allUsers?.length / rowsPerPage <= 1
-                                ? 1
-                                : Math.ceil(allUsers?.length / rowsPerPage)
-                        }
+                        count={allUsers?.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}

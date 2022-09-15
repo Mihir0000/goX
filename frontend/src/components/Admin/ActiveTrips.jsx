@@ -102,3 +102,4 @@ const ActiveTrips = () => {
 };
 
 export default ActiveTrips;
+
