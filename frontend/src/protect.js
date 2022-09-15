@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom';
 
 const Protect = ({children}) => {
     
-    let isLoggedIn=window.sessionStorage.getItem('email')
+    let isLoggedIn=window.localStorage.getItem('email')
     return isLoggedIn
             ? children
             : (<Navigate to="/login"/>)
