@@ -77,65 +77,66 @@ const AllTrips = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {allTrips?.map((trip, index) => {
-                                    return (
-                                        <TableRow
-                                            hover
-                                            role="checkbox"
-                                            tabIndex={-1}
-                                            key={index}
-                                        >
-                                            <TableCell
-                                                align="center"
-                                                className="tablecell"
+                                {allTrips
+                                    ?.slice(
+                                        page * rowsPerPage,
+                                        page * rowsPerPage + rowsPerPage
+                                    )
+                                    .map((trip, index) => {
+                                        return (
+                                            <TableRow
+                                                hover
+                                                role="checkbox"
+                                                tabIndex={-1}
+                                                key={index}
                                             >
-                                                {trip.id}
-                                            </TableCell>
-                                            <TableCell
-                                                align="center"
-                                                className="tablecell text-capitalize"
-                                            >
-                                                {trip.userName}
-                                            </TableCell>
-                                            <TableCell
-                                                align="center"
-                                                className="tablecell"
-                                            >
-                                                {trip.userEmail}
-                                            </TableCell>
-                                            <TableCell
-                                                align="center"
-                                                className="tablecell"
-                                            >
-                                                {trip.distance} Km
-                                            </TableCell>
-                                            <TableCell align="center">
-                                                ₹ {trip.amount}
-                                            </TableCell>
-                                            <TableCell align="center">
-                                                <Button
-                                                    variant="primary"
-                                                    onClick={() =>
-                                                        handleShow(trip)
-                                                    }
+                                                <TableCell
+                                                    align="center"
+                                                    className="tablecell"
                                                 >
-                                                    Details
-                                                </Button>
-                                            </TableCell>
-                                        </TableRow>
-                                    );
-                                })}
+                                                    {trip.id}
+                                                </TableCell>
+                                                <TableCell
+                                                    align="center"
+                                                    className="tablecell text-capitalize"
+                                                >
+                                                    {trip.userName}
+                                                </TableCell>
+                                                <TableCell
+                                                    align="center"
+                                                    className="tablecell"
+                                                >
+                                                    {trip.userEmail}
+                                                </TableCell>
+                                                <TableCell
+                                                    align="center"
+                                                    className="tablecell"
+                                                >
+                                                    {trip.distance} Km
+                                                </TableCell>
+                                                <TableCell align="center">
+                                                    ₹ {trip.amount}
+                                                </TableCell>
+                                                <TableCell align="center">
+                                                    <Button
+                                                        variant="primary"
+                                                        onClick={() =>
+                                                            handleShow(trip)
+                                                        }
+                                                    >
+                                                        Details
+                                                    </Button>
+                                                </TableCell>
+                                            </TableRow>
+                                        );
+                                    })}
                             </TableBody>
                         </Table>
                     </TableContainer>
                     <TablePagination
                         rowsPerPageOptions={[10, 25, 100]}
                         component="div"
-                        count={
-                            allTrips.length / rowsPerPage <= 1
-                                ? 1
-                                : Math.ceil(allTrips.length / rowsPerPage)
-                        }
+                        count={allTrips.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}
