@@ -4,10 +4,10 @@ import Sidebar from './Sidebar';
 import axios from 'axios';
 
 const Dashboard = () => {
-    const [dashboardData, setDashboardData] = useState();
-    // console.log(dashboardData, "dashboardData");
-    const [lastTrips, setLastTrips] = useState();
-    console.log(lastTrips, 'lastTrips');
+  const [dashboardData, setDashboardData] = useState();
+  // console.log(dashboardData, "dashboardData");
+  const [lastTrips, setLastTrips] = useState();
+  console.log(lastTrips, "lastTrips");
 
     useEffect(() => {
         axios
@@ -34,7 +34,7 @@ const Dashboard = () => {
     console.log(revenew);
 
     return (
-        <div className="dashboard">
+        <div className="dashboard" style={{ height: "100vh" }}>
             <Sidebar />
             <div className="dashboard_content">
                 <div className="container-fluid pt-4 px-4">

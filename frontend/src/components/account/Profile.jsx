@@ -1,6 +1,7 @@
 import { Container } from "@mui/system";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Header } from "../header/Header";
 import { Bnav } from "../nav/Bnav";
 import "./profile.css";
 
@@ -23,9 +24,9 @@ export const Profile = () => {
   }, []);
 
   return (
-    <div id="profile_body">
-      <Container>
-      <Bnav />
+    <div id="profile_body" style={{height:"100vh"}}>
+      <Header/>
+      <Container style={{height:"75vh"}}>
         <div className="shadow-lg p-3 mb-5 bg-white rounded profile_section ">
           <h4 id="account_heading">Account Information</h4>
 
@@ -61,7 +62,7 @@ export const Profile = () => {
 
         </div>
       </Container>
-      
+      <Bnav/>
     </div>
   );
 };

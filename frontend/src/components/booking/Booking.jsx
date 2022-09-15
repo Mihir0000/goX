@@ -85,8 +85,8 @@ export const Booking = () => {
                         </Box>
                     </>
                 ) : (
-                    <div>
-                        <div id="booking_lottie">
+                    <div style={{height:"80vh"}}>
+                        <div id="booking_lottie" >
                             <lottie-player
                                 src="https://assets8.lottiefiles.com/packages/lf20_mmwivxcd.json"
                                 background="transparent"
