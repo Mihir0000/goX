@@ -17,8 +17,7 @@ export const Header = () => {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        {localStorage.getItem('email') ? <Dropdown.Item onClick={logout}>Logout</Dropdown.Item> : <Dropdown.Item><Link to='login'>login</Link></Dropdown.Item>}
-        
+        <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
     </div>
