@@ -76,10 +76,24 @@ const Controls = () => {
         });
     }, []);
 
+    return (
+        <div className="controls_container" style={{ height: '100vh' }}>
+            <Sidebar />
 
-  return (
-    <div className="controls_container" style={{height:"100vh"}}>
-      <Sidebar />
+            <div className="mb-3">
+                <h3>Hey! Do You want to update todays price?</h3>
+            </div>
+            <div className="control_card container">
+                {/* weather card */}
+
+                <div className="w_card">
+                    <p className="time-font mb-0 ml-4  mt-5">
+                        {time} <span className="sm-font">AM</span>
+                    </p>
+                    <p className="ml-4 mb-4">
+                        {month} {date}
+                    </p>
+                </div>
 
                 {/* End weather card */}
 
@@ -135,7 +149,7 @@ const Controls = () => {
                     </button>
                 </div>
             </div>
-        
+        </div>
     );
 };
 
