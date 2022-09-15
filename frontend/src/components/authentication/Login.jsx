@@ -38,12 +38,12 @@ export default function Login() {
 
     return error;
   };
-
+  const [userData, setUserData] = useState();
   const navigate = useNavigate();
   // console.log(value,"value");
 
-  const submitHandler = (event) => {
-    // event.preventDefault();
+  const submitHandler = async (event) => {
+    event.preventDefault();
     let ErrorList = validation();
     setError(validation());
     // navigate("/home");
@@ -57,13 +57,32 @@ export default function Login() {
         })
         .then((res) => {
           console.log("Axios res: ", res);
-          // swal("Yayy! Login Successful!", "Enjoy your ride", "success");
-          window.localStorage.setItem("email", inputState.userEmail)
+          localStorage.setItem("email", inputState.userEmail);
+          const userEmail = localStorage.getItem("email");
+          axios
+            .get(`http://localhost:5000/me`, { params: { userEmail } })
+            .then((res1) => {
+              console.log(res1, "userres");
+              setUserData(res1?.data?.user);
+              localStorage.setItem("name", res1?.data?.user?.userName);
+              localStorage.setItem("role", res1?.data?.user?.role);
+              {
+                localStorage.getItem("role") === "admin"
+                  ? navigate("/admin_dashboard")
+                  : localStorage.getItem("role") === "driver"
+                  ? navigate("/driver_dashboard")
+                  : navigate("/");
+              }
+              swal("Yayy! Login Successful!", "Enjoy your ride", "success");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+
           setInputState({
             userEmail: "",
             password: "",
           });
-          navigate("/");
         })
         .catch((err) => {
           console.log(err);
@@ -71,6 +90,20 @@ export default function Login() {
         });
     }
   };
+
+  // console.log(userData, "kk");
+  // useEffect(() => {
+  //   const userEmail = localStorage.getItem("email");
+  //   axios
+  //     .get(`http://localhost:5000/me`, { params: { userEmail } })
+  //     .then((res) => {
+  //       console.log(res, "userres");
+  //       setUserData(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   return (
     <>
