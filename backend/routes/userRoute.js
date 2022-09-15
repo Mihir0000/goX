@@ -104,6 +104,7 @@ router.route('/trip').post(async (req, res) => {
             distance *
             (admin.basePrice + isRainPrice + isFrostPrice + isWeekend);
         await tripModel.create({
+            userName: user.userName,
             createdAt: Date.now(),
             id: Date.now(),
             userEmail,
@@ -120,11 +121,6 @@ router.route('/trip').post(async (req, res) => {
 router.route('/trip/singleUser').get(async (req, res) => {
     const { userEmail } = req.query;
     const allTrip = await tripModel.find({ userEmail });
-    allTrip.sort((a, b) => b.id - a.id);
-    res.send({ allTrip });
-});
-router.route('/trip/AllTrip').get(async (req, res) => {
-    const allTrip = await tripModel.find({});
     allTrip.sort((a, b) => b.id - a.id);
     res.send({ allTrip });
 });
@@ -168,6 +164,11 @@ router.route('/admin/last10Trip').get(async (req, res) => {
         }
     }
     res.status(200).send(tenTrip);
+});
+router.route('/trip/AllTrip').get(async (req, res) => {
+    const allTrip = await tripModel.find({});
+    allTrip.sort((a, b) => b.id - a.id);
+    res.send({ allTrip });
 });
 
 router.route('/admin/updateRole').put(async (req, res) => {
