@@ -12,7 +12,7 @@ import Dashboard from './components/Admin/Dashboard';
 import Controls from './components/Admin/Controls';
 import UserTable from './components/Admin/UserTable';
 import DriverDash from './components/driver/DriverDash';
-import ActiceTrip from './components/Admin/ActiveTrip';
+import ActiveTrip from './components/Admin/ActiveTrips';
 import AllTrips from './components/Admin/AllTrips';
 
 function App() {
@@ -86,7 +86,7 @@ function App() {
                         </Protect>
                     }
                 />
-                <Route path="/admin/active_trip" element={<ActiceTrip />} />
+                <Route path="/admin/active_trip" element={<ActiveTrip />} />
                 <Route path="/admin/allTrips" element={<AllTrips />} />
             </Routes>
         </div>

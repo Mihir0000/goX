@@ -79,7 +79,7 @@ const Sidebar = () => {
                                     <div className="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                                 </div>
                                 <div className="ms-3">
-                                    <h6 className="mb-0">
+                                    <h6 className="mb-0 text-capitalize">
                                         {localStorage.getItem('name')}
                                     </h6>
                                     <span>Admin</span>
@@ -114,13 +114,13 @@ const Sidebar = () => {
                                     <i className="fa fa-table me-2" />
                                     All Users
                                 </Link>
-                                <a
-                                    href="/admin/allTrips"
+                                <Link
+                                    to="/admin/allTrips"
                                     className="nav-item nav-link"
                                 >
                                     <i className="fa fa-chart-bar me-2"></i>
                                     All Trips
-                                </a>
+                                </Link>
                             </div>
                         </nav>
                     </div>

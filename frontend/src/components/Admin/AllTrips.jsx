@@ -17,7 +17,26 @@ const AllTrips = () => {
     const [allTrips, setAllTrips] = useState([]);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [singleTrip, setSingleTrip] = useState();
+
+    const handleShow = (trip) => {
+        setShow(true);
+        setSingleTrip(trip);
+    };
+    const changeDate = (time) => {
+        const d1 = new Date(time);
+        const result = d1.getTime();
+        console.log(result);
+        let todate = new Date(result).getDate();
+        let tomonth = new Date(result).getMonth() + 1;
+        let toyear = new Date(result).getFullYear();
+        let h = new Date(result).getHours();
+        let m = new Date(result).getMinutes();
+        let s = new Date(result).getSeconds();
+        let original_date =
+            todate + '/' + tomonth + '/' + toyear + ' ' + h + ':' + m + ':' + s;
+        return original_date;
+    };
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -32,7 +51,6 @@ const AllTrips = () => {
             setAllTrips(data.data.allTrip);
         });
     }, []);
-    // console.log(allTrips);
     const label = ['Trip ID', 'Name', 'Email', 'Distance', 'Amount', 'Details'];
 
     return (
@@ -97,34 +115,12 @@ const AllTrips = () => {
                                             <TableCell align="center">
                                                 <Button
                                                     variant="primary"
-                                                    onClick={handleShow}
+                                                    onClick={() =>
+                                                        handleShow(trip)
+                                                    }
                                                 >
                                                     Details
                                                 </Button>
-                                                <Modal
-                                                    show={show}
-                                                    onHide={handleClose}
-                                                >
-                                                    <Modal.Header closeButton>
-                                                        <Modal.Title>
-                                                            Modal heading
-                                                        </Modal.Title>
-                                                    </Modal.Header>
-                                                    <Modal.Body>
-                                                        Woohoo, you're reading
-                                                        this text in a modal!
-                                                    </Modal.Body>
-                                                    <Modal.Footer>
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={
-                                                                handleClose
-                                                            }
-                                                        >
-                                                            Close
-                                                        </Button>
-                                                    </Modal.Footer>
-                                                </Modal>
                                             </TableCell>
                                         </TableRow>
                                     );
@@ -146,6 +142,58 @@ const AllTrips = () => {
                         onRowsPerPageChange={handleChangeRowsPerPage}
                     />
                 </Paper>
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Trip Details</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p className="m-0">
+                            <strong>Trip ID : </strong>
+                            <span>{singleTrip?.id}</span>
+                        </p>
+                        <p className="m-0">
+                            <strong>User Name : </strong>
+                            <span>{singleTrip?.userName}</span>
+                        </p>
+                        <p className="m-0">
+                            <strong>User Email : </strong>
+                            <span>{singleTrip?.userEmail}</span>
+                        </p>
+                        <p className="m-0">
+                            <strong>Source : </strong>
+                            <span>{singleTrip?.source}</span>
+                        </p>
+                        <p className="m-0">
+                            <strong>Destination : </strong>
+                            <span>{singleTrip?.destination}</span>
+                        </p>
+                        <p className="m-0">
+                            <strong>Distance : </strong>
+                            <span>{singleTrip?.distance} Km</span>
+                        </p>
+                        <p className="m-0">
+                            <strong>Amount : </strong>
+                            <span>{singleTrip?.amount}</span>
+                        </p>
+                        <p className="m-0">
+                            <strong>Car Type : </strong>
+                            <span>{singleTrip?.id}</span>
+                        </p>
+                        <p className="m-0">
+                            <strong>Driver : </strong>
+                            <span>{singleTrip?.assignDriver}</span>
+                        </p>
+                        <p className="m-0">
+                            <strong>Time : </strong>
+                            <span>{changeDate(singleTrip?.createdAt)}</span>
+                        </p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={handleClose}>
+                            Close
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         </div>
     );
