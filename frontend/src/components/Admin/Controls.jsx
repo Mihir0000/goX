@@ -44,6 +44,7 @@ const Controls = () => {
     const frostChange = (e) => {
         e.target.checked ? setFrost(true) : setFrost(false);
     };
+    const rainParcent = () => {};
     const setPrice = () => {
         const userEmail = localStorage.getItem('email');
         const basePrice = basePriceRef.current.value;
@@ -99,6 +100,10 @@ const Controls = () => {
                 <div className="controls">
                     <div className="d-flex justify-content-between pb-5 mt-2">
                         <h5>Is today Frosty?</h5>
+                        <div>
+                            <input type="number" className="rainFrostInput" />
+                            <span> %</span>
+                        </div>
                         <Form.Check
                             type="switch"
                             id="custom-switc"
@@ -110,6 +115,14 @@ const Controls = () => {
                     </div>
                     <div className="d-flex justify-content-between pb-5">
                         <h5>Is Today Rainy?</h5>
+                        <div>
+                            <input
+                                type="number"
+                                className="rainFrostInput"
+                                onChange={rainParcent}
+                            />
+                            <span> %</span>
+                        </div>
                         <Form.Check
                             type="switch"
                             id="custom-switch"

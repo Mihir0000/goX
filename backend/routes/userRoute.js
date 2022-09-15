@@ -112,6 +112,11 @@ router.route('/trip/singleUser').get(async (req, res) => {
     allTrip.sort((a, b) => b.id - a.id);
     res.send({ allTrip });
 });
+router.route('/trip/AllTrip').get(async (req, res) => {
+    const allTrip = await tripModel.find({});
+    allTrip.sort((a, b) => b.id - a.id);
+    res.send({ allTrip });
+});
 
 router.route('/me').get(async (req, res) => {
     const { userEmail } = req.query;
