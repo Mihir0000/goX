@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
+import { Header } from '../header/Header';
 import { Bnav } from '../nav/Bnav';
 import './ride.css';
 // import LocationPicker from 'react-location-picker';
@@ -133,6 +134,7 @@ export const Ride1 = () => {
 
     return (
         <div className="ride_body">
+            <Header/>
             <div className="ride_logo">
                 <form className="ride_form">
                     <h5>Select Preferable Ride</h5>

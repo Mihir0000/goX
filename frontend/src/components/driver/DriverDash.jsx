@@ -91,7 +91,9 @@ const DriverDash = () => {
           </button>
           <button onClick={drop}>Trip Complete</button>
         </div>
-      ) : (
+      ) : ( bookedTrip?.length === 0 ? <div>
+        No Booking Request Right Now
+      </div> : 
         <div className="d_div">
           {bookedTrip?.map((e) => (
             <div className="driver_notification justify-content-between m-auto">

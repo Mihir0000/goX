@@ -4,6 +4,7 @@ import Sidebar from "../sharedModule/Sidebar";
 import "./driver.css"
 
 const ActiveTrip = () => {
+  
   return (
     <div className="active_trip_body">
       <Sidebar />

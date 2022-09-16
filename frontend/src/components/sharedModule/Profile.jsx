@@ -29,7 +29,7 @@ export const Profile = () => {
       <Sidebar/>
       }
       <Header/>
-      <Container style={{ height: "75vh", marginTop:"80px" }}>
+      <Container style={{ height: "75vh", paddingTop:"80px" }}>
         <div className="shadow-lg p-3 mb-5 bg-white rounded profile_section ">
           <h4 id="account_heading">Account Information</h4>
 
