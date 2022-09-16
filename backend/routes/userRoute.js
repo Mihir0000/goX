@@ -202,7 +202,7 @@ router.route('/driver/confirmTrip').put(async (req, res) => {
     const { id, assignDriver } = req.body;
     const trip = await tripModel.findOne({ id });
     if (trip.tripStatus !== 'booked') {
-        res.send({ message: 'Trip is Already taken.', startTripStatus: false });
+        res.send({ message: 'Trip is Already taken.', acceptStatus: false });
     } else {
         await tripModel
             .updateOne(
@@ -217,11 +217,11 @@ router.route('/driver/confirmTrip').put(async (req, res) => {
             .then((data) => {
                 res.send({
                     message: 'Successfully start trip',
-                    startTripStatus: true,
+                    acceptStatus: true,
                 });
             })
             .catch((err) => {
-                res.send({ err, startTripStatus: false });
+                res.send({ err, acceptStatus: false });
             });
     }
 });
@@ -229,13 +229,32 @@ router.route('/driver/confirmTrip').put(async (req, res) => {
 router.route('/driver/onTheWay').put(async (req, res) => {
     const { id } = req.body;
     const trip = await tripModel.findOne({ id });
+    if (!trip) {
+        res.send({ message: 'Cannot Find Trip', onTheWay: false });
+    }
     await tripModel
         .updateOne({ id }, { $set: { tripStatus: 'onTheWay' } })
         .then((data) => {
-            res.send({ message: 'Trip is onTheWay' });
+            res.send({ message: 'Trip is onTheWay', onTheWay: true });
         })
         .catch((err) => {
-            res.send({ err, message: 'Cannot update Data' });
+            res.send({ err, message: 'Cannot update Data', onTheWay: false });
+        });
+});
+
+router.route('/driver/endTrip').put(async (req, res) => {
+    const { id } = req.body;
+    const trip = await tripModel.findOne({ id });
+    if (!trip) {
+        res.send({ message: 'Cannot Find Trip', endTrip: false });
+    }
+    await tripModel
+        .updateOne({ id }, { $set: { tripStatus: 'endTrip' } })
+        .then((data) => {
+            res.send({ message: 'Trip is End Now', endTrip: true });
+        })
+        .catch((err) => {
+            res.send({ err, message: 'Cannot update Data', endTrip: false });
         });
 });
 
