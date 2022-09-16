@@ -3,10 +3,10 @@ import Sidebar from "../sharedModule/Sidebar";
 import { Header } from "../header/Header";
 import "./driver.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const DriverDash = () => {
   const [bookedTrip, setBookedTrip] = useState();
-  const [accept, setAccept] = useState();
   useEffect(() => {
     axios
       .get("http://localhost:5000/driver/bookedTrip")
@@ -31,20 +31,22 @@ const DriverDash = () => {
       })
       .then((data) => {
         console.log(data);
-        setAccept(data.status);
-        localStorage.setItem('accept', data.status)
+        localStorage.setItem('accept', data.data.startTripStatus)
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  console.log(accept);
   return (
     <div className="driver_dashboard">
       <Sidebar />
       <Header />
-      {localStorage.getItem('accept') === "200" ? (
-        <div>hkjghjkj</div>
+      {localStorage.getItem('accept') === 'true' ? (
+        <div className="currentTrip">
+          <h6>Your Passenger is waiting at pickup location...</h6>
+          <button><Link to='/activeTrip'>See details of this trip</Link></button>
+          <button>Pickup complete</button>
+        </div>
       ) : (
         <div className="d_div">
           {bookedTrip?.map((e) => (
