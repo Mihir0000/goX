@@ -202,7 +202,7 @@ router.route('/driver/confirmTrip').put(async (req, res) => {
     const { id, assignDriver } = req.body;
     const trip = await tripModel.findOne({ id });
     if (trip.tripStatus !== 'booked') {
-        res.send({ message: 'Trip is Already taken.' });
+        res.send({ message: 'Trip is Already taken.', startTripStatus: false });
     } else {
         await tripModel
             .updateOne(
@@ -214,13 +214,35 @@ router.route('/driver/confirmTrip').put(async (req, res) => {
                     },
                 }
             )
-            .then(() => {
-                res.send({ message: 'Successfully start trip', trip });
+            .then((data) => {
+                res.send({
+                    message: 'Successfully start trip',
+                    startTripStatus: true,
+                });
             })
             .catch((err) => {
-                res.send(err);
+                res.send({ err, startTripStatus: false });
             });
     }
+});
+
+router.route('/driver/onTheWay').put(async (req, res) => {
+    const { id } = req.body;
+    const trip = await tripModel.findOne({ id });
+    await tripModel
+        .updateOne({ id }, { $set: { tripStatus: 'onTheWay' } })
+        .then((data) => {
+            res.send({ message: 'Trip is onTheWay' });
+        })
+        .catch((err) => {
+            res.send({ err, message: 'Cannot update Data' });
+        });
+});
+
+router.route('/driver/tripHistory').get(async (req, res) => {
+    const { userEmail } = req.query;
+    const driverTripHistory = await tripModel.find({ assignDriver: userEmail });
+    res.send(driverTripHistory);
 });
 
 module.exports = router;
