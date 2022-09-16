@@ -3,7 +3,6 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { padding } from "@mui/system";
 
 const Sidebar = () => {
   const [show, setShow] = useState(false);
