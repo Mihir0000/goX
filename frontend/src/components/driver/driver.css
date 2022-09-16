@@ -63,3 +63,11 @@
   height: max-content;
   width: 40%;
 }
+.currentTrip{
+  background-color: #dcd5d582;
+  width: fit-content;
+  margin: auto;
+  padding: 50px;
+  border-radius: 4px;
+  margin-top: 150px;
+}

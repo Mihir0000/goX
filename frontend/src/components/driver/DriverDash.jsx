@@ -24,6 +24,7 @@ const DriverDash = () => {
 
   const tripAccept = async (TripId) => {
     console.log(TripId);
+    localStorage.setItem("tripId", TripId);
     await axios
       .put("http://localhost:5000/driver/confirmTrip", {
         id: TripId,
@@ -31,21 +32,64 @@ const DriverDash = () => {
       })
       .then((data) => {
         console.log(data);
-        localStorage.setItem('accept', data.data.startTripStatus)
+        localStorage.setItem("accept", data.data.acceptStatus);
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
       });
   };
+  const pickup = async () => {
+    await axios
+      .put("http://localhost:5000/driver/onTheWay", {
+        id: localStorage.getItem("tripId"),
+      })
+      .then((data) => {
+        console.log(data);
+        localStorage.removeItem("accept");
+        localStorage.setItem("pickup", data.data.onTheWay);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const drop = async () => {
+    await axios
+      .put("http://localhost:5000/driver/endTrip", {
+        id: localStorage.getItem("tripId"),
+      })
+      .then((data) => {
+        console.log(data);
+        localStorage.removeItem("pickup");
+        localStorage.removeItem('tripId')
+        // localStorage.setItem("drop", data.data.endTrip);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className="driver_dashboard">
       <Sidebar />
       <Header />
-      {localStorage.getItem('accept') === 'true' ? (
+      {localStorage.getItem("accept") === "true" ? (
         <div className="currentTrip">
           <h6>Your Passenger is waiting at pickup location...</h6>
-          <button><Link to='/activeTrip'>See details of this trip</Link></button>
-          <button>Pickup complete</button>
+          <button>
+            <Link to="/activeTrip">See details of this trip</Link>
+          </button>
+          <button onClick={pickup}>Pickup complete</button>
+        </div>
+      ) : localStorage.getItem("pickup") ? (
+        <div className="currentTrip">
+          <h6>Have a great journey...</h6>
+          <button>
+            <Link to="/activeTrip">See details of this trip</Link>
+          </button>
+          <button onClick={drop}>Trip Complete</button>
         </div>
       ) : (
         <div className="d_div">
