@@ -3,9 +3,16 @@
     padding: 8px;
     margin-top: 25px;
     position: fixed;
-    top: 30px;
+    top: 20px;
     right: 60px;
 }
 .dropdown-toggle::after{
     display: none !important;
+}
+.header_icon{
+    height: 35px;
+    color: aliceblue !important;
+}
+#header_btn{
+    z-index: 100;
 }

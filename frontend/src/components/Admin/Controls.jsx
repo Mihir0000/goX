@@ -36,12 +36,55 @@ const Controls = () => {
     "December",
   ];
 
+  const [hour, setHour] = useState();
+  const [minute, setMinute] = useState();
+  const [second, setSecond] = useState();
+  const [format, setFormat] = useState();
+
+  function showTime() {
+    let date = new Date();
+    let hours = date.getHours(); //0-23
+    let minutes = date.getMinutes(); //0-59
+    let seconds = date.getSeconds(); //0-59
+
+    setFormat(convertFormat(hours));
+    hours = checkTime(hours);
+
+    setHour(addZero(hours));
+    setMinute(addZero(minutes));
+    setSecond(addZero(seconds));
+  }
+  function convertFormat(time) {
+    let format = "AM";
+    if (time >= 12) {
+      format = "PM";
+    }
+    return format;
+  }
+
+  function checkTime(time) {
+    if (time > 12) {
+      time = time - 12;
+    }
+    if (time === 0) {
+      time = 12;
+    }
+    return time;
+  }
+
+  function addZero(time) {
+    if (time < 10) {
+      time = "0" + time;
+    }
+    return time;
+  }
+
+  setInterval(showTime, 1000);
+
+
   const today = new Date();
   const date = today.getDate();
   const month = monthNames[today.getMonth()];
-  const time =
-    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-  // const label = { inputProps: { 'aria-label': 'Switch demo' } };
   const rainChange = (e) => {
     e.target.checked ? setRain(true) : setRain(false);
   };
@@ -105,7 +148,7 @@ const Controls = () => {
 
         <div className="w_card">
           <p className="time-font mb-0 ml-4  mt-5">
-            {time} <span className="sm-font">AM</span>
+            {hour} : {minute} : {second} <span className="sm-font">{format}</span>
           </p>
           <p className="ml-4 mb-4">
             {month} {date}

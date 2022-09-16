@@ -34,89 +34,73 @@ const ActiveTrips = () => {
             });
     }, []);
 
-    const label = [
-        'TripID',
-        'UserEmail',
-        'Distance',
-        'Amount',
-        'Selected Driver',
-        'Trip Status',
-    ];
-    return (
-        <div className="all_users">
-            <Sidebar />
-            <Header />
-            <div className="user_table">
-                <Paper
-                    sx={{
-                        width: '100%',
-                        overflow: 'hidden',
-                        backgroundColor: '#72a3b334',
-                        color: 'whitesmoke',
-                    }}
-                >
-                    <TableContainer sx={{ maxHeight: 440 }}>
-                        <Table stickyHeader aria-label="sticky table">
-                            <TableHead>
-                                <TableRow>
-                                    {label.map((l, index) => (
-                                        <TableCell key={index} align="center">
-                                            {l}
-                                        </TableCell>
-                                    ))}
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {activeTrip
-                                    ?.slice(
-                                        page * rowsPerPage,
-                                        page * rowsPerPage + rowsPerPage
-                                    )
-                                    .map((trip, index) => {
-                                        return (
-                                            <TableRow
-                                                hover
-                                                role="checkbox"
-                                                tabIndex={-1}
-                                                key={index}
-                                            >
-                                                <TableCell align="center">
-                                                    {trip.id}
-                                                </TableCell>
-                                                <TableCell align="center">
-                                                    {trip.userEmail}
-                                                </TableCell>
-                                                <TableCell align="center">
-                                                    {trip.distance} Km
-                                                </TableCell>
-                                                <TableCell align="center">
-                                                    ₹ {trip.amount}
-                                                </TableCell>
-                                                <TableCell align="center">
-                                                    {trip?.assignDriver}
-                                                </TableCell>
-                                                <TableCell align="center">
-                                                    {trip.tripStatus}
-                                                </TableCell>
-                                            </TableRow>
-                                        );
-                                    })}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                    <TablePagination
-                        rowsPerPageOptions={[10, 25, 100]}
-                        component="div"
-                        count={activeTrip.length}
-                        rowsPerPage={rowsPerPage}
-                        page={page}
-                        onPageChange={handleChangePage}
-                        onRowsPerPageChange={handleChangeRowsPerPage}
-                    />
-                </Paper>
-            </div>
-        </div>
-    );
+  const label = [
+    "TripID",
+    "UserEmail",
+    "Distance",
+    "Amount",
+    "Selected Driver",
+    "Trip Status",
+  ];
+  return (
+    <div className="all_users">
+      <Sidebar />
+      <Header />
+      <div className="user_table">
+        <Paper
+          sx={{
+            width: "100%",
+            overflow: "hidden",
+            backgroundColor: "#72a3b334",
+            color: "whitesmoke",
+          }}
+        >
+          <TableContainer sx={{ maxHeight: 440 }}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  {label.map((l, index) => (
+                    <TableCell key={index} align="center">
+                      {l}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {activeTrip
+                  ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((trip, index) => {
+                    return (
+                      <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                        <TableCell align="center">{trip.id}</TableCell>
+                        <TableCell align="center">{trip.userEmail}</TableCell>
+                        <TableCell align="center">{trip.distance} Km</TableCell>
+                        <TableCell align="center">₹ {trip.amount}</TableCell>
+                        <TableCell align="center">
+                          {trip?.assignDriver}
+                        </TableCell>
+                        <TableCell align="center">{trip.tripStatus}</TableCell>
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={
+              activeTrip?.length
+            }
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Paper>
+      </div>
+    </div>
+  );
 };
 
 export default ActiveTrips;

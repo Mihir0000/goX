@@ -10,6 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import axios from "axios";
 import { Modal, Button } from "react-bootstrap";
 import Sidebar from "../sharedModule/Sidebar";
+import { Header } from "../header/Header";
 
 const TripHistory = () => {
   const [page, setPage] = useState(0);
@@ -33,11 +34,19 @@ const TripHistory = () => {
     });
   }, []);
   // console.log(allTrips);
-  const label = ["Trip ID", "Passenger Name", "from", "to", "Amount", "Details"];
+  const label = [
+    "Trip ID",
+    "Passenger Name",
+    "from",
+    "to",
+    "Amount",
+    "Details",
+  ];
 
   return (
     <div className="all_users" style={{ height: "100vh" }}>
       <Sidebar />
+      <Header />
       <div className="user_table">
         <Paper
           sx={{
@@ -59,44 +68,42 @@ const TripHistory = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {allTrips?.map((trip, index) => {
-                  return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                      <TableCell align="center" className="tablecell">
-                        {trip.id}
-                      </TableCell>
-                      <TableCell
-                        align="center"
-                        className="tablecell text-capitalize"
-                      >
-                        {trip.userName}
-                      </TableCell>
-                      <TableCell align="center" className="tablecell">
-                        {trip.userEmail}
-                      </TableCell>
-                      <TableCell align="center" className="tablecell">
-                        {trip.distance} Km
-                      </TableCell>
-                      <TableCell align="center">₹ {trip.amount}</TableCell>
-                      <TableCell align="center">
-                        <Button variant="warning" onClick={handleShow}>
-                          Details
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
+                {allTrips
+                  ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((trip, index) => {
+                    return (
+                      <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                        <TableCell align="center" className="tablecell">
+                          {trip.id}
+                        </TableCell>
+                        <TableCell
+                          align="center"
+                          className="tablecell text-capitalize"
+                        >
+                          {trip.userName}
+                        </TableCell>
+                        <TableCell align="center" className="tablecell">
+                          {trip.userEmail}
+                        </TableCell>
+                        <TableCell align="center" className="tablecell">
+                          {trip.distance} Km
+                        </TableCell>
+                        <TableCell align="center">₹ {trip.amount}</TableCell>
+                        <TableCell align="center">
+                          <Button variant="warning" onClick={handleShow}>
+                            Details
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
               </TableBody>
             </Table>
           </TableContainer>
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={
-              allTrips.length / rowsPerPage <= 1
-                ? 1
-                : Math.ceil(allTrips.length / rowsPerPage)
-            }
+            count={allTrips.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
