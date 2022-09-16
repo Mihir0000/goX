@@ -3,7 +3,6 @@ const router = express.Router();
 const userModel = require('../models/userModel');
 const adminDashboardModel = require('../models/adminDashboard');
 const tripModel = require('../models/tripModel');
-const { response } = require('express');
 
 router.route('/').get((req, res) => {
     res.status(200).send({ message: 'Home Page' });
@@ -101,9 +100,10 @@ router.route('/trip').post(async (req, res) => {
             : 0;
         const day = new Date().getDay();
         const isWeekend = day === 0 || day === 6 ? admin.basePrice * 0.3 : 0;
-        const price =
+        const price = parseFloat(
             distance *
-            (admin.basePrice + isRainPrice + isFrostPrice + isWeekend);
+                (admin.basePrice + isRainPrice + isFrostPrice + isWeekend)
+        ).toFixed(2);
         await tripModel.create({
             userName: user.userName,
             createdAt: Date.now(),
@@ -256,6 +256,20 @@ router.route('/driver/endTrip').put(async (req, res) => {
         .catch((err) => {
             res.send({ err, message: 'Cannot update Data', endTrip: false });
         });
+});
+
+router.route('/driver/activeTrip').get(async (req, res) => {
+    const { userEmail } = req.query;
+    const driverStartTrip = await tripModel.find({
+        assignDriver: userEmail,
+        tripStatus: 'startTrip',
+    });
+    let driverOntheWayTrip = await tripModel.find({
+        assignDriver: userEmail,
+        tripStatus: 'onTheWay',
+    });
+    driverOntheWayTrip.push(...driverStartTrip);
+    res.send({ driverOntheWayTrip });
 });
 
 router.route('/driver/tripHistory').get(async (req, res) => {
