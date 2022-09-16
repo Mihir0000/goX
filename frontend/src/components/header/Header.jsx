@@ -13,7 +13,7 @@ export const Header = () => {
     <div>
      <Dropdown id="header_btn">
       <Dropdown.Toggle variant="success" id="dropdown-basic">
-        <img className="profile_icon" src="https://img.icons8.com/color/48/000000/user.png" />
+        <img className="header_icon"   src="https://img.icons8.com/pastel-glyph/64/000000/shutdown--v4.png" />
       </Dropdown.Toggle>
 
       <Dropdown.Menu>

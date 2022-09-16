@@ -8,9 +8,9 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import axios from 'axios';
-import Sidebar from './Sidebar';
 import { Modal, Button } from 'react-bootstrap';
 import { Header } from '../header/Header';
+import Sidebar from '../sharedModule/Sidebar';
 
 const AllTrips = () => {
     const [page, setPage] = useState(0);

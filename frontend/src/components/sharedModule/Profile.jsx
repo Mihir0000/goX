@@ -28,29 +28,29 @@ export const Profile = () => {
       {userData?.role !== 'user' && 
       <Sidebar/>
       }
-      <Header />
-      <Container style={{ height: "75vh" }}>
+      <Header/>
+      <Container style={{ height: "75vh", marginTop:"80px" }}>
         <div className="shadow-lg p-3 mb-5 bg-white rounded profile_section ">
           <h4 id="account_heading">Account Information</h4>
 
           <div className="shadow-lg p-3 mb-5 bg-white rounded profile_div">
             <img
               className="profile_icon"
-              src="https://img.icons8.com/color/48/000000/user.png"
+              src="https://img.icons8.com/color/96/000000/customer-skin-type-7.png"
             />
             Name: {userData?.userName}
           </div>
           <div className="shadow-lg p-3 mb-5 bg-white rounded profile_div">
             <img
               className="profile_icon"
-              src="https://img.icons8.com/color/48/000000/order-delivered.png"
+              src="https://img.icons8.com/external-basicons-color-danil-polshin/100/000000/external-abstract-abstract-basicons-color-danil-polshin-9.png"
             />
             Role: {userData?.role}
           </div>
           <div className="shadow-lg p-3 mb-5 bg-white rounded profile_div">
             <img
               className="profile_icon"
-              src="https://img.icons8.com/color/48/000000/birthday-cake.png"
+              src="https://img.icons8.com/color/96/000000/new-post.png"
             />
             Email: {userData?.userEmail}
           </div>

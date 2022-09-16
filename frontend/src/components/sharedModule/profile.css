@@ -11,6 +11,7 @@
 
 .profile_icon {
   height: 25px;
+  margin-right: 10px;
 }
 
 @media (min-width: 1025px) {
@@ -21,7 +22,7 @@
     background-size: 40% !important;
     background-color: rgb(8, 107, 102);
     background-attachment: fixed;
-    padding: 40px !important;
+    /* padding: 40px !important; */
     margin: 0px !important;
   }
   .profile_section {

@@ -1,5 +1,5 @@
 .logBtn {
-  background-color: rgb(30, 120, 177) !important;
+  background-color: rgb(136, 132, 17) !important;
   width: 30%;
   font-weight: bold !important;
   margin-bottom: 18px;
@@ -7,7 +7,7 @@
 }
 
 .logBtn:hover {
-  background-color: rgb(22, 61, 85) !important;
+  background-color: rgb(17, 60, 66) !important;
 }
 
 
@@ -23,13 +23,13 @@
   background-color: rgb(22, 61, 85) !important;
 }
 
-a {
+.link {
   text-decoration: none !important;
-  color: rgb(40, 119, 165) !important;
+  color: rgb(136, 132, 17) !important;
 }
 
-a:hover {
-  color: rgb(22, 61, 85) !important;
+.link:hover {
+  color: rgb(8, 72, 39) !important;
 }
 .g{
   margin-right: 5px;
@@ -39,7 +39,7 @@ a:hover {
 @media (min-width: 1025px) {
   .flex {
 
-    background-image: url(../../assets/bg7.jpg);
+    background-image: url(https://i.pinimg.com/originals/eb/80/2c/eb802c071fde1f7b81bf38927893f3f1.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -66,11 +66,11 @@ a:hover {
 
   @keyframes color-change {
     10% {
-      color: rgb(127, 73, 115);
+      color: rgb(136, 134, 48);
     }
 
     40% {
-      color: rgb(94, 192, 202);
+      color: rgb(13, 116, 65);
     }
 
     70% {
@@ -86,7 +86,7 @@ a:hover {
     padding-left: 140px;
     padding-top: 150px;
     padding-right: 50px;
-    background-color: rgba(245, 245, 245, 0.644);
+    background-color: rgba(242, 242, 240, 0.644);
 
   }
 
@@ -104,7 +104,7 @@ a:hover {
 
 
   .text-center {
-    color: rgb(17, 77, 117);
+    color: rgb(136, 132, 17);
     padding-bottom: 20px;
   }
 

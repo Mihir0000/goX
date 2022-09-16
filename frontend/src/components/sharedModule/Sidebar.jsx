@@ -3,6 +3,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { padding } from "@mui/system";
 
 const Sidebar = () => {
   const [show, setShow] = useState(false);
@@ -69,18 +70,20 @@ const Sidebar = () => {
                 <div className="position-relative">
                   <img
                     className="rounded-circle"
-                    src="img/user.jpg"
+                    src="https://img.icons8.com/external-others-inmotus-design/67/000000/external-User-basic-web-ui-elements-others-inmotus-design-2.png"
                     alt=""
                     style={{
-                      width: "40px",
-                      height: "40px",
+                      width: "45px",
+                      height: "45px",
+                      border:"2px solid black",
+                      padding:"3px"
                     }}
                   />
                   <div className="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                 </div>
                 <div className="ms-3">
-                  <h6 className="mb-0">{name}</h6>
-                  <span>{role}</span>
+                  <h6 className="mb-0 text-capitalize">{name}</h6>
+                  <span className="text-capitalize">{role}</span>
                 </div>
               </div>
               <div className="navbar-nav w-100">

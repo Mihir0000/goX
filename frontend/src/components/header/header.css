@@ -9,3 +9,10 @@
 .dropdown-toggle::after{
     display: none !important;
 }
+.header_icon{
+    height: 35px;
+    color: aliceblue !important;
+}
+#header_btn{
+    z-index: 100;
+}
