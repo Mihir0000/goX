@@ -10,6 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import axios from 'axios';
 import Sidebar from './Sidebar';
 import { Modal, Button } from 'react-bootstrap';
+import { Header } from '../header/Header';
 
 const AllTrips = () => {
     const [page, setPage] = useState(0);
@@ -56,6 +57,7 @@ const AllTrips = () => {
     return (
         <div className="all_users" style={{ height: '100vh' }}>
             <Sidebar />
+            <Header />
             <div className="user_table">
                 <Paper
                     sx={{
