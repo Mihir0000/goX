@@ -1,38 +1,38 @@
-import React, { useState, useEffect } from "react";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
-import Sidebar from "../sharedModule/Sidebar";
-import axios from "axios";
-import { Header } from "../header/Header";
+import React, { useState, useEffect } from 'react';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+import Sidebar from '../sharedModule/Sidebar';
+import axios from 'axios';
+import { Header } from '../header/Header';
 
 const ActiveTrips = () => {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [activeTrip, setActiveTrip] = useState([]);
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [activeTrip, setActiveTrip] = useState([]);
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/admin/bookedTrip")
-      .then((data) => {
-        setActiveTrip(data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
+    useEffect(() => {
+        axios
+            .get('http://localhost:5000/admin/bookedTrip')
+            .then((data) => {
+                setActiveTrip(data.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
 
   const label = [
     "TripID",
@@ -90,9 +90,7 @@ const ActiveTrips = () => {
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
             count={
-              activeTrip?.length / rowsPerPage <= 1
-                ? 1
-                : activeTrip?.length / rowsPerPage
+              activeTrip?.length
             }
             rowsPerPage={rowsPerPage}
             page={page}
