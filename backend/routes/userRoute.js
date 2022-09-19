@@ -72,6 +72,7 @@ router.route('/admin/setPrice').post(async (req, res) => {
             for (let i = 0; i < allCar.length; i++) {
                 if (allCar[i].carType === carType) {
                     allCar[i].basePrice = basePrice;
+                    allCar[i].description = description;
                     found = true;
                 }
             }
