@@ -8,13 +8,13 @@ router.route('/').get((req, res) => {
     res.status(200).send({ message: 'Home Page' });
 });
 router.route('/register').post(async (req, res) => {
-    const { userName, userEmail, password } = req.body;
+    const { userName, userEmail, password, role } = req.body;
     let isExist = await userModel.findOne({ userEmail });
     if (isExist) {
         res.status(201).send({ message: "You're Already Registered" });
     } else {
         await userModel
-            .create({ userName, userEmail, password })
+            .create({ userName, userEmail, password, role })
             .then(() => {
                 res.status(200).send({ message: 'Register Successfully !' });
             })
