@@ -35,14 +35,6 @@ export const Ride1 = () => {
         carType: '',
     });
 
-    // console.log(inputState, "inputState");
-    // const [location, setLocation] = useState({
-    //   address: "",
-    //   position: {
-    //     lat: 0,
-    //     lng: 0
-    //   }
-    // })
 
     const [error, setError] = useState({});
     let name, value;
@@ -60,10 +52,8 @@ export const Ride1 = () => {
             distance: inputState.distance,
             carType: e.target.value,
         });
-        // console.log(inputState);
     };
 
-    console.log('dfdf', inputState);
     const validation = () => {
         let error = {};
         if (!inputState.source) {
@@ -96,7 +86,6 @@ export const Ride1 = () => {
                     // },
                 })
                 .then((res) => {
-                    // console.log("Axios res: ", res);
                     swal('Ride Booked !', 'Happy Journey', 'success');
                     setInputState({
                         source: '',
@@ -107,8 +96,7 @@ export const Ride1 = () => {
                     navigate('/bookings');
                 })
                 .catch((err) => {
-                    console.log(err);
-                    swal('wrong email or password');
+                    swal('wrong email or password', 'error');
                 });
         }
     };
@@ -130,7 +118,6 @@ export const Ride1 = () => {
             swal('Please Enter pickup and drop location');
         }
     };
-    console.log(inputState.distance);
 
     return (
         <div className="ride_body">

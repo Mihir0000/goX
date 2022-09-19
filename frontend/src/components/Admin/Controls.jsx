@@ -4,6 +4,7 @@ import { Form } from "react-bootstrap";
 import axios from "axios";
 import swal from "sweetalert";
 import { Header } from "../header/Header";
+import { toast } from 'react-toastify';
 
 const Controls = () => {
   const basePriceRef = useRef();
@@ -18,7 +19,6 @@ const Controls = () => {
   const [frostParcent, setFrostParcent] = useState(0);
 
   const basePriceChange = (e) => {
-    console.log(e.target.value);
     setBasePrice(e.target.value);
   };
   const monthNames = [
@@ -101,12 +101,11 @@ const Controls = () => {
     const userEmail = localStorage.getItem("email");
     const basePrice = basePriceRef.current.value;
     if (basePrice < 1) {
-      console.log("Base Price cannot set negetive or Zero");
+      toast("Base Price cannot set negetive or Zero");
       return;
     }
     const isRain = rainRef.current.checked;
     const isFrost = frostRef.current.checked;
-    console.log(userEmail, basePrice, isRain, isFrost);
     const data = {
       userEmail,
       basePrice,
@@ -118,11 +117,11 @@ const Controls = () => {
     axios
       .post("http://localhost:5000/admin/setPrice", data)
       .then(() => {
-        swal("Set Successfullly");
+        swal("Price Set Successfullly");
         setBasePrice("");
       })
       .catch((err) => {
-        console.log(err.message);
+        toast(err.message);
       });
   };
 

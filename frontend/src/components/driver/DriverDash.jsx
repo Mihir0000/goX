@@ -4,6 +4,7 @@ import { Header } from "../header/Header";
 import "./driver.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const DriverDash = () => {
   const [bookedTrip, setBookedTrip] = useState();
@@ -14,16 +15,13 @@ const DriverDash = () => {
         setBookedTrip(data?.data);
       })
       .catch((err) => {
-        console.log(err);
+        toast(err.message);
       });
   }, []);
-  console.log(bookedTrip);
 
   const driverName = localStorage.getItem("email");
-  // console.log(TripId,"id");
 
   const tripAccept = async (TripId) => {
-    console.log(TripId);
     localStorage.setItem("tripId", TripId);
     await axios
       .put("http://localhost:5000/driver/confirmTrip", {
@@ -31,12 +29,11 @@ const DriverDash = () => {
         assignDriver: driverName,
       })
       .then((data) => {
-        console.log(data);
         localStorage.setItem("accept", data.data.acceptStatus);
         window.location.reload();
       })
       .catch((err) => {
-        console.log(err);
+        toast(err.message);
       });
   };
   const pickup = async () => {
@@ -45,13 +42,12 @@ const DriverDash = () => {
         id: localStorage.getItem("tripId"),
       })
       .then((data) => {
-        console.log(data);
         localStorage.removeItem("accept");
         localStorage.setItem("pickup", data.data.onTheWay);
         window.location.reload();
       })
       .catch((err) => {
-        console.log(err);
+        toast(err.message);
       });
   };
   const drop = async () => {
@@ -60,14 +56,12 @@ const DriverDash = () => {
         id: localStorage.getItem("tripId"),
       })
       .then((data) => {
-        console.log(data);
         localStorage.removeItem("pickup");
-        localStorage.removeItem('tripId')
-        // localStorage.setItem("drop", data.data.endTrip);
+        localStorage.removeItem("tripId");
         window.location.reload();
       })
       .catch((err) => {
-        console.log(err);
+        toast(err.message);
       });
   };
 
@@ -91,12 +85,15 @@ const DriverDash = () => {
           </button>
           <button onClick={drop}>Trip Complete</button>
         </div>
-      ) : ( bookedTrip?.length === 0 ? <div>
-        No Booking Request Right Now
-      </div> : 
+      ) : bookedTrip?.length === 0 ? (
+        <div>No Booking Request Right Now</div>
+      ) : (
         <div className="d_div">
           {bookedTrip?.map((e, index) => (
-            <div className="driver_notification justify-content-between m-auto" key={index}>
+            <div
+              className="driver_notification justify-content-between m-auto"
+              key={index}
+            >
               <p>{e?.userName}</p>
               <h6>from {e?.source}</h6>
               <i className="fa-solid fa-arrow-left-long"></i>

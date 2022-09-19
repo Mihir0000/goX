@@ -9,7 +9,6 @@ import swal from 'sweetalert';
 
 const ChangeRole = ({ userId }) => {
     const [role, setRole] = useState('');
-    // console.log(userId);
 
     const changeRole = (event) => {
         setRole(event.target.value);
@@ -17,7 +16,6 @@ const ChangeRole = ({ userId }) => {
 
     const updateRole = () => {
         const data = { userId, updateRole: role };
-        console.log(data);
         if (role === '') {
             return;
         }
@@ -29,7 +27,7 @@ const ChangeRole = ({ userId }) => {
                 window.location.reload();
             })
             .catch((err) => {
-                console.log(err);
+                swal(err.message);
             });
     };
     return (

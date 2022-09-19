@@ -27,7 +27,6 @@ const AllTrips = () => {
     const changeDate = (time) => {
         const d1 = new Date(time);
         const result = d1.getTime();
-        console.log(result);
         let todate = new Date(result).getDate();
         let tomonth = new Date(result).getMonth() + 1;
         let toyear = new Date(result).getFullYear();

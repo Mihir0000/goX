@@ -5,31 +5,28 @@ import { Header } from "../header/Header";
 import { Bnav } from "../nav/Bnav";
 import "./profile.css";
 import Sidebar from "./Sidebar";
+import { toast } from "react-toastify";
 
 export const Profile = () => {
   const [userData, setUserData] = useState();
-  console.log(userData, "userData");
 
   useEffect(() => {
     const userEmail = localStorage.getItem("email");
     axios
       .get(`http://localhost:5000/me`, { params: { userEmail } })
       .then((res) => {
-        console.log(res);
         setUserData(res.data.user);
       })
       .catch((err) => {
-        console.log(err);
+        toast(err.message);
       });
   }, []);
 
   return (
     <div id="profile_body" style={{ height: "100vh" }}>
-      {userData?.role !== 'user' && 
-      <Sidebar/>
-      }
-      <Header/>
-      <Container style={{ height: "75vh", paddingTop:"80px" }}>
+      {userData?.role !== "user" && <Sidebar />}
+      <Header />
+      <Container style={{ height: "75vh", paddingTop: "80px" }}>
         <div className="shadow-lg p-3 mb-5 bg-white rounded profile_section ">
           <h4 id="account_heading">Account Information</h4>
 
