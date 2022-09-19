@@ -16,6 +16,7 @@ export default function Registration() {
     userName: "",
     userEmail: "",
     password: "",
+    role: "user",
     // confirmPassword:""
   });
   const [error, setError] = useState({});
@@ -28,7 +29,16 @@ export default function Registration() {
     setInputState({ ...inputState, [name]: value });
     setConfirm(event.target.value);
   };
-  console.log(value, "lk");
+  console.log(inputState, "lk");
+
+  const handleRoleChange = (e) => {
+    setInputState({
+      userName: inputState.userName,
+      userEmail: inputState.userEmail,
+      password: inputState.password,
+      role: e.target.value,
+    });
+  };
 
   const validation = () => {
     let error = {};
@@ -85,6 +95,7 @@ export default function Registration() {
             userName: "",
             userEmail: "",
             password: "",
+            role: "user",
           });
           setConfirm("");
           navigate("/login");
@@ -95,24 +106,6 @@ export default function Registration() {
         });
     }
   };
-
-  // const submitHandler1 = (event) => {
-  //   event.preventDefault();
-  //   let ErrorList = validation();
-  //   setError(validation());
-  //   if (Object.keys(ErrorList).length !== 0) {
-  //   } else {
-  //     localStorage.setItem("userEmail", inputState.userEmail);
-  //     localStorage.setItem("password", inputState.password);
-  //     localStorage.setItem("status", true);
-  //     swal(
-  //       "Good job!",
-  //       "A Verification Code has been sent to your userEmail",
-  //       "success"
-  //     );
-  //     navigate("/login");
-  //   }
-  // };
 
   return (
     <>
@@ -185,6 +178,15 @@ export default function Registration() {
               <br />
               <span className="err">{error.confirm}</span>
               <br />
+              <div>
+                <label><b>Role :</b></label>
+                <select className="role px-3 py-1" onChange={handleRoleChange}>
+                  <option value="user">User</option>
+                  <option value="admin">Admin</option>
+                  <option value="driver">Driver</option>
+                </select>
+              </div>
+
               <br />
               <Button
                 className="logBtn"

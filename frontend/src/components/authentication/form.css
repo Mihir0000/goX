@@ -155,6 +155,11 @@
     margin-left: 70px;
     font-size: 13px;
   }
+  .role{
+    margin-left: 45px;
+    border-radius: 3px;
+    border-color: transparent;
+  }
 
 }
 
