@@ -14,10 +14,11 @@
 .link {
   text-decoration: none !important;
   /* color: rgb(136, 132, 17) !important; */
+  color: rgb(179, 223, 215) !important;
 }
 
 .link:hover {
-  color: rgb(8, 72, 39) !important;
+  color: rgb(152, 199, 175) !important;
 }
 .g{
   margin-right: 5px;
@@ -74,7 +75,7 @@
     padding-left: 140px;
     padding-top: 150px;
     padding-right: 50px;
-    background-color: rgba(242, 242, 240, 0.644);
+    background-color: rgba(39, 43, 46, 0.644);
 
   }
 
