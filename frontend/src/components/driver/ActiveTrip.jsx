@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Header } from "../header/Header";
 import Sidebar from "../sharedModule/Sidebar";
 import "./driver.css";
-
+import { toast } from "react-toastify";
 const ActiveTrip = () => {
   const [activeTrip, setActiveTrip] = useState();
   const userEmail = localStorage.getItem("email");
@@ -14,7 +14,7 @@ const ActiveTrip = () => {
         setActiveTrip(data?.data?.driverOntheWayTrip);
       })
       .catch((err) => {
-        swal(err.message);
+        toast(err.message);
       });
   }, []);
 

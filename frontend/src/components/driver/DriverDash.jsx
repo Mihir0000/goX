@@ -4,7 +4,6 @@ import { Header } from "../header/Header";
 import "./driver.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import swal from "sweetalert";
 import { toast } from "react-toastify";
 
 const DriverDash = () => {
