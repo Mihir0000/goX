@@ -16,127 +16,131 @@ import AllTrips from "./components/Admin/AllTrips";
 import TripHistory from "./components/driver/TripHistory";
 import ActiveTrips from "./components/Admin/ActiveTrips";
 import ActiveTrip from "./components/driver/ActiveTrip";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
-    <div className="App">
-      <Routes>
-        <Route
-          exact
-          path="/"
-          element={
-            <Protect>
-              <UserProtect>
-                <Home />
-              </UserProtect>
-            </Protect>
-          }
-        />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Registration />} />
-        <Route
-          path="/profile"
-          element={
-            <Protect>
-              <Profile />
-            </Protect>
-          }
-        />
-        <Route
-          path="/bookings"
-          element={
-            <Protect>
-              <Booking />
-            </Protect>
-          }
-        />
-        <Route
-          path="/ridenow"
-          element={
-            <Protect>
-              <UserProtect>
-                <Ride1 />
-              </UserProtect>
-            </Protect>
-          }
-        />
-        <Route
-          path="/admin_dashboard"
-          element={
-            <Protect>
+    <>
+      <div className="App">
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <Protect>
+                <UserProtect>
+                  <Home />
+                </UserProtect>
+              </Protect>
+            }
+          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Registration />} />
+          <Route
+            path="/profile"
+            element={
+              <Protect>
+                <Profile />
+              </Protect>
+            }
+          />
+          <Route
+            path="/bookings"
+            element={
+              <Protect>
+                <Booking />
+              </Protect>
+            }
+          />
+          <Route
+            path="/ridenow"
+            element={
+              <Protect>
+                <UserProtect>
+                  <Ride1 />
+                </UserProtect>
+              </Protect>
+            }
+          />
+          <Route
+            path="/admin_dashboard"
+            element={
+              <Protect>
+                <AdminProtect>
+                  <Dashboard />
+                </AdminProtect>
+              </Protect>
+            }
+          />
+          <Route
+            path="/driver_dashboard"
+            element={
+              <Protect>
+                <DriverProtect>
+                  <DriverDash />
+                </DriverProtect>
+              </Protect>
+            }
+          />
+          <Route
+            path="/admin_dashboard/controls"
+            element={
+              <Protect>
+                <AdminProtect>
+                  <Controls />
+                </AdminProtect>
+              </Protect>
+            }
+          />
+          <Route
+            path="/all_users"
+            element={
+              <Protect>
+                <AdminProtect>
+                  <UserTable />
+                </AdminProtect>
+              </Protect>
+            }
+          />
+
+          <Route
+            path="/admin/active_trip"
+            element={
               <AdminProtect>
-                <Dashboard />
+                <ActiveTrips />
               </AdminProtect>
-            </Protect>
-          }
-        />
-        <Route
-          path="/driver_dashboard"
-          element={
-            <Protect>
+            }
+          />
+          <Route
+            path="/admin/allTrips"
+            element={
+              <AdminProtect>
+                <AllTrips />
+              </AdminProtect>
+            }
+          />
+          <Route
+            path="/trip_history"
+            element={
               <DriverProtect>
-                <DriverDash />
+                <TripHistory />
               </DriverProtect>
-            </Protect>
-          }
-        />
-        <Route
-          path="/admin_dashboard/controls"
-          element={
-            <Protect>
-              <AdminProtect>
-                <Controls />
-              </AdminProtect>
-            </Protect>
-          }
-        />
-        <Route
-          path="/all_users"
-          element={
-            <Protect>
-              <AdminProtect>
-                <UserTable />
-              </AdminProtect>
-            </Protect>
-          }
-        />
-
-        <Route
-          path="/admin/active_trip"
-          element={
-            <AdminProtect>
-              <ActiveTrips />
-            </AdminProtect>
-          }
-        />
-        <Route
-          path="/admin/allTrips"
-          element={
-            <AdminProtect>
-              <AllTrips />
-            </AdminProtect>
-          }
-        />
-        <Route
-          path="/trip_history"
-          element={
-            <DriverProtect>
-              <TripHistory />
-            </DriverProtect>
-          }
-        />
-        <Route
-          path="/activeTrip"
-          element={
-            <DriverProtect>
-              < ActiveTrip/>
-            </DriverProtect>
-          }
-        />
-      </Routes>
-    </div>
+            }
+          />
+          <Route
+            path="/activeTrip"
+            element={
+              <DriverProtect>
+                <ActiveTrip />
+              </DriverProtect>
+            }
+          />
+        </Routes>
+      </div>
+      <ToastContainer />
+    </>
   );
-
 }
 
 export default App;

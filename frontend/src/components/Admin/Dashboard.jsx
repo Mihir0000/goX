@@ -3,12 +3,11 @@ import "./admin.css";
 import Sidebar from "../sharedModule/Sidebar";
 import axios from "axios";
 import { Header } from "../header/Header";
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
   const [dashboardData, setDashboardData] = useState();
-  // console.log(dashboardData, "dashboardData");
   const [lastTrips, setLastTrips] = useState();
-  console.log(lastTrips, "lastTrips");
 
   useEffect(() => {
     axios
@@ -17,7 +16,7 @@ const Dashboard = () => {
         setDashboardData(res?.data);
       })
       .catch((err) => {
-        console.log(err);
+        toast(err.message);
       });
 
     axios
@@ -26,13 +25,11 @@ const Dashboard = () => {
         setLastTrips(res?.data);
       })
       .catch((err) => {
-        console.log(err);
+        toast(err.message);
       });
   }, []);
 
-  const revenew =
-    dashboardData?.totalBookedPrice - dashboardData?.totalBookedPrice / 10;
-  console.log(revenew);
+  const revenew = dashboardData?.totalBookedPrice / 10;
 
   return (
     <div className="dashboard" style={{ minHeight: "100vh" }}>
@@ -47,7 +44,7 @@ const Dashboard = () => {
                 <div className="ms-3">
                   <p className="mb-2">Total Sale</p>
                   <h6 className="mb-0">
-                    Rs. {dashboardData?.totalBookedPrice}
+                    Rs. {parseFloat(dashboardData?.totalBookedPrice).toFixed(2)}
                   </h6>
                 </div>
               </div>
@@ -75,7 +72,7 @@ const Dashboard = () => {
                 <i className="fa fa-chart-pie fa-3x text-warning"></i>
                 <div className="ms-3">
                   <p className="mb-2">Total Revenew</p>
-                  <h6 className="mb-0">Rs. {revenew}</h6>
+                  <h6 className="mb-0">Rs. {parseFloat(revenew).toFixed(2)}</h6>
                 </div>
               </div>
             </div>

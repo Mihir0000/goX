@@ -11,11 +11,13 @@ const ActiveTrip = () => {
     axios
       .get("http://localhost:5000/driver/activeTrip", { params: { userEmail } })
       .then((data) => {
-        console.log(data);
         setActiveTrip(data?.data?.driverOntheWayTrip);
+      })
+      .catch((err) => {
+        swal(err.message);
       });
   }, []);
-  console.log(activeTrip, "activetrip");
+
   return (
     <div className="active_trip_body">
       <Sidebar />
@@ -23,7 +25,9 @@ const ActiveTrip = () => {
       <div className="trip_card">
         <div className="card trip_card1">
           {activeTrip.length === 0 ? (
-            <div className="my-3 text-dark text-center">No Active Trip right now</div>
+            <div className="my-3 text-dark text-center">
+              No Active Trip right now
+            </div>
           ) : (
             <div className="card-body trip_card_body">
               <p className="m-0">

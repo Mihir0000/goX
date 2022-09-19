@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Container, Modal, Button } from "react-bootstrap";
-
+import React, { useState } from "react";
+import { Button } from "react-bootstrap";
 import swal from "sweetalert";
+import { toast } from "react-toastify";
 import "./form.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
@@ -16,6 +16,7 @@ export default function Registration() {
     userName: "",
     userEmail: "",
     password: "",
+    role: "user",
     // confirmPassword:""
   });
   const [error, setError] = useState({});
@@ -28,7 +29,15 @@ export default function Registration() {
     setInputState({ ...inputState, [name]: value });
     setConfirm(event.target.value);
   };
-  console.log(value, "lk");
+
+  const handleRoleChange = (e) => {
+    setInputState({
+      userName: inputState.userName,
+      userEmail: inputState.userEmail,
+      password: inputState.password,
+      role: e.target.value,
+    });
+  };
 
   const validation = () => {
     let error = {};
@@ -75,44 +84,21 @@ export default function Registration() {
           },
         })
         .then((res) => {
-          console.log("Axios res: ", res);
-          swal(
-            "Good job!",
-            "A Verification Code has been sent to your userEmail",
-            "success"
-          );
+          swal("Good job!", "Your Registration is successful", "success");
           setInputState({
             userName: "",
             userEmail: "",
             password: "",
+            role: "user",
           });
           setConfirm("");
           navigate("/login");
         })
         .catch((err) => {
-          console.log(err);
-          swal("Already Registered");
+          toast(err.message);
         });
     }
   };
-
-  // const submitHandler1 = (event) => {
-  //   event.preventDefault();
-  //   let ErrorList = validation();
-  //   setError(validation());
-  //   if (Object.keys(ErrorList).length !== 0) {
-  //   } else {
-  //     localStorage.setItem("userEmail", inputState.userEmail);
-  //     localStorage.setItem("password", inputState.password);
-  //     localStorage.setItem("status", true);
-  //     swal(
-  //       "Good job!",
-  //       "A Verification Code has been sent to your userEmail",
-  //       "success"
-  //     );
-  //     navigate("/login");
-  //   }
-  // };
 
   return (
     <>
@@ -185,6 +171,16 @@ export default function Registration() {
               <br />
               <span className="err">{error.confirm}</span>
               <br />
+              <div>
+                <label>
+                  <b>Role :</b>
+                </label>
+                <select className="role px-3 py-1" onChange={handleRoleChange}>
+                  <option value="user">User</option>
+                  <option value="driver">Driver</option>
+                </select>
+              </div>
+
               <br />
               <Button
                 className="logBtn"
