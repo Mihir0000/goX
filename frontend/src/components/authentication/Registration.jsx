@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Container, Modal, Button } from "react-bootstrap";
-
+import React, { useState } from "react";
+import { Button } from "react-bootstrap";
 import swal from "sweetalert";
+import { toast } from "react-toastify";
 import "./form.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
@@ -29,7 +29,6 @@ export default function Registration() {
     setInputState({ ...inputState, [name]: value });
     setConfirm(event.target.value);
   };
-  console.log(inputState, "lk");
 
   const handleRoleChange = (e) => {
     setInputState({
@@ -85,12 +84,7 @@ export default function Registration() {
           },
         })
         .then((res) => {
-          console.log("Axios res: ", res);
-          swal(
-            "Good job!",
-            "A Verification Code has been sent to your userEmail",
-            "success"
-          );
+          swal("Good job!", "Your Registration is successful", "success");
           setInputState({
             userName: "",
             userEmail: "",
@@ -101,8 +95,7 @@ export default function Registration() {
           navigate("/login");
         })
         .catch((err) => {
-          console.log(err);
-          swal("Already Registered");
+          toast(err.message);
         });
     }
   };
@@ -179,10 +172,11 @@ export default function Registration() {
               <span className="err">{error.confirm}</span>
               <br />
               <div>
-                <label><b>Role :</b></label>
+                <label>
+                  <b>Role :</b>
+                </label>
                 <select className="role px-3 py-1" onChange={handleRoleChange}>
                   <option value="user">User</option>
-                  <option value="admin">Admin</option>
                   <option value="driver">Driver</option>
                 </select>
               </div>

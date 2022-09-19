@@ -11,21 +11,9 @@
 }
 
 
-.otpBtn {
-  background-color: rgb(30, 120, 177) !important;
-  width: 50%;
-  /* font-weight: bold !important; */
-  margin-bottom: 18px;
-  color: aliceblue !important;
-}
-
-.otpBtn:hover {
-  background-color: rgb(22, 61, 85) !important;
-}
-
 .link {
   text-decoration: none !important;
-  color: rgb(136, 132, 17) !important;
+  /* color: rgb(136, 132, 17) !important; */
 }
 
 .link:hover {
@@ -116,30 +104,7 @@
     background-attachment: fixed;
     background-size: 30%;
   }
-  .otp_body{
-    background-color: rgba(225, 218, 224, 0.417);
-    background-size: cover;
-    background-attachment: fixed;
-    padding-top: 15%;
-    padding-bottom: 20%;
-  }
-  .logo_otp{
-    background-image: url(../../assets/bgac.webp);
-    background-position: left bottom;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: 30%;
-  }
-  .otp_form{
-    background-color: rgba(240, 248, 255, 0.769);
-    border-radius: 8px;
-    width: 25%;
-    margin-left: 35%;
-    color:rgb(74, 74, 74) ;
-  }
-  .otp_input{
-    margin-left: 22%;
-  }
+  
   #radio{
     text-align: left;
     margin-left: 70px;

@@ -27,7 +27,6 @@ const TripHistory = () => {
   const changeDate = (time) => {
     const d1 = new Date(time);
     const result = d1.getTime();
-    console.log(result);
     let todate = new Date(result).getDate();
     let tomonth = new Date(result).getMonth() + 1;
     let toyear = new Date(result).getFullYear();
@@ -52,7 +51,7 @@ const TripHistory = () => {
       setAllTrips(data.data.allTrip);
     });
   }, []);
-  // console.log(allTrips);
+
   const label = [
     "Trip ID",
     "Passenger Name",
@@ -62,7 +61,6 @@ const TripHistory = () => {
     "Details",
   ];
 
-  console.log(singleTrip);
 
   return (
     <div className="all_users" style={{ height: "100vh" }}>

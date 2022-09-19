@@ -11,15 +11,13 @@ export const Ride2 = () => {
     to: "",
   });
   const [count, setCount] = useState(0);
-  const inc=()=>{
-    setCount(count+1);
-  }
-  const dec=()=>{
-    if(count>0)
-    setCount(count-1);
-  }
+  const inc = () => {
+    setCount(count + 1);
+  };
+  const dec = () => {
+    if (count > 0) setCount(count - 1);
+  };
   const [error, setError] = useState({});
-  console.log("error", error);
   let name, value;
   const handleChange = (event) => {
     name = event.target.name;
