@@ -17,10 +17,17 @@ const Controls = () => {
   const [rain, setRain] = useState(false);
   const [rainParcent, setRainParcent] = useState(0);
   const [frostParcent, setFrostParcent] = useState(0);
+  const [carInfo, setCarInfo] = useState();
+  const [carType, setCarType] = useState()
 
-  const basePriceChange = (e) => {
+  const carTypeChange = (e) => {
     setBasePrice(e.target.value);
+    console.log(carInfo);
   };
+  const basePriceChange = (e) => {
+    setBasePrice(e?.target.value)
+    
+  }
   const monthNames = [
     "January",
     "February",
@@ -112,10 +119,13 @@ const Controls = () => {
       frost: isFrost,
       rainParcent,
       frostParcent,
+      carType,
     };
+    console.log(data);
     axios
       .post("http://localhost:5000/admin/setPrice", data)
-      .then(() => {
+      .then((data) => {
+        console.log(data);
         swal("Price Set Successfullly");
         setBasePrice("");
       })
@@ -126,13 +136,14 @@ const Controls = () => {
 
   useEffect(() => {
     axios.get("http://localhost:5000/admin/setPrice").then((data) => {
-      setBasePrice(data.data.basePrice);
+      setCarInfo(data.data.carInfo);
       setRain(data.data.rain);
       setFrost(data.data.frost);
       setRainParcent(data.data.rainParcent);
       setFrostParcent(data.data.frostParcent);
     });
   }, []);
+  // console.log(carInfo);
 
   return (
     <div className="controls_container">
@@ -206,13 +217,13 @@ const Controls = () => {
             <h5>Today's Base Price</h5>
 
             <div className="d-flex justify-content-between mt-3 cartype_price">
-              <select
-                className="px-3 py-1 "
-                onChange={basePriceChange}
-              >
-                <option selected>Select Car Type</option>
-                <option value="user">User</option>
-                <option value="driver">Driver</option>
+              <select className="px-3 py-1 " onChange={carTypeChange}>
+                <option selected>Car Types</option>
+                {carInfo?.map((e, index) => (
+                  <option value={e?.basePrice} key={index}>
+                    {e?.carType}
+                  </option>
+                ))}
               </select>
               <div>
                 <input
@@ -226,6 +237,7 @@ const Controls = () => {
                 ₹/km
               </div>
             </div>
+            <button>Add Car Type</button>
           </div>
           <button className="setPriceBtn" onClick={setPrice}>
             Set Price
