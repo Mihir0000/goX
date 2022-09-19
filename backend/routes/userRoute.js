@@ -41,8 +41,16 @@ router.route('/login').post(async (req, res) => {
 });
 
 router.route('/admin/setPrice').post(async (req, res) => {
-    const { userEmail, basePrice, rain, frost, rainParcent, frostParcent } =
-        req.body;
+    const {
+        userEmail,
+        basePrice,
+        rain,
+        frost,
+        rainParcent,
+        frostParcent,
+        carType,
+        description,
+    } = req.body;
     const user = await userModel.findOne({ userEmail });
     if (!user) {
         res.status(500).send({ message: 'Invalid User' });
@@ -50,30 +58,79 @@ router.route('/admin/setPrice').post(async (req, res) => {
         let admin = await adminDashboardModel.findOne({});
         if (!admin) {
             await adminDashboardModel.create({
-                basePrice,
                 rain,
                 frost,
                 lastUpdate: userEmail,
                 rainParcent,
                 frostParcent,
+                carInfo: [{ basePrice, carType, description }],
             });
             res.status(200).send({ message: 'Create Successfully.' });
         } else {
+            let allCar = admin.carInfo;
+            let found = false;
+            for (let i = 0; i < allCar.length; i++) {
+                if (allCar[i].carType === carType) {
+                    allCar[i].basePrice = basePrice;
+                    found = true;
+                }
+            }
+            if (found === false) {
+                res.status(404).send({ message: 'Car Not Found' });
+                return;
+            }
             await adminDashboardModel.updateOne(
                 {},
                 {
                     $set: {
-                        basePrice,
                         rain,
                         frost,
                         updateAt: Date.now(),
                         lastUpdate: userEmail,
                         rainParcent,
                         frostParcent,
+                        carInfo: [...allCar],
                     },
                 }
             );
             res.status(200).send({ message: 'Update Successfully.' });
+        }
+    } else {
+        res.status(402).send({ message: "Sorry, You're not Admin !!" });
+    }
+});
+
+router.route('/admin/addCar').post(async (req, res) => {
+    const { userEmail, basePrice, carType, description } = req.body;
+    const user = await userModel.findOne({ userEmail });
+    if (!user) {
+        res.status(500).send({ message: 'Invalid User' });
+    } else if (user.role === 'admin') {
+        let admin = await adminDashboardModel.findOne({});
+        if (admin) {
+            let allCar = admin.carInfo;
+            for (let i = 0; i < allCar.length; i++) {
+                if (allCar[i].carType === carType) {
+                    res.status(403).send({
+                        message: 'Car is Already Added , You Can Update Car',
+                    });
+                    return;
+                }
+            }
+            await adminDashboardModel.updateOne(
+                {},
+                {
+                    $set: {
+                        updateAt: Date.now(),
+                        lastUpdate: userEmail,
+                        carInfo: [
+                            ...admin.carInfo,
+                            { basePrice, carType, description },
+                        ],
+                    },
+                }
+            );
+            res.status(200).send({ message: 'Car Added Successfully.' });
         }
     } else {
         res.status(402).send({ message: "Sorry, You're not Admin !!" });
@@ -92,17 +149,30 @@ router.route('/trip').post(async (req, res) => {
         res.status(500).send({ message: 'Invalid User' });
     } else {
         const admin = await adminDashboardModel.findOne({});
+        console.log(admin);
+        let allCar = admin.carInfo;
+        let basePrice;
+        let found = false;
+        for (let i = 0; i < allCar.length; i++) {
+            if (allCar[i].carType === carType) {
+                basePrice = allCar[i].basePrice;
+                found = true;
+            }
+        }
+        if (found === false) {
+            res.status(404).send({ message: 'Car Not Found' });
+            return;
+        }
         const isRainPrice = admin.rain
-            ? (admin.basePrice * admin.rainParcent) / 100
+            ? (basePrice * admin.rainParcent) / 100
             : 0;
         const isFrostPrice = admin.frost
-            ? (admin.basePrice * admin.frostParcent) / 100
+            ? (basePrice * admin.frostParcent) / 100
             : 0;
         const day = new Date().getDay();
-        const isWeekend = day === 0 || day === 6 ? admin.basePrice * 0.3 : 0;
+        const isWeekend = day === 0 || day === 6 ? basePrice * 0.3 : 0;
         const price = parseFloat(
-            distance *
-                (admin.basePrice + isRainPrice + isFrostPrice + isWeekend)
+            distance * (basePrice + isRainPrice + isFrostPrice + isWeekend)
         ).toFixed(2);
         await tripModel.create({
             userName: user.userName,

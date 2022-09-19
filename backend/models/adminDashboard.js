@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const adminDashboardSchema = mongoose.Schema({
-    basePrice: {
-        type: Number,
-        required: true,
-    },
     rain: {
         type: Boolean,
         required: true,
@@ -27,6 +23,22 @@ const adminDashboardSchema = mongoose.Schema({
     frostParcent: {
         type: Number,
     },
+    carInfo: [
+        {
+            basePrice: {
+                type: Number,
+                required: true,
+            },
+            carType: {
+                type: String,
+                required: true,
+            },
+            description: {
+                type: String,
+                required: true,
+            },
+        },
+    ],
 });
 
 module.exports = mongoose.model('adminDashboards', adminDashboardSchema);
