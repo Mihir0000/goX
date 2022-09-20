@@ -7,8 +7,8 @@ import swal from 'sweetalert';
 
 const ActiveTrip = () => {
     const [activeTrip, setActiveTrip] = useState([]);
-    const userEmail = localStorage.getItem('email');
     useEffect(() => {
+        const userEmail = localStorage.getItem('email');
         axios
             .get('http://localhost:5000/driver/activeTrip', {
                 params: { userEmail },

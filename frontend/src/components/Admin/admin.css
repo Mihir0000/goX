@@ -148,8 +148,17 @@
 .basePriceInput {
     border: 1px solid gray;
     border-radius: 8px;
-    height: 30px;
+    height: 35px;
     width: 30%;
+}
+
+.selectPriceInput {
+    border: 1px solid gray;
+    border-radius: 8px;
+    height: 35px;
+    width: 40%;
+    padding-left: 10px;
+    margin-left: 10px;
 }
 
 .rainFrostInput {
@@ -160,6 +169,11 @@
 }
 .base_price h5{
     text-align: left;
+}
+.inpt-cont {
+  border: 1px solid grey;
+  border-radius: 5px;
+  margin-top: 2px;
 }
 
 /* -- end controls -- */

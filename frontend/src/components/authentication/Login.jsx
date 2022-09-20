@@ -104,7 +104,7 @@ export default function Login() {
                     });
                 })
                 .catch((err) => {
-                    toast(err.message);
+                    toast(err.response.data.message);
                 });
         }
     };
