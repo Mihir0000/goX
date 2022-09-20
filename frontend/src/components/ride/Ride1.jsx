@@ -1,12 +1,12 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 import { Header } from '../header/Header';
 import { Bnav } from '../nav/Bnav';
 import './ride.css';
-// import LocationPicker from 'react-location-picker';
+import { toast } from "react-toastify";
 
 export const Ride1 = () => {
     const services = [
@@ -34,6 +34,8 @@ export const Ride1 = () => {
         distance: 0,
         carType: '',
     });
+
+    const [cars, setCars] = useState()
 
 
     const [error, setError] = useState({});
@@ -119,6 +121,19 @@ export const Ride1 = () => {
         }
     };
 
+
+    useEffect(() => {
+        axios
+        .get("http://localhost:5000/admin/setPrice")
+        .then((data) => {
+            setCars(data?.data?.carInfo);
+        })
+        .catch((err) => {
+          toast(err.message);
+        });
+    }, [])
+    
+console.log(cars);
     return (
         <div className="ride_body">
             <Header/>
@@ -159,16 +174,16 @@ export const Ride1 = () => {
                             </button>
                             <p>Total Distance:{` ${inputState.distance} Km`}</p>
                         </div>
-                        <div className="car_type">
-                            {services?.map((e, index) => (
+                        <div className="car_type row">
+                            {cars?.map((e, index) => (
                                 <label key={index}>
                                     <input
                                         type="radio"
                                         name="carType"
-                                        value={e.Name}
+                                        value={e.carType}
                                         onChange={serviceChange}
                                     />
-                                    {e.Name}
+                                    {e?.carType} - {e?.basePrice}
                                 </label>
                             ))}
                         </div>

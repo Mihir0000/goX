@@ -18,7 +18,6 @@ const Controls = () => {
   const [rainParcent, setRainParcent] = useState(0);
   const [frostParcent, setFrostParcent] = useState(0);
   const [carInfo, setCarInfo] = useState();
-  const [carType, setCarType] = useState()
 
   const carTypeChange = (e) => {
     setBasePrice(e.target.value);
@@ -26,7 +25,6 @@ const Controls = () => {
   };
   const basePriceChange = (e) => {
     setBasePrice(e?.target.value)
-    
   }
   const monthNames = [
     "January",
@@ -119,13 +117,10 @@ const Controls = () => {
       frost: isFrost,
       rainParcent,
       frostParcent,
-      carType,
     };
-    console.log(data);
     axios
       .post("http://localhost:5000/admin/setPrice", data)
-      .then((data) => {
-        console.log(data);
+      .then(() => {
         swal("Price Set Successfullly");
         setBasePrice("");
       })

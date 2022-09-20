@@ -6,7 +6,7 @@ import './driver.css';
 import swal from 'sweetalert';
 
 const ActiveTrip = () => {
-    const [activeTrip, setActiveTrip] = useState();
+    const [activeTrip, setActiveTrip] = useState([]);
     const userEmail = localStorage.getItem('email');
     useEffect(() => {
         axios
