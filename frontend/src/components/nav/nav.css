@@ -11,8 +11,10 @@
 @media (min-width: 1025px)  {
     #bnav{
         padding-top: 50px;
-        position: sticky;
+        padding-bottom: 10px;
+        position: fixed;
         bottom: 0;
+        width: 100vw;
     }
     .nav_button{
         height: 50px;

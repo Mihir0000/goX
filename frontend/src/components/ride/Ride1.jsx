@@ -98,7 +98,7 @@ export const Ride1 = () => {
           navigate("/bookings");
         })
         .catch((err) => {
-          toast('Select your prefereble car type');
+          toast("Select your prefereble car type");
         });
     }
   };
@@ -173,10 +173,11 @@ export const Ride1 = () => {
               <br />
             </div>
             <div>
-              <button className="confirmPickup" onClick={distanceHandler}>
-                Confirm Pickup and Drop Location
-              </button>
-              {inputState.distance !== 0 && (
+              {inputState.distance === 0 ? (
+                <button className="confirmPickup" onClick={distanceHandler}>
+                  Confirm Pickup and Drop Location
+                </button>
+              ) : (
                 <p>Total Distance:{` ${inputState.distance} Km`}</p>
               )}
             </div>
