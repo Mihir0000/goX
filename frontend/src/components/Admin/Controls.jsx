@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
-import Sidebar from "../sharedModule/Sidebar";
-import { Button, Form, Modal } from "react-bootstrap";
-import axios from "axios";
-import swal from "sweetalert";
-import { Header } from "../header/Header";
-import { toast } from "react-toastify";
+import React, { useEffect, useRef, useState } from 'react';
+import Sidebar from '../sharedModule/Sidebar';
+import { Button, Form, Modal } from 'react-bootstrap';
+import axios from 'axios';
+import swal from 'sweetalert';
+import { Header } from '../header/Header';
+import { toast } from 'react-toastify';
 
 const Controls = () => {
   const basePriceRef = useRef();
@@ -22,9 +22,9 @@ const Controls = () => {
   const [frostParcent, setFrostParcent] = useState(0);
   const [carInfo, setCarInfo] = useState();
   const [carType, setCarType] = useState();
-  const [newCar, setNewCar] = useState("");
+  const [newCar, setNewCar] = useState('');
   const [newPrice, setNewPrice] = useState(0);
-  const [newDescription, setNewDescription] = useState("");
+  const [newDescription, setNewDescription] = useState('');
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -46,7 +46,7 @@ const Controls = () => {
         setBasePrice(carInfo[i].basePrice);
       }
     }
-    if (e.target.value === "0") {
+    if (e.target.value === '0') {
       setBasePrice(0);
     }
 
@@ -57,18 +57,18 @@ const Controls = () => {
     setBasePrice(e?.target.value);
   };
   const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ];
 
   const [hour, setHour] = useState();
@@ -90,9 +90,9 @@ const Controls = () => {
     setSecond(addZero(seconds));
   }
   function convertFormat(time) {
-    let format = "AM";
+    let format = 'AM';
     if (time >= 12) {
-      format = "PM";
+      format = 'PM';
     }
     return format;
   }
@@ -109,7 +109,7 @@ const Controls = () => {
 
   function addZero(time) {
     if (time < 10) {
-      time = "0" + time;
+      time = '0' + time;
     }
     return time;
   }
@@ -132,10 +132,10 @@ const Controls = () => {
     setFrostParcent(frostParcentRef.current.value);
   };
   const setPrice = () => {
-    const userEmail = localStorage.getItem("email");
+    const userEmail = localStorage.getItem('email');
     const basePrice = basePriceRef.current.value;
     if (basePrice < 1) {
-      toast("Base Price cannot set negetive or Zero");
+      toast('Base Price cannot set negetive or Zero');
       return;
     }
     const isRain = rainRef.current.checked;
@@ -151,10 +151,10 @@ const Controls = () => {
     };
     console.log(data);
     axios
-      .post("http://localhost:5000/admin/setPrice", data)
+      .post('http://localhost:5000/admin/setPrice', data)
       .then((data) => {
         console.log(data);
-        swal("Price Set Successfullly");
+        swal('Price Set Successfullly');
       })
       .catch((err) => {
         toast(err.response.data.message);
@@ -162,7 +162,7 @@ const Controls = () => {
   };
 
   const addCar = async () => {
-    const userEmail = localStorage.getItem("email");
+    const userEmail = localStorage.getItem('email');
     const data = {
       userEmail,
       carType: newCar.toLowerCase(),
@@ -170,7 +170,7 @@ const Controls = () => {
       description: newDescription,
     };
     await axios
-      .post("http://localhost:5000/admin/addCar", data)
+      .post('http://localhost:5000/admin/addCar', data)
       .then((data) => {
         swal(data.data.message);
       })
@@ -181,7 +181,7 @@ const Controls = () => {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:5000/admin/setPrice").then((data) => {
+    axios.get('http://localhost:5000/admin/setPrice').then((data) => {
       setCarInfo(data.data.carInfo);
       setRain(data.data.rain);
       setFrost(data.data.frost);
@@ -204,7 +204,7 @@ const Controls = () => {
 
         <div className="w_card">
           <p className="time-font mb-0 ml-4  mt-5">
-            {hour} : {minute} : {second}{" "}
+            {hour} : {minute} : {second}{' '}
             <span className="sm-font">{format}</span>
           </p>
           <p className="ml-4 mb-4">

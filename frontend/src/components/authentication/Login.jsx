@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { Button } from "react-bootstrap";
-import "./form.css";
-import { Link, useNavigate } from "react-router-dom";
-import swal from "sweetalert";
-import axios from "axios";
-import { toast } from "react-toastify";
+import React, { useState } from 'react';
+import { Button } from 'react-bootstrap';
+import './form.css';
+import { Link, useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export default function Login() {
   const validateEmail = RegExp(
@@ -12,8 +12,8 @@ export default function Login() {
   );
 
   const [inputState, setInputState] = useState({
-    userEmail: "",
-    password: "",
+    userEmail: '',
+    password: '',
   });
   const [error, setError] = useState({});
   let name, value;
@@ -25,12 +25,12 @@ export default function Login() {
   const validation = () => {
     let error = {};
     if (!inputState.userEmail) {
-      error.userEmail = "Email is required";
+      error.userEmail = 'Email is required';
     } else if (!validateEmail.test(inputState.userEmail)) {
-      error.userEmail = "Invalid Email";
+      error.userEmail = 'Invalid Email';
     }
     if (!inputState.password) {
-      error.password = "Enter password";
+      error.password = 'Enter password';
       // } else if (!valclassNamePassword.test(inputState.password)) {
       //   error.password = "atleast 1 uppercase 1 lowercase and 1 number minimum 8 characters";
     }
@@ -47,43 +47,43 @@ export default function Login() {
     if (Object.keys(ErrorList).length !== 0) {
     } else {
       axios
-        .post("http://localhost:5000/login", inputState, {
+        .post('http://localhost:5000/login', inputState, {
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
         })
         .then((res) => {
-          localStorage.setItem("email", inputState.userEmail);
-          const userEmail = localStorage.getItem("email");
+          localStorage.setItem('email', inputState.userEmail);
+          const userEmail = localStorage.getItem('email');
           axios
             .get(`http://localhost:5000/me`, {
               params: { userEmail },
             })
             .then((res1) => {
               setUserData(res1?.data?.user);
-              localStorage.setItem("name", res1?.data?.user?.userName);
-              localStorage.setItem("role", res1?.data?.user?.role);
+              localStorage.setItem('name', res1?.data?.user?.userName);
+              localStorage.setItem('role', res1?.data?.user?.role);
 
-              if (localStorage.getItem("role") === "admin") {
+              if (localStorage.getItem('role') === 'admin') {
                 swal({
-                  title: "Login Successful",
-                  icon: "success",
+                  title: 'Login Successful',
+                  icon: 'success',
                 });
-                navigate("/admin_dashboard");
-              } else if (localStorage.getItem("role") === "driver") {
+                navigate('/admin_dashboard');
+              } else if (localStorage.getItem('role') === 'driver') {
                 swal({
-                  title: "Login Successful",
-                  text: "Safe Drive",
-                  icon: "success",
+                  title: 'Login Successful',
+                  text: 'Safe Drive',
+                  icon: 'success',
                 });
-                navigate("/driver_dashboard");
+                navigate('/driver_dashboard');
               } else {
                 swal({
-                  title: "Yayy! Login Successful",
-                  text: "Enjoy Your Ride",
-                  icon: "success",
+                  title: 'Yayy! Login Successful',
+                  text: 'Enjoy Your Ride',
+                  icon: 'success',
                 });
-                navigate("/");
+                navigate('/');
               }
             })
             .catch((err) => {
@@ -91,8 +91,8 @@ export default function Login() {
             });
 
           setInputState({
-            userEmail: "",
-            password: "",
+            userEmail: '',
+            password: '',
           });
         })
         .catch((err) => {
@@ -115,12 +115,7 @@ export default function Login() {
                 name="userEmail"
                 value={inputState.userEmail}
                 onChange={handleChange}
-                fullWclassNameth
                 placeholder="Email"
-                sx={{
-                  wclassNameth: "80%",
-                  margin: "40px 0",
-                }}
                 variant="standard"
               />
               <p className="error">{error.userEmail}</p>
@@ -131,8 +126,6 @@ export default function Login() {
                 name="password"
                 value={inputState.password}
                 onChange={handleChange}
-                fullWclassNameth
-                sx={{ wclassNameth: "80%" }}
                 placeholder="Password"
                 variant="standard"
               />
