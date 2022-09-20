@@ -31,7 +31,7 @@ const ActiveTrips = () => {
         setActiveTrip(data.data);
       })
       .catch((err) => {
-        toast(err.message);
+        toast(err.response.data.message);
       });
   }, []);
 
