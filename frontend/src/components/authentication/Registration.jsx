@@ -95,7 +95,7 @@ export default function Registration() {
           navigate("/login");
         })
         .catch((err) => {
-          toast(err.message);
+          toast(err.response.data.message);
         });
     }
   };

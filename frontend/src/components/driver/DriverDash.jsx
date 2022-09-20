@@ -15,7 +15,7 @@ const DriverDash = () => {
         setBookedTrip(data?.data);
       })
       .catch((err) => {
-        toast(err.message);
+        toast(err.response.data.message);
       });
   }, []);
 
@@ -33,7 +33,7 @@ const DriverDash = () => {
         window.location.reload();
       })
       .catch((err) => {
-        toast(err.message);
+        toast(err.response.data.message);
       });
   };
   const pickup = async () => {
@@ -47,7 +47,7 @@ const DriverDash = () => {
         window.location.reload();
       })
       .catch((err) => {
-        toast(err.message);
+        toast(err.response.data.message);
       });
   };
   const drop = async () => {
@@ -61,7 +61,7 @@ const DriverDash = () => {
         window.location.reload();
       })
       .catch((err) => {
-        toast(err.message);
+        toast(err.response.data.message);
       });
   };
 

@@ -42,7 +42,7 @@ const UserTable = () => {
         setAllUsers(res.data);
       })
       .catch((err) => {
-        toast(err.message);
+        toast(err.response.data.message);
       });
   }, []);
 

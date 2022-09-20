@@ -18,7 +18,7 @@ export const Profile = () => {
         setUserData(res.data.user);
       })
       .catch((err) => {
-        toast(err.message);
+        toast(err.response.data.message);
       });
   }, []);
 
