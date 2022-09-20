@@ -9,24 +9,6 @@ import "./ride.css";
 import { toast } from "react-toastify";
 
 export const Ride1 = () => {
-  const services = [
-    {
-      Name: "Car Pool",
-      des: "For maximum 4 people",
-    },
-    {
-      Name: "Luxary Car",
-      des: "A luxary car for maximum 4 people",
-    },
-    {
-      Name: "Car Prime",
-      des: "For maximum 6 people",
-    },
-    {
-      Name: "Bike",
-      des: "Bike service for one person",
-    },
-  ];
   const [inputState, setInputState] = useState({
     userEmail: localStorage.getItem("email"),
     source: "",
@@ -36,23 +18,13 @@ export const Ride1 = () => {
   });
 
   const [cars, setCars] = useState();
-
+  const [admin, setAdmin] = useState();
   const [error, setError] = useState({});
   let name, value;
   const handleChange = (event) => {
-    // event.persist();
     name = event.target.name;
     value = event.target.value;
     setInputState({ ...inputState, [name]: value });
-  };
-  const serviceChange = (e) => {
-    setInputState({
-      userEmail: localStorage.getItem("email"),
-      source: inputState.source,
-      destination: inputState.destination,
-      distance: inputState.distance,
-      carType: e.target.value,
-    });
   };
 
   const validation = () => {
@@ -63,9 +35,9 @@ export const Ride1 = () => {
     if (!inputState.destination) {
       error.destination = "Please Enter drop location";
     }
-    if (!inputState.carType) {
-      error.carType = "Select a car type";
-    }
+    // if (!inputState.carType) {
+    //   error.carType = "Select a car type";
+    // }
     // if (!inputState.distance) {
     //   error.distance = "please confirm pickup and drop location";
     // }
@@ -73,19 +45,45 @@ export const Ride1 = () => {
     return error;
   };
 
+  function randomNumberInRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  const distanceHandler = (event) => {
+    event.preventDefault();
+    if (inputState.source && inputState.destination) {
+      setInputState({
+        userEmail: localStorage.getItem("email"),
+        source: inputState.source,
+        destination: inputState.destination,
+        distance: randomNumberInRange(1, 200),
+      });
+      axios
+        .get("http://localhost:5000/admin/setPrice")
+        .then((data) => {
+          setCars(data?.data?.carInfo);
+        })
+        .catch((err) => {
+          toast(err.response.data.message);
+        });
+    } else {
+      toast("Please Enter pickup and drop location");
+      // console.log(err.response.data.message)
+    }
+  };
+
   const navigate = useNavigate();
   const bookingHandler = (event) => {
     event.preventDefault();
     let ErrorList = validation();
     setError(validation());
-    if (Object.keys(ErrorList).length !== 0 && inputState.distance === 0) {
-      toast("please confirm pickup and drop location");
+    if (Object.keys(ErrorList).length !== 0 || inputState.distance === 0) {
+      
+        toast("please confirm pickup and drop location");
+      
     } else {
       axios
         .post("http://localhost:5000/trip", inputState, {
-          // headers: {
-          //   "Content-Type": "application/json",
-          // },
         })
         .then((res) => {
           swal("Ride Booked !", "Happy Journey", "success");
@@ -103,42 +101,43 @@ export const Ride1 = () => {
     }
   };
 
-  function randomNumberInRange(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
 
-  const distanceHandler = (event) => {
-    event.preventDefault();
-    if (inputState.source && inputState.destination) {
-      setInputState({
-        userEmail: localStorage.getItem("email"),
-        source: inputState.source,
-        destination: inputState.destination,
-        distance: randomNumberInRange(1, 500),
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/admin/totalData")
+      .then((data) => {
+        console.log(data.data);
+        setAdmin(data.data[0]);
+      })
+      .catch((err) => {
+        toast(err.response.data.message);
       });
-      axios
-        .get("http://localhost:5000/admin/setPrice")
-        .then((data) => {
-          setCars(data?.data?.carInfo);
-        })
-        .catch((err) => {
-          toast(err.response.data.message);
-        });
-    } else {
-      toast("Please Enter pickup and drop location");
-    }
+  }, []);
+
+  const calculatePrice = (basePrice) => {
+    const isRainPrice = admin.rain ? (basePrice * admin.rainParcent) / 100 : 0;
+    const isFrostPrice = admin.frost
+      ? (basePrice * admin.frostParcent) / 100
+      : 0;
+    const day = new Date().getDay();
+    const isWeekend = day === 0 || day === 6 ? basePrice * 0.3 : 0;
+    const price = parseFloat(
+      inputState.distance * (basePrice + isRainPrice + isFrostPrice + isWeekend)
+    ).toFixed(0);
+    return price;
   };
 
-  //   useEffect(() => {
-  //     axios
-  //       .get("http://localhost:5000/admin/setPrice")
-  //       .then((data) => {
-  //         setCars(data?.data?.carInfo);
-  //       })
-  //       .catch((err) => {
-  //         toast(err.response.data.message);
-  //       });
-  //   }, []);
+  const handleCarClick = (carType) => {
+    // setActiveCar(carType)
+    setInputState({
+      userEmail: localStorage.getItem("email"),
+      source: inputState.source,
+      destination: inputState.destination,
+      distance: inputState.distance,
+      carType: carType,
+    });
+    console.log(carType);
+  };
 
   console.log(cars);
   return (
@@ -178,20 +177,33 @@ export const Ride1 = () => {
                   Confirm Pickup and Drop Location
                 </button>
               ) : (
-                <p>Total Distance:{` ${inputState.distance} Km`}</p>
+                <p className="text-center">
+                  Total Distance:{` ${inputState.distance} Km`}
+                </p>
               )}
             </div>
             <div className="car_type row">
               {cars?.map((e, index) => (
-                <label key={index}>
-                  <input
-                    type="radio"
-                    name="carType"
-                    value={e.carType}
-                    onChange={serviceChange}
-                  />
-                  {e?.carType} - {e?.basePrice}
-                </label>
+                <div
+                  key={index}
+                  className={
+                    "row p-2 m-1 carCard " +
+                    (inputState.carType === e?.carType ? "active" : "")
+                  }
+                  onClick={() => handleCarClick(e?.carType)}
+                >
+                  <div className="d-flex justify-content-between px-3 py-1">
+                    <div>
+                      <span className="car_name text-capitalize">
+                        {e?.carType}
+                      </span>
+                      <p className="car_des">{e?.description}</p>
+                    </div>
+                    <h6>
+                      <b>₹{calculatePrice(e?.basePrice)}</b>
+                    </h6>
+                  </div>
+                </div>
               ))}
             </div>
           </div>

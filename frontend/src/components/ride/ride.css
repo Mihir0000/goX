@@ -76,6 +76,24 @@
     }
 }
 
+/* -- car card --  */
+
+.carCard{
+    background-color: black;
+    color: aliceblue;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.active{
+    background-color: rgb(175, 141, 7) ;
+}
+.car_des{
+    margin: 0;
+    font-size: 12px;
+}
+
+/* -- car card --  */
+
 @media (min-width: 768px) and (max-width: 1024px) {
 }
 
