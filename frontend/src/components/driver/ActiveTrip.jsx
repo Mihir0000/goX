@@ -7,7 +7,6 @@ import swal from 'sweetalert';
 
 const ActiveTrip = () => {
     const [activeTrip, setActiveTrip] = useState([]);
-
     useEffect(() => {
         const userEmail = localStorage.getItem('email');
         axios
