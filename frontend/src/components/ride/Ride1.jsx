@@ -66,9 +66,9 @@ export const Ride1 = () => {
     if (!inputState.carType) {
       error.carType = "Select a car type";
     }
-    if (!inputState.distance) {
-      error.distance = "please confirm pickup and drop location";
-    }
+    // if (!inputState.distance) {
+    //   error.distance = "please confirm pickup and drop location";
+    // }
 
     return error;
   };
@@ -78,7 +78,8 @@ export const Ride1 = () => {
     event.preventDefault();
     let ErrorList = validation();
     setError(validation());
-    if (Object.keys(ErrorList).length !== 0) {
+    if (Object.keys(ErrorList).length !== 0 && inputState.distance === 0) {
+      toast("please confirm pickup and drop location");
     } else {
       axios
         .post("http://localhost:5000/trip", inputState, {
@@ -97,7 +98,7 @@ export const Ride1 = () => {
           navigate("/bookings");
         })
         .catch((err) => {
-          swal("wrong email or password", "error");
+          toast('Select your prefereble car type');
         });
     }
   };
@@ -115,21 +116,29 @@ export const Ride1 = () => {
         destination: inputState.destination,
         distance: randomNumberInRange(1, 500),
       });
+      axios
+        .get("http://localhost:5000/admin/setPrice")
+        .then((data) => {
+          setCars(data?.data?.carInfo);
+        })
+        .catch((err) => {
+          toast(err.response.data.message);
+        });
     } else {
-      swal("Please Enter pickup and drop location");
+      toast("Please Enter pickup and drop location");
     }
   };
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/admin/setPrice")
-      .then((data) => {
-        setCars(data?.data?.carInfo);
-      })
-      .catch((err) => {
-        toast(err.response.data.message);
-      });
-  }, []);
+  //   useEffect(() => {
+  //     axios
+  //       .get("http://localhost:5000/admin/setPrice")
+  //       .then((data) => {
+  //         setCars(data?.data?.carInfo);
+  //       })
+  //       .catch((err) => {
+  //         toast(err.response.data.message);
+  //       });
+  //   }, []);
 
   console.log(cars);
   return (
@@ -167,7 +176,9 @@ export const Ride1 = () => {
               <button className="confirmPickup" onClick={distanceHandler}>
                 Confirm Pickup and Drop Location
               </button>
-              <p>Total Distance:{` ${inputState.distance} Km`}</p>
+              {inputState.distance !== 0 && (
+                <p>Total Distance:{` ${inputState.distance} Km`}</p>
+              )}
             </div>
             <div className="car_type row">
               {cars?.map((e, index) => (

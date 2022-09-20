@@ -118,7 +118,7 @@ export default function Login() {
                 placeholder="Email"
                 variant="standard"
               />
-              <p className="Lerror">{error.userEmail}</p>
+              <p className="error">{error.userEmail}</p>
 
               <input
                 className="input"
@@ -129,7 +129,7 @@ export default function Login() {
                 placeholder="Password"
                 variant="standard"
               />
-              <p className="Lerror">{error.password}</p>
+              <p className="error">{error.password}</p>
 
               <br />
               <Button

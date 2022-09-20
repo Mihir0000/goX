@@ -123,7 +123,7 @@ export default function Registration() {
                 variant="standard"
               />
               <br />
-              <span className="err">{error.userName}</span>
+              <span className="error">{error.userName}</span>
               <br />
               <input
                 className="input"
@@ -140,7 +140,7 @@ export default function Registration() {
                 variant="standard"
               />
               <br />
-              <span className="err">{error.userEmail}</span>
+              <span className="error">{error.userEmail}</span>
               <br />
 
               <input
@@ -155,7 +155,7 @@ export default function Registration() {
                 variant="standard"
               />
               <br />
-              <span className="err">{error.password}</span>
+              <span className="error">{error.password}</span>
               <br />
               <input
                 className="input"
@@ -169,7 +169,7 @@ export default function Registration() {
                 variant="standard"
               />
               <br />
-              <span className="err">{error.confirm}</span>
+              <span className="error">{error.confirm}</span>
               <br />
               <div>
                 <label>
