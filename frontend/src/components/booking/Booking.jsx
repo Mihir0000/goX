@@ -56,6 +56,27 @@ export const Booking = () => {
                 {bookingData?.allTrip?.map((e, index) => (
                   <Grid item xs={4} key={index}>
                     <div className="booking">
+                      {e?.tripStatus !== "endTrip" && (
+                        <div
+                          style={{
+                            float: "right",
+                            // padding: "5px",
+                          }}
+                        >
+                          <lottie-player
+                            src="https://assets4.lottiefiles.com/packages/lf20_gv7Ovi.json"
+                            background="transparent"
+                            speed="1"
+                            style={{
+                              width: "70px",
+                              height: "70px",
+                              marginLeft: "10px",
+                            }}
+                            loop
+                            autoplay
+                          ></lottie-player>
+                        </div>
+                      )}
                       <p>
                         <strong>Booked At: </strong> {changeDate(e?.createdAt)}
                       </p>
@@ -70,6 +91,12 @@ export const Booking = () => {
                       </p>
                       <p>
                         <strong>Ride Preferred:</strong> {e?.carType}
+                      </p>
+                      <p>
+                        <strong>Amount:</strong> ₹ {e?.amount}
+                      </p>
+                      <p>
+                        <strong>Ride Status :</strong> {e?.tripStatus}
                       </p>
                     </div>
                   </Grid>
