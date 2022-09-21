@@ -261,12 +261,40 @@ router.route('/admin/bookedTrip').get(async (req, res) => {
   let bookedTrip = await tripModel.find({ tripStatus: 'startTrip' });
   const onTheWay = await tripModel.find({ tripStatus: 'onTheWay' });
   bookedTrip.push(...onTheWay);
-  res.send(bookedTrip);
+  bookedTrip.sort((a, b) => b.id - a.id);
+  res.status(200).send(bookedTrip);
 });
 
 router.route('/driver/bookedTrip').get(async (req, res) => {
   let bookedTrip = await tripModel.find({ tripStatus: 'booked' });
+  bookedTrip.sort((a, b) => b.id - a.id);
   res.status(200).send(bookedTrip);
+});
+
+router.route('/driver/trip').get(async (req, res) => {
+  const { idx } = req.query;
+  let allDriver = await userModel.find({ role: 'driver' });
+  allDriver.sort((a, b) => b.userId - a.userId);
+  const fixedDriver = allDriver.slice(0, 5);
+  const foundDriver = fixedDriver[idx % 5];
+  if (foundDriver) {
+    res.send(foundDriver);
+  } else {
+    res.send({ message: 'Driver Not found' });
+  }
+});
+
+router.route('/cancelTrip').put(async (req, res) => {
+  const { id } = req.body;
+  const trip = await tripModel.findOne({ id });
+  if (!trip) {
+    res.status(404).send({ message: 'Trip Not Found' });
+  } else if (trip.tripStatus === 'cancled') {
+    res.send(500).send({ message: 'Trip is Already Cancled before' });
+  } else {
+    await tripModel.updateOne({ id }, { $set: { tripStatus: 'cancled' } });
+    res.status(200).send({ message: 'Trip is Succesfully Cancel Now' });
+  }
 });
 
 router.route('/driver/confirmTrip').put(async (req, res) => {
