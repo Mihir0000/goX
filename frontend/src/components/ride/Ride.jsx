@@ -8,7 +8,7 @@ import { Bnav } from "../nav/Bnav";
 import "./ride.css";
 import { toast } from "react-toastify";
 
-export const Ride1 = () => {
+export const Ride = () => {
   const [inputState, setInputState] = useState({
     userEmail: localStorage.getItem("email"),
     source: "",
@@ -17,7 +17,7 @@ export const Ride1 = () => {
     carType: "",
   });
 
-  const [cars, setCars] = useState();
+  const [cars, setCars] = useState([]);
   const [admin, setAdmin] = useState();
   const [error, setError] = useState({});
   let name, value;
@@ -93,7 +93,7 @@ export const Ride1 = () => {
             distance: "",
             carType: "",
           });
-          navigate("/bookings");
+          navigate("/booking_status");
         })
         .catch((err) => {
           toast("Select your prefereble car type");
@@ -128,7 +128,6 @@ export const Ride1 = () => {
   };
 
   const handleCarClick = (carType) => {
-    // setActiveCar(carType)
     setInputState({
       userEmail: localStorage.getItem("email"),
       source: inputState.source,
