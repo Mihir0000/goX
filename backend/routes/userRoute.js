@@ -289,10 +289,10 @@ router.route('/cancelTrip').put(async (req, res) => {
   const trip = await tripModel.findOne({ id });
   if (!trip) {
     res.status(404).send({ message: 'Trip Not Found' });
-  } else if (trip.tripStatus === 'cancled') {
-    res.send(500).send({ message: 'Trip is Already Cancled before' });
+  } else if (trip.tripStatus === 'cancel') {
+    res.send(500).send({ message: 'Trip is Already Cancelled before' });
   } else {
-    await tripModel.updateOne({ id }, { $set: { tripStatus: 'cancled' } });
+    await tripModel.updateOne({ id }, { $set: { tripStatus: 'cancel' } });
     res.status(200).send({ message: 'Trip is Succesfully Cancel Now' });
   }
 });
