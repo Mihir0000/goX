@@ -210,6 +210,9 @@ const Controls = () => {
           <p className="ml-4 mb-4">
             {month} {date}
           </p>
+          <h5>Kolkata, West Bengal</h5>
+          <h2 className='mt-5'>24°C</h2>
+          <p>Cloudy</p>
         </div>
 
         {/* End weather card */}

@@ -5,13 +5,14 @@
     
 }
 @media (min-width: 1025px)  {
-    #booking_body{
+    .booking_body{
         background-image: url(/public/assets/bg1.webp);
         background-position: bottom;
         background-size: cover;
         background-attachment: fixed;
         padding-bottom: 20px;
         padding-top: 20px;
+        min-height: 100vh;
         
     }
     #booking_lottie{
@@ -37,6 +38,19 @@
     }
     
 }
+
+/* -- booking status --  */
+
+.booking_status_body{
+    background-color: rgb(36, 36, 36);
+    height: 100vh;
+}
+.booking_status{
+    width: fit-content;
+    background-color: #FFFFFF;
+}
+
+/* -- end booking status --  */
 
 @media (min-width: 768px) and (max-width: 1024px) {
 
