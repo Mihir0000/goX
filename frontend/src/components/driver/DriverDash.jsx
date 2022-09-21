@@ -5,9 +5,11 @@ import './driver.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { Button } from 'react-bootstrap';
 
 const DriverDash = () => {
   const [bookedTrip, setBookedTrip] = useState(null);
+  const [cancelTrip, setCancelTrip] = useState('');
   // const [driver, setDriver] = useState();
   // useEffect(() => {
   //   axios
@@ -48,6 +50,29 @@ const DriverDash = () => {
       setBookedTrip(null);
     }, 69000);
   }, [driverName]);
+
+  useEffect(() => {
+    const id = localStorage.getItem('tripId');
+    console.log(id);
+    if (id) {
+      axios
+        .get('http://localhost:5000/singleTripDetails', { params: { id } })
+        .then((data) => {
+          setCancelTrip(data.data.tripStatus);
+          // data.data.tripStatus === "cancel" && toast("cancel")
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  });
+
+  const checkNewTrip = () => {
+    localStorage.removeItem('tripId');
+    localStorage.removeItem('accept');
+    console.log('canceled');
+    window.location.reload();
+  };
 
   const tripAccept = async (TripId) => {
     localStorage.setItem('tripId', TripId);
@@ -97,9 +122,11 @@ const DriverDash = () => {
     <div className="driver_dashboard">
       <Sidebar />
       <Header />
-      {localStorage.getItem('accept') === 'true' ? (
+
+      {localStorage.getItem('accept') === 'true' && cancelTrip !== 'cancel' ? (
         <div className="currentTrip">
           <h6>Your Passenger is waiting at pickup location...</h6>
+
           <button>
             <Link to="/activeTrip">See details of this trip</Link>
           </button>
@@ -115,6 +142,11 @@ const DriverDash = () => {
         </div>
       ) : bookedTrip?.length === 0 ? (
         <div>No Booking Request Right Now</div>
+      ) : cancelTrip === 'cancel' ? (
+        <div>
+          <div className="text-white"> This trip is cancelled.</div>
+          <Button onClick={checkNewTrip}>Check New Trip</Button>
+        </div>
       ) : (
         <div className="d_div">
           {bookedTrip == null && (

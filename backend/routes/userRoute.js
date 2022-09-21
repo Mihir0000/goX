@@ -288,13 +288,24 @@ router.route('/cancelTrip').put(async (req, res) => {
   const { id } = req.body;
   const trip = await tripModel.findOne({ id });
   if (!trip) {
-    res.status(404).send({ message: 'Trip Not Found' });
+    res.status(404).send({ message: 'Trip Not Found', cancelStatus: false });
   } else if (trip.tripStatus === 'cancel') {
-    res.send(500).send({ message: 'Trip is Already Cancelled before' });
+    res.send(500).send({
+      message: 'Trip is Already Cancelled before',
+      cancelStatus: false,
+    });
   } else {
     await tripModel.updateOne({ id }, { $set: { tripStatus: 'cancel' } });
-    res.status(200).send({ message: 'Trip is Succesfully Cancel Now' });
+    res
+      .status(200)
+      .send({ message: 'Trip is Succesfully Cancel Now', cancelStatus: true });
   }
+});
+
+router.route('/singleTripDetails').get(async (req, res) => {
+  const { id } = req.query;
+  const trip = await tripModel.findOne({ id });
+  res.status(200).send(trip);
 });
 
 router.route('/driver/confirmTrip').put(async (req, res) => {
@@ -330,15 +341,20 @@ router.route('/driver/onTheWay').put(async (req, res) => {
   const trip = await tripModel.findOne({ id });
   if (!trip) {
     res.send({ message: 'Cannot Find Trip', onTheWay: false });
+  } else if (trip.tripStatus === 'cancel') {
+    res
+      .status(501)
+      .send({ message: 'So Sorry, Trip is Cancelled Now', onTheWay: false });
+  } else {
+    await tripModel
+      .updateOne({ id }, { $set: { tripStatus: 'onTheWay' } })
+      .then((data) => {
+        res.send({ message: 'Trip is onTheWay', onTheWay: true });
+      })
+      .catch((err) => {
+        res.send({ err, message: 'Cannot update Data', onTheWay: false });
+      });
   }
-  await tripModel
-    .updateOne({ id }, { $set: { tripStatus: 'onTheWay' } })
-    .then((data) => {
-      res.send({ message: 'Trip is onTheWay', onTheWay: true });
-    })
-    .catch((err) => {
-      res.send({ err, message: 'Cannot update Data', onTheWay: false });
-    });
 });
 
 router.route('/driver/endTrip').put(async (req, res) => {
@@ -346,15 +362,20 @@ router.route('/driver/endTrip').put(async (req, res) => {
   const trip = await tripModel.findOne({ id });
   if (!trip) {
     res.send({ message: 'Cannot Find Trip', endTrip: false });
+  } else if (trip.tripStatus === 'cancel') {
+    res
+      .status(501)
+      .send({ message: 'So Sorry, Trip is Cancelled', endTrip: false });
+  } else {
+    await tripModel
+      .updateOne({ id }, { $set: { tripStatus: 'endTrip' } })
+      .then((data) => {
+        res.send({ message: 'Trip is End Now', endTrip: true });
+      })
+      .catch((err) => {
+        res.send({ err, message: 'Cannot update Data', endTrip: false });
+      });
   }
-  await tripModel
-    .updateOne({ id }, { $set: { tripStatus: 'endTrip' } })
-    .then((data) => {
-      res.send({ message: 'Trip is End Now', endTrip: true });
-    })
-    .catch((err) => {
-      res.send({ err, message: 'Cannot update Data', endTrip: false });
-    });
 });
 
 router.route('/driver/activeTrip').get(async (req, res) => {
