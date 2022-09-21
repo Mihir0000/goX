@@ -54,7 +54,7 @@ export const Booking = () => {
                 {bookingData?.allTrip?.map((e, index) => (
                   <Grid item xs={4} key={index}>
                     <div className="booking">
-                      {e?.tripStatus !== "endTrip" ? (
+                      {e?.tripStatus !== "endTrip" && e?.tripStatus !== 'cancel' ? (
                         <div
                           style={{
                             float: "right",
@@ -65,8 +65,8 @@ export const Booking = () => {
                             background="transparent"
                             speed="1"
                             style={{
-                              width: "70px",
-                              height: "70px",
+                              width: "40px",
+                              height: "40px",
                               marginLeft: "10px",
                             }}
                             loop
@@ -85,8 +85,8 @@ export const Booking = () => {
                               background="transparent"
                               speed="1"
                               style={{
-                                width: "70px",
-                                height: "70px",
+                                width: "40px",
+                                height: "40px",
                                 marginLeft: "10px",
                               }}
                               // loop

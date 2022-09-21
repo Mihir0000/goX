@@ -62,6 +62,9 @@ const BookingStatus = () => {
                   Connecting your booking to your nearest driver. wait for a
                   while...
                 </p>
+                <button onClick={() => CancelTrip(status?.allTrip[0]?.id)}>
+                  Cancel
+                </button>
               </div>
             ) : status?.allTrip[0]?.tripStatus === "startTrip" ? (
               <div>
@@ -82,6 +85,9 @@ const BookingStatus = () => {
                   request
                 </p>
                 <p>Driver is reaching your pickup point</p>
+                <button onClick={() => CancelTrip(status?.allTrip[0]?.id)}>
+                  Cancel
+                </button>
               </div>
             ) : (
               status?.allTrip[0]?.tripStatus === "onTheWay" && (
@@ -103,9 +109,6 @@ const BookingStatus = () => {
                 </div>
               )
             )}
-            <button onClick={() => CancelTrip(status?.allTrip[0]?.id)}>
-              Cancel
-            </button>
           </div>
         ) : status?.allTrip[0]?.tripStatus === "cancel" ? (
           <div className="m-5 p-5 booking_status">
