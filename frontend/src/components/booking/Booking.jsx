@@ -54,14 +54,14 @@ export const Booking = () => {
                 {bookingData?.allTrip?.map((e, index) => (
                   <Grid item xs={4} key={index}>
                     <div className="booking">
-                      {e?.tripStatus !== "endTrip" && (
+                      {e?.tripStatus !== "endTrip" ? (
                         <div
                           style={{
                             float: "right",
                           }}
                         >
                           <lottie-player
-                            src="https://assets4.lottiefiles.com/packages/lf20_gv7Ovi.json"
+                            src="https://assets1.lottiefiles.com/packages/lf20_qa602yhl.json"
                             background="transparent"
                             speed="1"
                             style={{
@@ -73,6 +73,27 @@ export const Booking = () => {
                             autoplay
                           ></lottie-player>
                         </div>
+                      ) : (
+                        e?.tripStatus === "cancel" && (
+                          <div
+                            style={{
+                              float: "right",
+                            }}
+                          >
+                            <lottie-player
+                              src="https://assets7.lottiefiles.com/private_files/lf30_rp0vziqi.json"
+                              background="transparent"
+                              speed="1"
+                              style={{
+                                width: "70px",
+                                height: "70px",
+                                marginLeft: "10px",
+                              }}
+                              // loop
+                              autoplay
+                            ></lottie-player>
+                          </div>
+                        )
                       )}
                       <p>
                         <strong>Booked At: </strong> {changeDate(e?.createdAt)}
