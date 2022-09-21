@@ -38,16 +38,14 @@ export const Booking = () => {
   }, []);
 
   return (
-    <div id="booking_body" style={{ height: "100vh" }}>
+    <div className="booking_body">
       <Header />
-
       <div id="booking_info">
         {bookingData?.allTrip?.length !== 0 ? (
           <>
             <h5>Booking Details</h5>
             <hr />
             <br />
-
             <Box
               sx={{ flexGrow: 1 }}
               style={{ overflowY: "scroll", height: "80vh" }}
@@ -60,7 +58,6 @@ export const Booking = () => {
                         <div
                           style={{
                             float: "right",
-                            // padding: "5px",
                           }}
                         >
                           <lottie-player
