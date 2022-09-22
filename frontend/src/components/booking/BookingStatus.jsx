@@ -22,7 +22,7 @@ const BookingStatus = () => {
       });
   });
 
-  console.log(status?.allTrip[0]?.id);
+  // console.log(status?.allTrip[0]?.id);
 
   const navigate = useNavigate();
   const CancelTrip = (id) => {
