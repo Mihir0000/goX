@@ -397,5 +397,14 @@ router.route('/driver/tripHistory').get(async (req, res) => {
   const driverTripHistory = await tripModel.find({ assignDriver: userEmail });
   res.send(driverTripHistory);
 });
+router.route('/generateOTP').get(async (req, res) => {
+  const num = () => Math.floor(Math.random() * 10);
+  let otp = '';
+  for (let i = 0; i < 4; i++) {
+    otp += num();
+  }
+  console.log(otp);
+  res.send({ otp });
+});
 
 module.exports = router;
