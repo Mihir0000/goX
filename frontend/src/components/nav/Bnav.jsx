@@ -29,7 +29,6 @@ export const Bnav = () => {
         <Link to="/bookings">
           <button className="nav_button mx-3">Bookings</button>
         </Link>
-        {/* {userData?.role === 'admin' ? <Link to="/admin_dashboard" target="_blank"><button className='nav_button'>Admin Dashbord</button></Link> : userData?.role === 'driver' ? <Link to="/driver_dashboard"><button className='nav_button'>Driver Dashbord</button></Link> : ""} */}
       </div>
     </>
   );

@@ -10,7 +10,6 @@
 
 @media (min-width: 1025px)  {
     #bnav{
-        padding-top: 50px;
         padding-bottom: 10px;
         position: fixed;
         bottom: 0;

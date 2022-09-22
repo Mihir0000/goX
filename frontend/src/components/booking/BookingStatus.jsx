@@ -42,7 +42,7 @@ const BookingStatus = () => {
       <Header />
       <div className="m-5 p-5 d-flex justify-content-center">
         {status?.allTrip[0]?.tripStatus !== "endTrip" ? (
-          <div className="m-5 p-5 booking_status">
+          <div className="p-5 booking_status">
             {status?.allTrip[0]?.tripStatus === "booked" ? (
               <div>
                 <lottie-player
@@ -62,7 +62,7 @@ const BookingStatus = () => {
                   Connecting your booking to your nearest driver. wait for a
                   while...
                 </p>
-                <button onClick={() => CancelTrip(status?.allTrip[0]?.id)}>
+                <button className="btn btn-danger" onClick={() => CancelTrip(status?.allTrip[0]?.id)}>
                   Cancel
                 </button>
               </div>
@@ -85,7 +85,7 @@ const BookingStatus = () => {
                   request
                 </p>
                 <p>Driver is reaching your pickup point</p>
-                <button onClick={() => CancelTrip(status?.allTrip[0]?.id)}>
+                <button className="btn btn-danger" onClick={() => CancelTrip(status?.allTrip[0]?.id)}>
                   Cancel
                 </button>
               </div>
@@ -93,7 +93,7 @@ const BookingStatus = () => {
               status?.allTrip[0]?.tripStatus === "onTheWay" && (
                 <div>
                   <lottie-player
-                    src="https://assets9.lottiefiles.com/packages/lf20_it6c3dgk.json"
+                    src="https://assets5.lottiefiles.com/packages/lf20_it6c3dgk.json"
                     background="transparent"
                     speed="1"
                     style={{
