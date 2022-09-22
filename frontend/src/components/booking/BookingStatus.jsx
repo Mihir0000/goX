@@ -85,6 +85,8 @@ const BookingStatus = () => {
                   request
                 </p>
                 <p>Driver is reaching your pickup point</p>
+                <p>OTP : 6734</p>
+                <p>Confirm this OTP when your driver will pick you up</p>
                 <button className="btn btn-danger" onClick={() => CancelTrip(status?.allTrip[0]?.id)}>
                   Cancel
                 </button>
@@ -106,6 +108,8 @@ const BookingStatus = () => {
                   />
                   <p>Our driver has picked you up. Hope you are comfortable</p>
                   <h6>Have a great journey</h6>
+                  <p>OTP: 9087</p>
+                  <p>Confirm this OTP when driver will drop in your destination</p>
                 </div>
               )
             )}
