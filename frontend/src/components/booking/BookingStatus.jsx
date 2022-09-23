@@ -8,6 +8,8 @@ import { Bnav } from "../nav/Bnav";
 
 const BookingStatus = () => {
   const [status, setStatus] = useState();
+  const [otp1, setOtp1] = useState("");
+  const [otp2, setOtp2] = useState("")
   useEffect(() => {
     const userEmail = localStorage.getItem("email");
     axios
@@ -16,6 +18,10 @@ const BookingStatus = () => {
       })
       .then((res) => {
         setStatus(res?.data);
+        setOtp1(res?.data?.allTrip[0]?.otp1)
+        setOtp2(res?.data?.allTrip[0]?.otp2)
+        
+        console.log(res);
       })
       .catch((err) => {
         toast(err.response.data.message);
@@ -23,6 +29,7 @@ const BookingStatus = () => {
   });
 
   // console.log(status?.allTrip[0]?.id);
+  console.log(otp1);
 
   const navigate = useNavigate();
   const CancelTrip = (id) => {
@@ -85,7 +92,7 @@ const BookingStatus = () => {
                   request
                 </p>
                 <p>Driver is reaching your pickup point</p>
-                <p>OTP : 6734</p>
+                <p>OTP : {otp1}</p>
                 <p>Confirm this OTP when your driver will pick you up</p>
                 <button className="btn btn-danger" onClick={() => CancelTrip(status?.allTrip[0]?.id)}>
                   Cancel
@@ -108,7 +115,7 @@ const BookingStatus = () => {
                   />
                   <p>Our driver has picked you up. Hope you are comfortable</p>
                   <h6>Have a great journey</h6>
-                  <p>OTP: 9087</p>
+                  <p>OTP: {otp2}</p>
                   <p>Confirm this OTP when driver will drop in your destination</p>
                 </div>
               )

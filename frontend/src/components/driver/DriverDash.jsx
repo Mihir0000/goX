@@ -12,7 +12,9 @@ const DriverDash = () => {
   const [bookedTrip, setBookedTrip] = useState(null);
   const [cancelTrip, setCancelTrip] = useState("");
   const [otp, setOtp] = useState("");
-  const [otp2, setOtp2] = useState("")
+  const [otp2, setOtp2] = useState("");
+  const [confirmOtp1, setConfirmOtp1] = useState("");
+  const [confirmOtp2, setConfirmOtp2] = useState("")
 
   const driverName = localStorage.getItem("email");
   useEffect(() => {
@@ -26,6 +28,7 @@ const DriverDash = () => {
               .get("http://localhost:5000/driver/bookedTrip")
               .then((data) => {
                 setBookedTrip(data?.data[0]);
+                
               })
               .catch((err) => {
                 toast(err.response.data.message);
@@ -52,13 +55,16 @@ const DriverDash = () => {
         .get("http://localhost:5000/singleTripDetails", { params: { id } })
         .then((data) => {
           setCancelTrip(data.data.tripStatus);
-          // data.data.tripStatus === "cancel" && toast("cancel")
+          console.log(data);
+          setConfirmOtp1(data?.data?.otp1)
+          setConfirmOtp2(data?.data?.otp2)
         })
         .catch((err) => {
           console.log(err);
         });
     }
   });
+  console.log(otp);
 
   const checkNewTrip = () => {
     localStorage.removeItem("tripId");
@@ -76,6 +82,7 @@ const DriverDash = () => {
       })
       .then((data) => {
         localStorage.setItem("accept", data.data.acceptStatus);
+        // console.log(data,"otp1");
         window.location.reload();
       })
       .catch((err) => {
@@ -85,7 +92,7 @@ const DriverDash = () => {
   const pickup = async () => {
     if (!otp) {
       toast("Enter OTP first");
-    } else if (otp === "6734") {
+    } else if (otp === confirmOtp1) {
       await axios
         .put("http://localhost:5000/driver/onTheWay", {
           id: localStorage.getItem("tripId"),
@@ -94,6 +101,7 @@ const DriverDash = () => {
           localStorage.removeItem("accept");
           localStorage.setItem("pickup", data.data.onTheWay);
           window.location.reload();
+          // console.log(data,"otp2");
         })
         .catch((err) => {
           toast(err.response.data.message);
@@ -105,7 +113,7 @@ const DriverDash = () => {
   const drop = async () => {
     if (!otp2) {
       toast("Enter OTP first");
-    } else if (otp2 === "9087") {
+    } else if (otp2 === confirmOtp2) {
     await axios
       .put("http://localhost:5000/driver/endTrip", {
         id: localStorage.getItem("tripId"),
