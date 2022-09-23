@@ -14,7 +14,8 @@ const DriverDash = () => {
   const [otp, setOtp] = useState("");
   const [otp2, setOtp2] = useState("");
   const [confirmOtp1, setConfirmOtp1] = useState("");
-  const [confirmOtp2, setConfirmOtp2] = useState("")
+  const [confirmOtp2, setConfirmOtp2] = useState("");
+  const [tick, setTick] = useState(false);
 
   const driverName = localStorage.getItem("email");
   useEffect(() => {
@@ -28,7 +29,6 @@ const DriverDash = () => {
               .get("http://localhost:5000/driver/bookedTrip")
               .then((data) => {
                 setBookedTrip(data?.data[0]);
-                
               })
               .catch((err) => {
                 toast(err.response.data.message);
@@ -56,8 +56,8 @@ const DriverDash = () => {
         .then((data) => {
           setCancelTrip(data.data.tripStatus);
           console.log(data);
-          setConfirmOtp1(data?.data?.otp1)
-          setConfirmOtp2(data?.data?.otp2)
+          setConfirmOtp1(data?.data?.otp1);
+          setConfirmOtp2(data?.data?.otp2);
         })
         .catch((err) => {
           console.log(err);
@@ -75,6 +75,7 @@ const DriverDash = () => {
 
   const tripAccept = async (TripId) => {
     localStorage.setItem("tripId", TripId);
+    setTick(false);
     await axios
       .put("http://localhost:5000/driver/confirmTrip", {
         id: TripId,
@@ -90,6 +91,7 @@ const DriverDash = () => {
       });
   };
   const pickup = async () => {
+    setTick(false);
     if (!otp) {
       toast("Enter OTP first");
     } else if (otp === confirmOtp1) {
@@ -114,20 +116,41 @@ const DriverDash = () => {
     if (!otp2) {
       toast("Enter OTP first");
     } else if (otp2 === confirmOtp2) {
-    await axios
-      .put("http://localhost:5000/driver/endTrip", {
-        id: localStorage.getItem("tripId"),
-      })
-      .then((data) => {
-        localStorage.removeItem("pickup");
-        localStorage.removeItem("tripId");
-        window.location.reload();
-      })
-      .catch((err) => {
-        toast(err.response.data.message);
-      });
+      await axios
+        .put("http://localhost:5000/driver/endTrip", {
+          id: localStorage.getItem("tripId"),
+        })
+        .then((data) => {
+          localStorage.removeItem("pickup");
+          localStorage.removeItem("tripId");
+          window.location.reload();
+        })
+        .catch((err) => {
+          toast(err.response.data.message);
+        });
     } else {
       toast("wrong OTP");
+    }
+  };
+
+  const verify1 = () => {
+    if (!otp) {
+      toast("Enter OTP first");
+    } else if (otp !== confirmOtp1) {
+      toast("Wrong OTP");
+    } else {
+      toast("OTP verified");
+      setTick(true);
+    }
+  };
+  const verify2 = () => {
+    if (!otp2) {
+      toast("Enter OTP first");
+    } else if (otp2 !== confirmOtp2) {
+      toast("Wrong OTP");
+    } else {
+      toast("OTP verified");
+      setTick(true);
     }
   };
 
@@ -143,7 +166,7 @@ const DriverDash = () => {
             Enter Verification Code before picking your passenger up. You will
             get the OTP from your passenger
           </p>
-          <div className="d-flex justify-content-center p-2">
+          <div className="d-flex justify-content-center p-2 mb-4">
             <OtpInput
               placeholder="none"
               value={otp}
@@ -152,12 +175,35 @@ const DriverDash = () => {
               isInputNum={true}
               inputStyle="inputStyle"
               separator={<span>-</span>}
+              isDisabled={tick}
             />
+            {tick ? (
+              <div className="d-flex justify-content-center">
+                <Button disabled>Verified</Button>
+
+                <lottie-player
+                  src="https://assets1.lottiefiles.com/packages/lf20_wc1axoqt.json"
+                  background="transparent"
+                  speed="1"
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                  }}
+                  autoplay
+                />
+              </div>
+            ) : (
+              <Button onClick={verify1}>Verify OTP</Button>
+            )}
           </div>
           <button className="btn btn-info me-2 text-white">
-            <Link className="text-white" to="/activeTrip">See details of this trip</Link>
+            <Link className="text-white" to="/activeTrip">
+              See details of this trip
+            </Link>
           </button>
-          <button className="btn btn-success" onClick={pickup}>Pickup complete</button>
+          <button className="btn btn-success" disabled={!tick} onClick={pickup}>
+            Pickup complete
+          </button>
         </div>
       ) : localStorage.getItem("pickup") ? (
         <div className="currentTrip">
@@ -171,12 +217,35 @@ const DriverDash = () => {
               isInputNum={true}
               inputStyle="inputStyle"
               separator={<span>-</span>}
+              isDisabled={tick}
             />
+            {tick ? (
+              <div className="d-flex justify-content-center">
+                <Button disabled>Verified</Button>
+
+                <lottie-player
+                  src="https://assets1.lottiefiles.com/packages/lf20_wc1axoqt.json"
+                  background="transparent"
+                  speed="1"
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                  }}
+                  autoplay
+                />
+              </div>
+            ) : (
+              <Button onClick={verify2}>Verify OTP</Button>
+            )}
           </div>
           <button className="btn btn-info me-2">
-            <Link className="text-white" to="/activeTrip">See details of this trip</Link>
+            <Link className="text-white" to="/activeTrip">
+              See details of this trip
+            </Link>
           </button>
-          <button className="btn btn-success" onClick={drop}>Trip Complete</button>
+          <button className="btn btn-success" disabled={!tick} onClick={drop}>
+            Trip Complete
+          </button>
         </div>
       ) : bookedTrip?.length === 0 ? (
         <div>No Booking Request Right Now</div>
@@ -200,7 +269,7 @@ const DriverDash = () => {
               <h5>{bookedTrip?.distance}km</h5>
               <i className="fa-solid fa-arrow-right-long"></i>
               <h6>to {bookedTrip?.destination}</h6>
-              <button 
+              <button
                 className="d_btn btn-info text-white"
                 onClick={() => tripAccept(bookedTrip?.id)}
               >
