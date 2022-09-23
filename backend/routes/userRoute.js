@@ -314,6 +314,11 @@ router.route('/driver/confirmTrip').put(async (req, res) => {
   if (trip.tripStatus !== 'booked') {
     res.send({ message: 'Trip is Already taken.', acceptStatus: false });
   } else {
+    const num = () => Math.floor(Math.random() * 10);
+    let otp = '';
+    for (let i = 0; i < 4; i++) {
+      otp += num();
+    }
     await tripModel
       .updateOne(
         { id },
@@ -328,6 +333,7 @@ router.route('/driver/confirmTrip').put(async (req, res) => {
         res.send({
           message: 'Successfully start trip',
           acceptStatus: true,
+          otp,
         });
       })
       .catch((err) => {
@@ -346,10 +352,15 @@ router.route('/driver/onTheWay').put(async (req, res) => {
       .status(501)
       .send({ message: 'So Sorry, Trip is Cancelled Now', onTheWay: false });
   } else {
+    const num = () => Math.floor(Math.random() * 10);
+    let otp = '';
+    for (let i = 0; i < 4; i++) {
+      otp += num();
+    }
     await tripModel
       .updateOne({ id }, { $set: { tripStatus: 'onTheWay' } })
       .then((data) => {
-        res.send({ message: 'Trip is onTheWay', onTheWay: true });
+        res.send({ message: 'Trip is onTheWay', onTheWay: true, otp });
       })
       .catch((err) => {
         res.send({ err, message: 'Cannot update Data', onTheWay: false });
