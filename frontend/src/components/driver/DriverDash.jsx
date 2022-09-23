@@ -38,38 +38,32 @@ const DriverDash = () => {
           }
         });
       idx++;
-      console.log(idx);
     }, 5000);
     setTimeout(() => {
       clearInterval(req);
-      console.log("cleared");
       setBookedTrip(null);
     }, 69000);
   }, [driverName]);
 
   useEffect(() => {
     const id = localStorage.getItem("tripId");
-    console.log(id);
     if (id) {
       axios
         .get("http://localhost:5000/singleTripDetails", { params: { id } })
         .then((data) => {
           setCancelTrip(data.data.tripStatus);
-          console.log(data);
           setConfirmOtp1(data?.data?.otp1);
           setConfirmOtp2(data?.data?.otp2);
         })
         .catch((err) => {
-          console.log(err);
+          toast(err.response.data.message);
         });
     }
   });
-  console.log(otp);
 
   const checkNewTrip = () => {
     localStorage.removeItem("tripId");
     localStorage.removeItem("accept");
-    console.log("canceled");
     window.location.reload();
   };
 
@@ -83,7 +77,6 @@ const DriverDash = () => {
       })
       .then((data) => {
         localStorage.setItem("accept", data.data.acceptStatus);
-        // console.log(data,"otp1");
         window.location.reload();
       })
       .catch((err) => {
@@ -92,45 +85,32 @@ const DriverDash = () => {
   };
   const pickup = async () => {
     setTick(false);
-    if (!otp) {
-      toast("Enter OTP first");
-    } else if (otp === confirmOtp1) {
-      await axios
-        .put("http://localhost:5000/driver/onTheWay", {
-          id: localStorage.getItem("tripId"),
-        })
-        .then((data) => {
-          localStorage.removeItem("accept");
-          localStorage.setItem("pickup", data.data.onTheWay);
-          window.location.reload();
-          // console.log(data,"otp2");
-        })
-        .catch((err) => {
-          toast(err.response.data.message);
-        });
-    } else {
-      toast("wrong OTP");
-    }
+    await axios
+      .put("http://localhost:5000/driver/onTheWay", {
+        id: localStorage.getItem("tripId"),
+      })
+      .then((data) => {
+        localStorage.removeItem("accept");
+        localStorage.setItem("pickup", data.data.onTheWay);
+        window.location.reload();
+      })
+      .catch((err) => {
+        toast(err.response.data.message);
+      });
   };
   const drop = async () => {
-    if (!otp2) {
-      toast("Enter OTP first");
-    } else if (otp2 === confirmOtp2) {
-      await axios
-        .put("http://localhost:5000/driver/endTrip", {
-          id: localStorage.getItem("tripId"),
-        })
-        .then((data) => {
-          localStorage.removeItem("pickup");
-          localStorage.removeItem("tripId");
-          window.location.reload();
-        })
-        .catch((err) => {
-          toast(err.response.data.message);
-        });
-    } else {
-      toast("wrong OTP");
-    }
+    await axios
+      .put("http://localhost:5000/driver/endTrip", {
+        id: localStorage.getItem("tripId"),
+      })
+      .then((data) => {
+        localStorage.removeItem("pickup");
+        localStorage.removeItem("tripId");
+        window.location.reload();
+      })
+      .catch((err) => {
+        toast(err.response.data.message);
+      });
   };
 
   const verify1 = () => {
