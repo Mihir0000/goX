@@ -326,6 +326,7 @@ router.route('/driver/confirmTrip').put(async (req, res) => {
           $set: {
             assignDriver: assignDriver,
             tripStatus: 'startTrip',
+            otp1: otp,
           },
         }
       )
@@ -351,6 +352,8 @@ router.route('/driver/onTheWay').put(async (req, res) => {
     res
       .status(501)
       .send({ message: 'So Sorry, Trip is Cancelled Now', onTheWay: false });
+  } else if (trip.tripStatus === 'onTheWay') {
+    res.status(422).send({ message: 'Trip is On The Way', onTheWay: false });
   } else {
     const num = () => Math.floor(Math.random() * 10);
     let otp = '';
@@ -358,7 +361,7 @@ router.route('/driver/onTheWay').put(async (req, res) => {
       otp += num();
     }
     await tripModel
-      .updateOne({ id }, { $set: { tripStatus: 'onTheWay' } })
+      .updateOne({ id }, { $set: { tripStatus: 'onTheWay', otp2: otp } })
       .then((data) => {
         res.send({ message: 'Trip is onTheWay', onTheWay: true, otp });
       })
@@ -377,6 +380,10 @@ router.route('/driver/endTrip').put(async (req, res) => {
     res
       .status(501)
       .send({ message: 'So Sorry, Trip is Cancelled', endTrip: false });
+  } else if (trip.tripStatus === 'endTrip') {
+    res
+      .status(422)
+      .send({ message: 'Trip is Already ended.', onTheWay: false });
   } else {
     await tripModel
       .updateOne({ id }, { $set: { tripStatus: 'endTrip' } })
