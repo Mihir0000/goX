@@ -20,16 +20,11 @@ const BookingStatus = () => {
         setStatus(res?.data);
         setOtp1(res?.data?.allTrip[0]?.otp1)
         setOtp2(res?.data?.allTrip[0]?.otp2)
-        
-        console.log(res);
       })
       .catch((err) => {
         toast(err.response.data.message);
       });
   });
-
-  // console.log(status?.allTrip[0]?.id);
-  console.log(otp1);
 
   const navigate = useNavigate();
   const CancelTrip = (id) => {

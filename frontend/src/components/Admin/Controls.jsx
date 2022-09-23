@@ -149,11 +149,9 @@ const Controls = () => {
       frostParcent,
       carType,
     };
-    console.log(data);
     axios
       .post('http://localhost:5000/admin/setPrice', data)
       .then((data) => {
-        console.log(data);
         swal('Price Set Successfullly');
       })
       .catch((err) => {
@@ -175,8 +173,7 @@ const Controls = () => {
         swal(data.data.message);
       })
       .catch((err) => {
-        console.log(err);
-        swal(err.response.data.message);
+        toast(err.response.data.message);
       });
   };
 
@@ -190,7 +187,6 @@ const Controls = () => {
       setBasePrice(0);
     });
   }, []);
-  // console.log(carInfo);
 
   return (
     <div className="controls_container">

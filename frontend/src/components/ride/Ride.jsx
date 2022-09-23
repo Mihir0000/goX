@@ -68,7 +68,6 @@ export const Ride = () => {
         });
     } else {
       toast("Please Enter pickup and drop location");
-      // console.log(err.response.data.message)
     }
   };
 
@@ -106,7 +105,6 @@ export const Ride = () => {
     axios
       .get("http://localhost:5000/admin/totalData")
       .then((data) => {
-        console.log(data.data);
         setAdmin(data.data[0]);
       })
       .catch((err) => {
@@ -135,10 +133,7 @@ export const Ride = () => {
       distance: inputState.distance,
       carType: carType,
     });
-    console.log(carType);
   };
-
-  console.log(cars);
   return (
     <div className="ride_body">
       <Header />
