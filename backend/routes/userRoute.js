@@ -8,13 +8,22 @@ router.route('/').get((req, res) => {
   res.status(200).send({ message: 'Home Page' });
 });
 router.route('/register').post(async (req, res) => {
-  const { userName, userEmail, password, role } = req.body;
+  const { userName, userEmail, password, role, carNo, carColor, carModelName } =
+    req.body;
   let isExist = await userModel.findOne({ userEmail });
   if (isExist) {
     res.status(201).send({ message: "You're Already Registered" });
   } else {
     await userModel
-      .create({ userName, userEmail, password, role })
+      .create({
+        userName,
+        userEmail,
+        password,
+        role,
+        carNo,
+        carColor,
+        carModelName,
+      })
       .then(() => {
         res.status(200).send({ message: 'Register Successfully !' });
       })
@@ -423,6 +432,21 @@ router.route('/generateOTP').get(async (req, res) => {
   }
   console.log(otp);
   res.send({ otp });
+});
+
+router.route('/driver/last24Hrs').get(async (req, res) => {
+  const { userEmail } = req.query;
+  const allTrip = await tripModel.find({ assignDriver: userEmail });
+  const timestamps = new Date().setHours(0, 0, 0, 0);
+  let trips = [];
+  let amount = 0;
+  for (let i = 0; i < allTrip.length; i++) {
+    if (allTrip[i].id >= timestamps) {
+      trips.push(allTrip[i]);
+      amount += allTrip[i].amount;
+    }
+  }
+  res.status(200).send({ trips, amount });
 });
 
 module.exports = router;
