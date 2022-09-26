@@ -26,6 +26,8 @@ const BookingStatus = () => {
       });
   });
 
+  console.log(status);
+
   const navigate = useNavigate();
   const CancelTrip = (id) => {
     axios
@@ -86,9 +88,10 @@ const BookingStatus = () => {
                   autoplay
                 />
                 <p>
-                  {status?.allTrip[0]?.assignDriver} has accepted your booking
+                  <strong className="text-capitalize">{status?.allTrip[0]?.driverName}</strong> has accepted your booking
                   request
                 </p>
+                <div className="d-flex px-1 justify-content-between"><p>{status?.allTrip[0]?.carColor} {status?.allTrip[0]?.carModelName}</p><b>{status?.allTrip[0]?.carNo}</b></div>
                 <p>Driver is reaching your pickup point</p>
                 <p>OTP : {otp1}</p>
                 <p>Confirm this OTP when your driver will pick you up</p>

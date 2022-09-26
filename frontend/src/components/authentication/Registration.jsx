@@ -20,8 +20,8 @@ export default function Registration() {
     userEmail: "",
     password: "",
     role: "user",
-    carName: "",
-    carNumber: "",
+    carModelName: "",
+    carNo: "",
     carColor: "",
   });
   const [error, setError] = useState({});
@@ -41,8 +41,8 @@ export default function Registration() {
       userEmail: inputState.userEmail,
       password: inputState.password,
       role: e.target.value,
-      carName: inputState.carName,
-      carNumber: inputState.carNumber,
+      carModelName: inputState.carModelName,
+      carNo: inputState.carNo,
       carColor: inputState.carColor,
     });
   };
@@ -74,16 +74,16 @@ export default function Registration() {
       error.confirm = "password doesn't match";
     }
     if (inputState.role === "driver") {
-      if (!inputState.carName) {
-        error.carName = "Enter Model Name of your vehicle";
+      if (!inputState.carModelName) {
+        error.carModelName = "Enter Model Name of your vehicle";
       }
       if (!inputState.carColor) {
         error.carColor = "Enter Color of your vehicle";
       }
-      if (!inputState.carNumber) {
-        error.carNumber = "Enter your vehicle number";
-      } else if (!validVehicle.test(inputState.carNumber)) {
-        error.carNumber = "Enter a valid Indian Vehicle Number";
+      if (!inputState.carNo) {
+        error.carNo = "Enter your vehicle number";
+      // } else if (!validVehicle.test(inputState.carNo)) {
+        // error.carNo = "Enter a valid Indian Vehicle Number";
       }
     }
 
@@ -111,8 +111,8 @@ export default function Registration() {
             userEmail: "",
             password: "",
             role: "user",
-            carName: "",
-            carNumber: "",
+            carModelName: "",
+            carNo: "",
             carColor: "",
           });
           setConfirm("");
@@ -196,13 +196,13 @@ export default function Registration() {
                     className="input"
                     type="text"
                     name="carModelName"
-                    value={inputState.carName}
+                    value={inputState.carModelName}
                     onChange={handleChange}
                     placeholder="Vehicle Model Name"
                     variant="standard"
                   />
                   <br />
-                  <span className="error">{error.carName}</span>
+                  <span className="error">{error.carModelName}</span>
                   <br />
                   <input
                     className="input"
@@ -220,13 +220,13 @@ export default function Registration() {
                     className="input"
                     type="text"
                     name="carNo"
-                    value={inputState.carNumber}
+                    value={inputState.carNo}
                     onChange={handleChange}
                     placeholder="Vehicle Number"
                     variant="standard"
                   />
                   <br />
-                  <span className="error">{error.carNumber}</span>
+                  <span className="error">{error.carNo}</span>
                   <br />
                 </div>
               )}
