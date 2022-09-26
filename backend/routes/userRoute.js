@@ -328,6 +328,8 @@ router.route('/driver/confirmTrip').put(async (req, res) => {
     for (let i = 0; i < 4; i++) {
       otp += num();
     }
+    let driver = await userModel.findOne({ userEmail: assignDriver });
+    const { carNo, carColor, carModelName, userName } = driver;
     await tripModel
       .updateOne(
         { id },
@@ -336,6 +338,10 @@ router.route('/driver/confirmTrip').put(async (req, res) => {
             assignDriver: assignDriver,
             tripStatus: 'startTrip',
             otp1: otp,
+            carNo,
+            carColor,
+            carModelName,
+            driverName: userName,
           },
         }
       )
