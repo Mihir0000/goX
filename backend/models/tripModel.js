@@ -53,5 +53,21 @@ const tripSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
+  carNo: {
+    type: String,
+    default: '',
+  },
+  carColor: {
+    type: String,
+    default: '',
+  },
+  carModelName: {
+    type: String,
+    default: '',
+  },
+  driverName: {
+    type: String,
+    default: '',
+  },
 });
 module.exports = mongoose.model('TripDetails', tripSchema);
