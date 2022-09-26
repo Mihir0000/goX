@@ -9,7 +9,7 @@ import { Bnav } from "../nav/Bnav";
 const BookingStatus = () => {
   const [status, setStatus] = useState();
   const [otp1, setOtp1] = useState("");
-  const [otp2, setOtp2] = useState("")
+  const [otp2, setOtp2] = useState("");
   useEffect(() => {
     const userEmail = localStorage.getItem("email");
     axios
@@ -18,13 +18,15 @@ const BookingStatus = () => {
       })
       .then((res) => {
         setStatus(res?.data);
-        setOtp1(res?.data?.allTrip[0]?.otp1)
-        setOtp2(res?.data?.allTrip[0]?.otp2)
+        setOtp1(res?.data?.allTrip[0]?.otp1);
+        setOtp2(res?.data?.allTrip[0]?.otp2);
       })
       .catch((err) => {
         toast(err.response.data.message);
       });
   });
+
+  console.log(status);
 
   const navigate = useNavigate();
   const CancelTrip = (id) => {
@@ -64,7 +66,10 @@ const BookingStatus = () => {
                   Connecting your booking to your nearest driver. wait for a
                   while...
                 </p>
-                <button className="btn btn-danger" onClick={() => CancelTrip(status?.allTrip[0]?.id)}>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => CancelTrip(status?.allTrip[0]?.id)}
+                >
                   Cancel
                 </button>
               </div>
@@ -83,13 +88,17 @@ const BookingStatus = () => {
                   autoplay
                 />
                 <p>
-                  {status?.allTrip[0]?.assignDriver} has accepted your booking
+                  <strong className="text-capitalize">{status?.allTrip[0]?.driverName}</strong> has accepted your booking
                   request
                 </p>
+                <div className="d-flex px-1 justify-content-between"><p>{status?.allTrip[0]?.carColor} {status?.allTrip[0]?.carModelName}</p><b>{status?.allTrip[0]?.carNo}</b></div>
                 <p>Driver is reaching your pickup point</p>
                 <p>OTP : {otp1}</p>
                 <p>Confirm this OTP when your driver will pick you up</p>
-                <button className="btn btn-danger" onClick={() => CancelTrip(status?.allTrip[0]?.id)}>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => CancelTrip(status?.allTrip[0]?.id)}
+                >
                   Cancel
                 </button>
               </div>
@@ -111,7 +120,9 @@ const BookingStatus = () => {
                   <p>Our driver has picked you up. Hope you are comfortable</p>
                   <h6>Have a great journey</h6>
                   <p>OTP: {otp2}</p>
-                  <p>Confirm this OTP when driver will drop in your destination</p>
+                  <p>
+                    Confirm this OTP when driver will drop in your destination
+                  </p>
                 </div>
               )
             )}
