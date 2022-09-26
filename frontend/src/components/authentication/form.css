@@ -78,6 +78,12 @@
     background-color: rgba(39, 43, 46, 0.644);
 
   }
+  .Registration{
+    padding-left: 140px;
+    padding-top: 60px;
+    padding-right: 50px;
+    background-color: rgba(39, 43, 46, 0.644);
+  }
 
   form {
     width: 450px;
@@ -118,8 +124,9 @@
   .error{
     color: rgb(249, 91, 59);
     text-align: left;
-    margin-left: 70px;
+    margin-left: 50px;
     font-size: 13px;
+    font-weight:lighter;
   }
   .role{
     margin-left: 45px;

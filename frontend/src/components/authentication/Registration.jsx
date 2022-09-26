@@ -11,13 +11,18 @@ export default function Registration() {
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   );
   const validPassword = RegExp(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,20}$/);
+  const validVehicle = RegExp(
+    /^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$/
+  );
 
   const [inputState, setInputState] = useState({
     userName: "",
     userEmail: "",
     password: "",
     role: "user",
-    // confirmPassword:""
+    carName: "",
+    carNumber: "",
+    carColor: "",
   });
   const [error, setError] = useState({});
   const [confirm, setConfirm] = useState();
@@ -36,6 +41,9 @@ export default function Registration() {
       userEmail: inputState.userEmail,
       password: inputState.password,
       role: e.target.value,
+      carName: inputState.carName,
+      carNumber: inputState.carNumber,
+      carColor: inputState.carColor,
     });
   };
 
@@ -65,6 +73,19 @@ export default function Registration() {
     } else if (inputState.password !== confirm && confirm.length > 0) {
       error.confirm = "password doesn't match";
     }
+    if (inputState.role === "driver") {
+      if (!inputState.carName) {
+        error.carName = "Enter Model Name of your vehicle";
+      }
+      if (!inputState.carColor) {
+        error.carColor = "Enter Color of your vehicle";
+      }
+      if (!inputState.carNumber) {
+        error.carNumber = "Enter your vehicle number";
+      } else if (!validVehicle.test(inputState.carNumber)) {
+        error.carNumber = "Enter a valid Indian Vehicle Number";
+      }
+    }
 
     return error;
   };
@@ -90,6 +111,9 @@ export default function Registration() {
             userEmail: "",
             password: "",
             role: "user",
+            carName: "",
+            carNumber: "",
+            carColor: "",
           });
           setConfirm("");
           navigate("/login");
@@ -104,7 +128,7 @@ export default function Registration() {
     <>
       <div className="flex">
         <div className="logo_bg">
-          <div className="login">
+          <div className="Registration">
             <form className="form">
               <h4 className="text-center">SignUp</h4>
 
@@ -114,12 +138,7 @@ export default function Registration() {
                 name="userName"
                 value={inputState.userName}
                 onChange={handleChange}
-                fullWclassNameth
                 placeholder="Enter a username"
-                sx={{
-                  wclassNameth: "80%",
-                  margin: "40px 0",
-                }}
                 variant="standard"
               />
               <br />
@@ -131,12 +150,7 @@ export default function Registration() {
                 name="userEmail"
                 value={inputState.userEmail}
                 onChange={handleChange}
-                fullWclassNameth
                 placeholder="Enter your email"
-                sx={{
-                  wclassNameth: "80%",
-                  margin: "40px 0",
-                }}
                 variant="standard"
               />
               <br />
@@ -149,8 +163,6 @@ export default function Registration() {
                 name="password"
                 value={inputState.password}
                 onChange={handleChange}
-                fullWclassNameth
-                sx={{ wclassNameth: "80%" }}
                 placeholder="Create Password"
                 variant="standard"
               />
@@ -163,8 +175,6 @@ export default function Registration() {
                 name="cPassword"
                 value={inputState.confirmPassword}
                 onChange={handleChange}
-                fullWclassNameth
-                sx={{ wclassNameth: "80%" }}
                 placeholder="Confirm Password"
                 variant="standard"
               />
@@ -173,13 +183,53 @@ export default function Registration() {
               <br />
               <div>
                 <label>
-                  <b>Role :</b>
+                  <b className="text-white">Role :</b>
                 </label>
                 <select className="role px-3 py-1" onChange={handleRoleChange}>
                   <option value="user">User</option>
                   <option value="driver">Driver</option>
                 </select>
               </div>
+              {inputState.role === "driver" && (
+                <div className="d-block">
+                  <input
+                    className="input"
+                    type="text"
+                    name="carModelName"
+                    value={inputState.carName}
+                    onChange={handleChange}
+                    placeholder="Vehicle Model Name"
+                    variant="standard"
+                  />
+                  <br />
+                  <span className="error">{error.carName}</span>
+                  <br />
+                  <input
+                    className="input"
+                    type="text"
+                    name="carColor"
+                    value={inputState.carColor}
+                    onChange={handleChange}
+                    placeholder="Vehicle Color"
+                    variant="standard"
+                  />
+                  <br />
+                  <span className="error">{error.carColor}</span>
+                  <br />
+                  <input
+                    className="input"
+                    type="text"
+                    name="carNo"
+                    value={inputState.carNumber}
+                    onChange={handleChange}
+                    placeholder="Vehicle Number"
+                    variant="standard"
+                  />
+                  <br />
+                  <span className="error">{error.carNumber}</span>
+                  <br />
+                </div>
+              )}
 
               <br />
               <Button
