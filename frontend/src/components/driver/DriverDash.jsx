@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button } from "react-bootstrap";
 import OtpInput from "react-otp-input";
+import addNotification, { Notifications } from "react-push-notification";
 
 const DriverDash = () => {
   const [bookedTrip, setBookedTrip] = useState(null);
@@ -44,6 +45,18 @@ const DriverDash = () => {
       setBookedTrip(null);
     }, 69000);
   }, [driverName]);
+
+  const Notification = () => {
+    if (bookedTrip !== null) {
+      addNotification({
+        title: "GoX",
+        subtitle: 'Someone has booked a ride near you',
+        message: 'Someone has booked a ride near you',
+        duration:3000,
+        native: true,
+      });
+    }
+  };
 
   useEffect(() => {
     const id = localStorage.getItem("tripId");
@@ -138,7 +151,7 @@ const DriverDash = () => {
     <div className="driver_dashboard">
       <Sidebar />
       <Header />
-
+      <Notifications onClick={Notification()} />
       {localStorage.getItem("accept") === "true" && cancelTrip !== "cancel" ? (
         <div className="currentTrip">
           <h6>Your Passenger is waiting at pickup location...</h6>
@@ -242,19 +255,21 @@ const DriverDash = () => {
             </div>
           )}
           {bookedTrip !== null && (
-            <div className="driver_notification justify-content-between m-auto">
-              <p>{bookedTrip?.userName}</p>
-              <h6>from {bookedTrip?.source}</h6>
-              <i className="fa-solid fa-arrow-left-long"></i>
-              <h5>{bookedTrip?.distance}km</h5>
-              <i className="fa-solid fa-arrow-right-long"></i>
-              <h6>to {bookedTrip?.destination}</h6>
-              <button
-                className="d_btn btn-info text-white"
-                onClick={() => tripAccept(bookedTrip?.id)}
-              >
-                Accept
-              </button>
+            <div>
+              <div className="driver_notification justify-content-between m-auto">
+                <p>{bookedTrip?.userName}</p>
+                <h6>from {bookedTrip?.source}</h6>
+                <i className="fa-solid fa-arrow-left-long"></i>
+                <h5>{bookedTrip?.distance}km</h5>
+                <i className="fa-solid fa-arrow-right-long"></i>
+                <h6>to {bookedTrip?.destination}</h6>
+                <button
+                  className="d_btn btn-info text-white"
+                  onClick={() => tripAccept(bookedTrip?.id)}
+                >
+                  Accept
+                </button>
+              </div>
             </div>
           )}
         </div>
