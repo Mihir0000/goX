@@ -78,13 +78,13 @@ const TripHistory = () => {
   ];
 
   return (
-    <div className="all_users" style={{ height: "100%" }}>
+    <div className="all_users" style={{ height: "100%", width:"100vw" }}>
       <Sidebar />
       <Header />
 
-      <div className="row px-5 pt-5">
+      <div className="g-0 row d-flex px-5 pt-5 justify-content-center">
         <div className="col-sm-12 col-xl-6">
-          <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+          <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4 m-1 me-2">
             <i className="fa fa-coins fa-3x text-warning"></i>
             <div className="ms-3">
               <p className="mb-2">Total Earning Today</p>
@@ -93,7 +93,7 @@ const TripHistory = () => {
           </div>
         </div>
         <div className="col-sm-12 col-xl-6">
-          <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+          <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4 m-1 ml-2">
             <i className="fa fa-chart-bar fa-3x text-warning"></i>
             <div className="ms-3">
               <p className="mb-2">Total Bookings Today</p>
