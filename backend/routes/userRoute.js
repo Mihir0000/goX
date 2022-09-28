@@ -4,6 +4,8 @@ const userModel = require('../models/userModel');
 const adminDashboardModel = require('../models/adminDashboard');
 const tripModel = require('../models/tripModel');
 
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
 router.route('/').get((req, res) => {
   res.status(200).send({ message: 'Home Page' });
 });
@@ -453,6 +455,28 @@ router.route('/driver/last24Hrs').get(async (req, res) => {
     }
   }
   res.status(200).send({ trips, amount });
+});
+
+// stripe payment
+router.route('/stripePayment').post(async (req, res) => {
+  const { selectedPrice } = req.body;
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: selectedPrice * 100,
+    currency: 'inr',
+    metadata: {
+      company: 'goX',
+    },
+    automatic_payment_methods: {
+      enabled: true,
+    },
+  });
+  res.send({
+    clientSecret: paymentIntent.client_secret,
+  });
+});
+
+router.route('/sendStripeApiKey').get(async (req, res) => {
+  res.status(200).send({ stripeApiKey: process.env.STRIPE_API_KEY });
 });
 
 module.exports = router;

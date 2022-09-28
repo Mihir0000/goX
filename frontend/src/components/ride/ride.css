@@ -1,95 +1,141 @@
 .ride_form {
-    text-align: left;
+  text-align: left;
 }
 
 @media (min-width: 1025px) {
-    .ride_body {
-        background-image: url(../../assets/bgac.webp);
-        background-position: left bottom;
-        background-repeat: no-repeat;
-        background-size: 40% !important;
-        background-color: rgb(8, 107, 102);
-        background-attachment: fixed;
-        padding: 40px;
-        margin: 0px !important;
-        padding-top: 5% !important;
-        padding-bottom: 8%;
-        min-height: 100vh;
-    }
+  .ride_body {
+    background-image: url(../../assets/bgac.webp);
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    background-size: 40% !important;
+    background-color: rgb(8, 107, 102);
+    background-attachment: fixed;
+    padding: 40px;
+    margin: 0px !important;
+    padding-top: 5% !important;
+    padding-bottom: 8%;
+    min-height: 100vh;
+  }
 
-    .ride_body h5 {
-        text-align: center;
-        padding-bottom: 20px;
-    }
+  .ride_body h5 {
+    text-align: center;
+    padding-bottom: 20px;
+  }
 
-    .ride_form {
-        background-color: rgba(240, 248, 255, 0.809);
-        border-radius: 7px;
-        margin-left: 35%;
-    }
+  .ride_form {
+    background-color: rgba(240, 248, 255, 0.809);
+    border-radius: 7px;
+    margin-left: 35%;
+  }
 
-    .ride_input {
-        margin-right: 15px;
-        margin-left: 5%;
-        border-color: rgb(30, 120, 177) !important;
-    }
+  .ride_input {
+    margin-right: 15px;
+    margin-left: 5%;
+    border-color: rgb(30, 120, 177) !important;
+  }
 
-    .ride_label {
-        font-weight: bold;
-        margin-bottom: 8px;
-        color: rgb(8, 107, 102);
-    }
+  .ride_label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: rgb(8, 107, 102);
+  }
 
-    .ride_btn {
-        background-color: rgb(30, 120, 177) !important;
-        width: 30%;
-        margin: 20px;
-        color: aliceblue !important;
-    }
-    .ride2_btn {
-        background-color: rgb(30, 120, 177) !important;
-        width: 30%;
-        margin-left: 35%;
-        margin-bottom: 35px;
-        color: aliceblue !important;
-    }
+  .ride_btn {
+    background-color: rgb(30, 120, 177) !important;
+    width: 30%;
+    margin: 20px;
+    color: aliceblue !important;
+  }
+  .ride2_btn {
+    background-color: rgb(30, 120, 177) !important;
+    width: 30%;
+    margin-left: 35%;
+    margin-bottom: 35px;
+    color: aliceblue !important;
+  }
 
-    .ride_btn:hover {
-        background-color: rgb(22, 61, 85) !important;
-    }
-    .location_input {
-        width: 70%;
-        margin-left: 16%;
-        border-color: transparent;
-        border-radius: 3px;
-    }
-    .confirmPickup {
-        border: 1px solid blue;
-        margin-left: 16%;
-        padding: 5px;
-        border-radius: 7px;
-        transition: all 0.5s;
-    }
-    .confirmPickup:hover {
-        background-color: rgba(0, 0, 255, 0.397);
-        color: white;
-    }
+  .ride_btn:hover {
+    background-color: rgb(22, 61, 85) !important;
+  }
+  .location_input {
+    width: 70%;
+    margin-left: 16%;
+    border-color: transparent;
+    border-radius: 3px;
+  }
+  .confirmPickup {
+    border: 1px solid blue;
+    margin-left: 16%;
+    padding: 5px;
+    border-radius: 7px;
+    transition: all 0.5s;
+  }
+  .confirmPickup:hover {
+    background-color: rgba(0, 0, 255, 0.397);
+    color: white;
+  }
 }
 
 /* -- car card --  */
 
-.carCard{
-    background-color: black;
-    color: aliceblue;
-    border-radius: 4px;
-    cursor: pointer;
+.carCard {
+  background-color: black;
+  color: aliceblue;
+  border-radius: 4px;
+  cursor: pointer;
 }
-.active{
-    background-color: rgb(175, 141, 7) ;
+.active {
+  background-color: rgb(175, 141, 7);
 }
-.car_des{
-    margin: 0;
-    font-size: 12px;
+.car_des {
+  margin: 0;
+  font-size: 12px;
+}
+
+.paymentContainer {
+  border: 1px dashed black;
+  border-radius: 20px;
+}
+.paymentInput {
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 5px;
+}
+.paymentFormBtn {
+  margin-left: 30%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 3px;
+  padding: 5px;
+  background-color: black;
+  color: white;
+  transition: all 0.5s;
+}
+.paymentFormBtn:hover {
+  background-color: blue;
+  box-shadow: 0px 0px 10px blue;
+}
+.paymentform {
+  width: 70%;
+  border: 1px solid blue;
+  border-radius: 10px;
+  margin: auto;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.87);
+}
+.payment_modal {
+  background-image: url(../../assets/paymentBackground.jpg);
+  background-size: cover;
+  /* width: 50%; */
+}
+.cardHolder {
+  width: 96%;
+  margin: 2%;
+}
+.modal-body {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 /* -- car card --  */
