@@ -16,11 +16,15 @@
 
 @media (min-width: 1025px) {
   #profile_body {
-    background-image: url(../../assets/bgac.webp);
-    background-position: left bottom;
+    /* background-image: url(../../assets/bgac.webp); */
+    background-image: url(https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700323120.jpg);
+    /* background-position: left bottom; */
+    background-position: center;
     background-repeat: no-repeat;
-    background-size: 40% !important;
-    background-color: rgb(8, 107, 102);
+    background-size:cover ;
+    height: 100vh;
+    /* background-size: 40% !important; */
+    /* background-color: rgb(35, 37, 39); */
     background-attachment: fixed;
     /* padding: 40px !important; */
     margin: 0px !important;
@@ -36,6 +40,14 @@
   #account_heading {
     padding-bottom: 30px;
     padding-top: 20px;
+  }
+  .pro_icon{
+    position: fixed;
+    display: flex;
+    align-items: flex-start;
+    color: rgb(233, 231, 231);
+    bottom: 100px;
+    margin-left: 20px;
   }
 }
 

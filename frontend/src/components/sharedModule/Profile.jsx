@@ -26,7 +26,7 @@ export const Profile = () => {
     <div id="profile_body" style={{ height: "100vh" }}>
       {userData?.role !== "user" && <Sidebar />}
       <Header />
-      <Container style={{ height: "75vh", paddingTop: "80px" }}>
+      <Container style={{ height: "75vh", paddingTop: "100px" }}>
         <div className="shadow-lg p-3 mb-5 bg-white rounded profile_section ">
           <h4 id="account_heading">Account Information</h4>
 
@@ -55,6 +55,7 @@ export const Profile = () => {
             Email: {userData?.userEmail}
           </div>
         </div>
+        <i class="fa-solid fa-10x fa-user pro_icon"></i>
       </Container>
       {userData?.role === "user" && <Bnav />}
     </div>

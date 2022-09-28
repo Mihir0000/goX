@@ -6,14 +6,16 @@
 }
 @media (min-width: 1025px)  {
     .booking_body{
-        background-image: url(/public/assets/bg1.webp);
-        background-position: bottom;
+        background-image: url(https://png.pngtree.com/thumb_back/fw800/back_our/20190625/ourmid/pngtree-c4d-indoor-garage-display-car-scene-image_258567.jpg);
+        background-position: center;
         background-size: cover;
         background-attachment: fixed;
-        padding-bottom: 20px;
-        padding-top: 20px;
         min-height: 100vh;
         
+    }
+    .booking_body2{
+        background-color: rgba(0, 0, 0, 0.455);
+        height: 100vh;
     }
     #booking_lottie{
         padding-top: 20px;
@@ -28,7 +30,7 @@
         font-size: 15px;
         text-align: left;
         color: aliceblue;
-        background-color: black;
+        background-color: rgba(7, 7, 7, 0.693);
         /* width: 30%; */
         margin: 10%;
         border-radius: 10px;

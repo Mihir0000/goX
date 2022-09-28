@@ -1,53 +1,58 @@
 .card {
-    margin-bottom: 8px;
-    background-color: rgb(0, 4, 8);
-    text-align: left;
-    color: white !important;
-    margin-right: 0 !important;
+  margin-bottom: 8px;
+  background-color: rgb(0, 4, 8);
+  text-align: left;
+  color: white !important;
+  margin-right: 0 !important;
 }
 
 a:hover {
-    color: rgb(81, 182, 213) !important;
+  color: rgb(81, 182, 213) !important;
 }
-#body_heading{
-    padding-top: 70px;
-    color: rgb(85, 83, 83);
+#body_heading {
+  padding-top: 70px;
+  color: rgb(85, 83, 83);
 }
-
-
 
 @media (min-width: 1025px) {
-    .card {
-        width: 55%;
-        height: 90px;
-        padding: 8px;
-        padding-top: 18px;
-        padding-left: 45px;
-    }
+  .card {
+    width: 55%;
+    height: 90px;
+    padding: 8px;
+    padding-top: 18px;
+    padding-left: 45px;
+  }
 
-    #booking_section {
-        padding-left: 31%;
-        padding-top: 90px;
-    }
-    .lottie{
-        padding-right: 48%;
-    }
-    #home_body{
-        background-image: url(../../assets/bg1.webp);
-        background-position: bottom;
-        background-repeat: no-repeat;
-        background-size:cover;
-    }
+  #booking_section {
+    padding-left: 31%;
+    padding-top: 50px;
+  }
+  .lottie {
+    padding-right: 48%;
+  }
+  #home_body {
+    background-image: url(https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-1.2.1&w=1080&fit=max&q=80&fm=jpg&crop=entropy&cs=tinysrgb);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+
+  }
+  .home_body2 {
+    background-color: rgba(0, 0, 0, 0.564);
+    height: 100vh;
+  }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {}
+@media (min-width: 768px) and (max-width: 1024px) {
+}
 
-@media (min-width: 481px) and (max-width: 767px) {}
+@media (min-width: 481px) and (max-width: 767px) {
+}
 
-@media (min-width: 320px) and (max-width: 480px) {}
+@media (min-width: 320px) and (max-width: 480px) {
+}
 
 span {
-    font-weight: bold;
+  font-weight: bold;
 }
-
-
