@@ -11,7 +11,7 @@ export const Home = () => {
         <Container style={{ height: "80vh" }}>
           <Header />
           <div id="body_heading">
-            <img src="/assets/G.png" alt="logo" style={{height:"80px", width:"200px", marginBottom:"10px"}}/>
+            <img src="/assets/G.png" alt="logo" style={{height:"80px", width:"200px", marginBottom:"10px", boxShadow:"0px 0px 25px #ffff"}}/>
             <h6 className="text-white">Hello {localStorage.getItem("name")}</h6>
           </div>
 
