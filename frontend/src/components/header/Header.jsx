@@ -12,7 +12,7 @@ export const Header = () => {
     return (
         <div>
             <Dropdown id="header_btn">
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                <Dropdown.Toggle variant="light" id="dropdown-basic">
                     <img
                         className="header_icon"
                         alt="shutdown"

@@ -236,6 +236,7 @@ export default function Registration() {
                 className="logBtn"
                 onClick={submitHandler}
                 variant="contained"
+                type="submit"
               >
                 SignUp
               </Button>

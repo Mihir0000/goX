@@ -61,7 +61,7 @@ const ActiveTrips = () => {
               <TableHead>
                 <TableRow>
                   {label.map((l, index) => (
-                    <TableCell key={index} align="center">
+                    <TableCell key={index} align="left">
                       {l}
                     </TableCell>
                   ))}
@@ -73,14 +73,14 @@ const ActiveTrips = () => {
                   .map((trip, index) => {
                     return (
                       <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                        <TableCell align="center">{trip.id}</TableCell>
-                        <TableCell align="center">{trip.userEmail}</TableCell>
-                        <TableCell align="center">{trip.distance} Km</TableCell>
-                        <TableCell align="center">₹ {trip.amount}</TableCell>
-                        <TableCell align="center">
+                        <TableCell align="left" className="tablecell">{trip.id}</TableCell>
+                        <TableCell align="left" className="tablecell">{trip.userEmail}</TableCell>
+                        <TableCell align="left" className="tablecell">{trip.distance} Km</TableCell>
+                        <TableCell align="left" className="tablecell">₹ {trip.amount}</TableCell>
+                        <TableCell align="left" className="tablecell">
                           {trip?.assignDriver}
                         </TableCell>
-                        <TableCell align="center">{trip.tripStatus}</TableCell>
+                        <TableCell align="left" className="tablecell">{trip.tripStatus}</TableCell>
                       </TableRow>
                     );
                   })}
