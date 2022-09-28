@@ -64,7 +64,7 @@ const UserTable = () => {
               <TableHead>
                 <TableRow>
                   {label.map((l, index) => (
-                    <TableCell key={index} align="center">
+                    <TableCell key={index} align="left">
                       {l}
                     </TableCell>
                   ))}
@@ -76,19 +76,19 @@ const UserTable = () => {
                   .map((user, index) => {
                     return (
                       <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                        <TableCell align="center" className="tablecell">
+                        <TableCell align="left" className="tablecell">
                           {user.userId}
                         </TableCell>
-                        <TableCell align="center" className="tablecell">
+                        <TableCell align="left" className="tablecell">
                           {user.userName}
                         </TableCell>
-                        <TableCell align="center" className="tablecell">
+                        <TableCell align="left" className="tablecell">
                           {user.userEmail}
                         </TableCell>
-                        <TableCell align="center" className="tablecell">
+                        <TableCell align="left" className="tablecell">
                           {user.role}
                         </TableCell>
-                        <TableCell align="center">
+                        <TableCell align="left">
                           <ChangeRole userId={user.userId} />
                         </TableCell>
                       </TableRow>
