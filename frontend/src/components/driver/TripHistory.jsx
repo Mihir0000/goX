@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
-import axios from "axios";
-import { Modal, Button, Container } from "react-bootstrap";
-import Sidebar from "../sharedModule/Sidebar";
-import { Header } from "../header/Header";
-import { toast } from "react-toastify";
+import React, { useState, useEffect } from 'react';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+import axios from 'axios';
+import { Modal, Button } from 'react-bootstrap';
+import Sidebar from '../sharedModule/Sidebar';
+import { Header } from '../header/Header';
+import { toast } from 'react-toastify';
 
 const TripHistory = () => {
   const [page, setPage] = useState(0);
@@ -20,7 +20,7 @@ const TripHistory = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const [singleTrip, setSingleTrip] = useState();
-  const [driverEarning, setDriverEarning] = useState("");
+  const [driverEarning, setDriverEarning] = useState('');
 
   const handleShow = (trip) => {
     setShow(true);
@@ -36,7 +36,7 @@ const TripHistory = () => {
     let m = new Date(result).getMinutes();
     let s = new Date(result).getSeconds();
     let original_date =
-      todate + "/" + tomonth + "/" + toyear + " " + h + ":" + m + ":" + s;
+      todate + '/' + tomonth + '/' + toyear + ' ' + h + ':' + m + ':' + s;
     return original_date;
   };
 
@@ -49,15 +49,15 @@ const TripHistory = () => {
     setPage(0);
   };
   useEffect(() => {
-    axios.get("http://localhost:5000/trip/AllTrip").then((data) => {
+    axios.get('http://localhost:5000/trip/AllTrip').then((data) => {
       setAllTrips(data.data.allTrip);
     });
   }, []);
 
   useEffect(() => {
-    const userEmail = localStorage.getItem("email");
+    const userEmail = localStorage.getItem('email');
     axios
-      .get("http://localhost:5000/driver/last24Hrs", { params: { userEmail } })
+      .get('http://localhost:5000/driver/last24Hrs', { params: { userEmail } })
       .then((data) => {
         console.log(data);
         setDriverEarning(data?.data);
@@ -68,17 +68,17 @@ const TripHistory = () => {
   });
 
   const label = [
-    "Trip ID",
-    "Passenger Name",
-    "From",
-    "To",
-    "Distance",
-    "Amount",
-    "Details",
+    'Trip ID',
+    'Passenger Name',
+    'From',
+    'To',
+    'Distance',
+    'Amount',
+    'Details',
   ];
 
   return (
-    <div className="all_users" style={{ height: "100%", width:"100vw" }}>
+    <div className="all_users" style={{ height: '100%', width: '100vw' }}>
       <Sidebar />
       <Header />
 
@@ -106,10 +106,10 @@ const TripHistory = () => {
       <div className="user_table">
         <Paper
           sx={{
-            width: "100%",
-            overflow: "hidden",
-            backgroundColor: "#72a3b334",
-            color: "whitesmoke",
+            width: '100%',
+            overflow: 'hidden',
+            backgroundColor: '#72a3b334',
+            color: 'whitesmoke',
           }}
         >
           <TableContainer sx={{ maxHeight: 500 }}>
