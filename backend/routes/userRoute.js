@@ -156,7 +156,7 @@ router.route('/trip').post(async (req, res) => {
     res.status(500).send({ message: 'Invalid User' });
   } else {
     const admin = await adminDashboardModel.findOne({});
-    console.log(admin);
+    // console.log(admin);
     let allCar = admin.carInfo;
     let basePrice;
     let found = false;
@@ -436,7 +436,7 @@ router.route('/generateOTP').get(async (req, res) => {
   for (let i = 0; i < 4; i++) {
     otp += num();
   }
-  console.log(otp);
+  // console.log(otp);
   res.send({ otp });
 });
 
