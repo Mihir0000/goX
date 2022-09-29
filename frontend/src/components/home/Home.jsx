@@ -9,24 +9,24 @@ export const Home = () => {
     <div id="home_body">
       <Container>
         <Header />
+        <img
+          src="/assets/G.png"
+          alt="logo"
+          style={{
+            height: "80px",
+            width: "200px",
+            marginBottom: "10px",
+            boxShadow: "0px 0px 25px #ffff",
+          }}
+        />
         <div id="body_heading">
-          <img
-            src="/assets/G.png"
-            alt="logo"
-            style={{
-              height: "80px",
-              width: "200px",
-              marginBottom: "10px",
-              boxShadow: "0px 0px 25px #ffff",
-            }}
-          />
           <h6 className="text-white">Hello {localStorage.getItem("name")}</h6>
         </div>
 
         <div id="booking_section">
           <a href="/ridenow" className="card">
-            <div className="d-flex">
-              <div className="lottie">
+            <div className="d-flex justify-content-between px-5">
+              <div className="lottie pt-2">
                 Book a Ride <br /> <span>NOW</span>
               </div>
               <lottie-player
@@ -44,8 +44,8 @@ export const Home = () => {
             </div>
           </a>
           <a className="card" href="/#">
-            <div className="d-flex">
-              <div className="lottie">
+            <div className="d-flex justify-content-between px-5">
+              <div className="lottie pt-2">
                 Plan a <span>FUTURE</span>
                 <br />
                 Trip
@@ -61,8 +61,8 @@ export const Home = () => {
             </div>
           </a>
           <a className="card" href="/#">
-            <div className="d-flex">
-              <div className="lottie">
+            <div className="d-flex justify-content-between px-5">
+              <div className="lottie pt-2">
                 <span>OUTSTATION</span>
                 <br />
                 Journey Book

@@ -43,12 +43,10 @@ export const Booking = () => {
       <div id="booking_info">
         {bookingData?.allTrip?.length !== 0 ? (
           <>
-            <h5 className="pt-5 text-white">Booking Details</h5>
-            <hr />
-            <br />
+            <h5 className="pt-2 text-white">Booking Details</h5>
             <Box
+            className="booking_box"
               sx={{ flexGrow: 1 }}
-              style={{ overflowY: "scroll", height: "80vh" }}
             >
               <Grid container spacing={2}>
                 {bookingData?.allTrip?.map((e, index) => (
@@ -96,27 +94,30 @@ export const Booking = () => {
                           </div>
                         )
                       )}
-                      <p>
-                        <strong>Booked At: </strong> {changeDate(e?.createdAt)}
-                      </p>
-                      <p>
-                        <strong>From :</strong> {e?.source}
-                      </p>
-                      <p>
-                        <strong>To :</strong> {e?.destination}
-                      </p>
-                      <p>
-                        <strong>Distance :</strong> {e?.distance}km
-                      </p>
-                      <p>
-                        <strong>Ride Preferred:</strong> {e?.carType}
-                      </p>
-                      <p>
-                        <strong>Amount:</strong> ₹ {e?.amount}
-                      </p>
-                      <p>
-                        <strong>Ride Status :</strong> {e?.tripStatus}
-                      </p>
+                      <div className="booking_details">
+                        <p>
+                          <strong>Booked At: </strong>{" "}
+                          {changeDate(e?.createdAt)}
+                        </p>
+                        <p>
+                          <strong>From :</strong> {e?.source}
+                        </p>
+                        <p>
+                          <strong>To :</strong> {e?.destination}
+                        </p>
+                        <p>
+                          <strong>Distance :</strong> {e?.distance}km
+                        </p>
+                        <p>
+                          <strong>Ride Preferred:</strong> {e?.carType}
+                        </p>
+                        <p>
+                          <strong>Amount:</strong> ₹ {e?.amount}
+                        </p>
+                        <p>
+                          <strong>Ride Status :</strong> {e?.tripStatus}
+                        </p>
+                      </div>
                     </div>
                   </Grid>
                 ))}
