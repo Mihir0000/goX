@@ -180,6 +180,18 @@ const Controls = () => {
         toast(err.response.data.message);
       });
   };
+  const removeCar = async (removeCar) => {
+    console.log(removeCar);
+    const userEmail = localStorage.getItem("email");
+    await axios
+      .put("http://localhost:5000/admin/removeCar", {removeCar, userEmail})
+      .then((data) => {
+        swal(data.data.message);
+      })
+      .catch((err) => {
+        toast(err.response.data.message);
+      });
+  };
 
   useEffect(() => {
     axios.get("http://localhost:5000/admin/setPrice").then((data) => {
@@ -190,7 +202,7 @@ const Controls = () => {
       setFrostParcent(data.data.frostParcent);
       setBasePrice(0);
     });
-  }, []);
+  }, );
 
   return (
     <div className="controls_container">
@@ -373,7 +385,7 @@ const Controls = () => {
                 {carInfo?.map((e, index) => (
                   <div className="d-flex justify-content-between p-3" key={index}>
                     <h5 className="text-capitalize">{e?.carType}</h5>
-                    <i className="fa-solid fa-trash-can p-1"></i>
+                    <i className="fa-solid fa-trash-can p-1" onClick={()=>removeCar(e?.carType) }></i>
                   </div>
                 ))}
               </div>
