@@ -35,7 +35,6 @@ function App() {
         console.log(err);
       });
   }, []);
-  console.log(stripeApiKey);
   return (
     <>
       <div className="App">

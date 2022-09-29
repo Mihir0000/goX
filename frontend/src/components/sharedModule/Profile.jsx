@@ -1,17 +1,17 @@
-import { Container } from "@mui/system";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Header } from "../header/Header";
-import { Bnav } from "../nav/Bnav";
-import "./profile.css";
-import Sidebar from "./Sidebar";
-import { toast } from "react-toastify";
+import { Container } from '@mui/system';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Header } from '../header/Header';
+import { Bnav } from '../nav/Bnav';
+import './profile.css';
+import Sidebar from './Sidebar';
+import { toast } from 'react-toastify';
 
 export const Profile = () => {
   const [userData, setUserData] = useState();
 
   useEffect(() => {
-    const userEmail = localStorage.getItem("email");
+    const userEmail = localStorage.getItem('email');
     axios
       .get(`http://localhost:5000/me`, { params: { userEmail } })
       .then((res) => {
@@ -24,9 +24,9 @@ export const Profile = () => {
 
   return (
     <div id="profile_body">
-      {userData?.role !== "user" && <Sidebar />}
+      {userData?.role !== 'user' && <Sidebar />}
       <Header />
-      <Container style={{ height: "100%", paddingTop: "100px" }}>
+      <Container style={{ height: '100%', paddingTop: '100px' }}>
         <div className="d-flex justify-content-between">
           <i className="fa-solid fa-10x fa-user pro_icon"></i>
           <div className="shadow-lg p-4 mb-4 bg-white rounded profile_section ">
@@ -38,7 +38,8 @@ export const Profile = () => {
                 src="https://img.icons8.com/color/96/000000/customer-skin-type-7.png"
                 alt="usericon"
               />
-              Name: {userData?.userName}
+              Name :{' '}
+              <strong className="text-capitalize">{userData?.userName}</strong>
             </div>
             <div className="shadow-lg p-3 mb-5 bg-white rounded profile_div">
               <img
@@ -46,7 +47,8 @@ export const Profile = () => {
                 alt="role"
                 src="https://img.icons8.com/external-basicons-color-danil-polshin/100/000000/external-abstract-abstract-basicons-color-danil-polshin-9.png"
               />
-              Role: {userData?.role}
+              Role:{' '}
+              <strong className="text-capitalize">{userData?.role}</strong>
             </div>
             <div className="shadow-lg p-3 mb-5 bg-white rounded profile_div">
               <img
@@ -54,12 +56,12 @@ export const Profile = () => {
                 src="https://img.icons8.com/color/96/000000/new-post.png"
                 alt="mailicon"
               />
-              Email: {userData?.userEmail}
+              Email: <strong>{userData?.userEmail}</strong>
             </div>
           </div>
         </div>
       </Container>
-      {userData?.role === "user" && <Bnav />}
+      {userData?.role === 'user' && <Bnav />}
     </div>
   );
 };

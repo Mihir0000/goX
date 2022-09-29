@@ -7,21 +7,21 @@ import { Header } from '../header/Header';
 import { toast } from 'react-toastify';
 
 const Controls = () => {
-  const basePriceRef = useRef();
-  const rainRef = useRef();
-  const frostRef = useRef();
-  const rainParcentRef = useRef();
-  const frostParcentRef = useRef();
-  const addCarTypeRef = useRef();
-  const addCarPriceRef = useRef();
-  const addCarDescriptionRef = useRef();
-  const [basePrice, setBasePrice] = useState();
+  const basePriceRef = useRef(null);
+  const rainRef = useRef(null);
+  const frostRef = useRef(null);
+  const rainParcentRef = useRef(null);
+  const frostParcentRef = useRef(null);
+  const addCarTypeRef = useRef(null);
+  const addCarPriceRef = useRef(null);
+  const addCarDescriptionRef = useRef(null);
+  const [basePrice, setBasePrice] = useState(0);
   const [frost, setFrost] = useState(false);
   const [rain, setRain] = useState(false);
   const [rainParcent, setRainParcent] = useState(0);
   const [frostParcent, setFrostParcent] = useState(0);
-  const [carInfo, setCarInfo] = useState();
-  const [carType, setCarType] = useState();
+  const [carInfo, setCarInfo] = useState([]);
+  const [carType, setCarType] = useState('');
   const [newCar, setNewCar] = useState('');
   const [newPrice, setNewPrice] = useState(0);
   const [newDescription, setNewDescription] = useState('');
@@ -237,6 +237,7 @@ const Controls = () => {
             <h5>Is today Frosty?</h5>
             <div>
               <input
+                name="frostPercent"
                 type="number"
                 className="rainFrostInput"
                 ref={frostParcentRef}
@@ -247,6 +248,7 @@ const Controls = () => {
               <span> %</span>
             </div>
             <Form.Check
+              name="frost"
               type="switch"
               id="custom-switc"
               ref={frostRef}
@@ -259,6 +261,7 @@ const Controls = () => {
             <h5>Is Today Rainy?</h5>
             <div>
               <input
+                name="rainParcent"
                 type="number"
                 className="rainFrostInput"
                 onChange={rainParcentHandle}
@@ -269,6 +272,7 @@ const Controls = () => {
               <span> %</span>
             </div>
             <Form.Check
+              name="rain"
               type="switch"
               id="custom-switch"
               ref={rainRef}
@@ -297,6 +301,7 @@ const Controls = () => {
               </select>
               <div className="basePriceIn">
                 <input
+                  name="basePrice"
                   type="number"
                   min="1"
                   ref={basePriceRef}
@@ -333,6 +338,7 @@ const Controls = () => {
                 <div className="d-flex justify-content-between ">
                   <label>Car Type :</label>
                   <input
+                    name="carType"
                     className="inpt-cont"
                     type="text"
                     required
@@ -345,6 +351,7 @@ const Controls = () => {
                 <div className="d-flex justify-content-between">
                   <label>Base Price Per Km :</label>
                   <input
+                    name="basePrice"
                     className="inpt-cont"
                     type="Number"
                     required
@@ -357,6 +364,7 @@ const Controls = () => {
                 <div className="d-flex justify-content-between">
                   <label>Description :</label>
                   <input
+                    name="descriptions"
                     className="inpt-cont"
                     type="text"
                     required
