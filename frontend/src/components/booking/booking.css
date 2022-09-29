@@ -3,37 +3,46 @@
   padding: 0px !important;
   height: fit-content;
 }
-@media (min-width: 1025px) {
-  .booking_body {
-    background: linear-gradient(to right, rgba(4, 13, 66, 0.455),rgba(0, 0, 0, 0.455)),
-      url(https://png.pngtree.com/thumb_back/fw800/back_our/20190625/ourmid/pngtree-c4d-indoor-garage-display-car-scene-image_258567.jpg);
-    background-position: center;
-    background-size: cover;
-    background-attachment: fixed;
-    min-height: 100vh;
-  }
-  #booking_lottie {
-    padding-top: 20px;
-    margin-left: 47%;
-  }
-  #booking_info {
-    padding-bottom: 10px;
-  }
-  .booking {
-    margin-top: 10px;
-    /* font-weight: bold; */
-    font-size: 15px;
-    text-align: left;
-    color: aliceblue;
-    background-color: rgba(7, 7, 7, 0.693);
-    /* width: 30%; */
-    margin: 10%;
-    border-radius: 10px;
-    padding: 30px;
-    /* padding-left: 60px; */
-    height: fit-content;
-  }
+/* @media (min-width: 1025px) { */
+.booking_body {
+  background: linear-gradient(
+      to right,
+      rgba(4, 13, 66, 0.455),
+      rgba(0, 0, 0, 0.455)
+    ),
+    url(https://png.pngtree.com/thumb_back/fw800/back_our/20190625/ourmid/pngtree-c4d-indoor-garage-display-car-scene-image_258567.jpg);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh;
 }
+#booking_lottie {
+  padding-top: 20px;
+  margin-left: 47%;
+}
+#booking_info {
+  padding-bottom: 10px;
+}
+.booking {
+  margin-top: 10px;
+  /* font-weight: bold; */
+  font-size: 15px;
+  text-align: left;
+  color: aliceblue;
+  background-color: rgba(7, 7, 7, 0.693);
+  /* width: 30%; */
+  margin: 10%;
+  border-radius: 10px;
+  padding: 30px;
+  /* padding-left: 60px; */
+  height: fit-content;
+}
+.booking_details p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* } */
 
 /* -- booking status --  */
 
@@ -44,6 +53,18 @@
 .booking_status {
   width: fit-content;
   background-color: #ffffff;
+}
+.booking_box{
+  overflow-y: scroll;
+  height: 80vh;
+  border: 1px solid whitesmoke;
+  width: 95%;
+  margin: auto;
+  border-radius: 20px;
+  margin-bottom: 70px!important;
+}
+.booking_box::-webkit-scrollbar{
+  display: none;
 }
 
 /* -- end booking status --  */

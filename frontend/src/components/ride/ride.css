@@ -5,11 +5,11 @@
 /* @media (min-width: 1025px) { */
   .ride_body {
     /* background-image: url(../../assets/bgac.webp); */
-    background-image: url(https://cdnb.artstation.com/p/assets/images/images/024/338/949/large/curtis-moroney-render-final-1.jpg?1582088357&dl=1);
-    background-position: left bottom;
+    background: linear-gradient(to left,rgba(0, 0, 0, 0.705),rgba(2, 21, 65, 0.579)),url(https://images.hdqwalls.com/download/open-road-to-mountains-4k-60-1920x1080.jpg);
+    background-position: center;
     background-repeat: no-repeat;
-    background-size: 40% !important;
-    background-color: rgb(8, 107, 102);
+    background-size: cover;
+    /* background-color: rgb(8, 107, 102); */
     background-attachment: fixed;
     padding: 40px;
     margin: 0px !important;
