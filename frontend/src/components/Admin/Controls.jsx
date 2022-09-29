@@ -373,7 +373,7 @@ const Controls = () => {
                 {carInfo?.map((e, index) => (
                   <div className="d-flex justify-content-between p-3" key={index}>
                     <h5 className="text-capitalize">{e?.carType}</h5>
-                    <i class="fa-solid fa-trash-can p-1"></i>
+                    <i className="fa-solid fa-trash-can p-1"></i>
                   </div>
                 ))}
               </div>

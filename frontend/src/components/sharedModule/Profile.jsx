@@ -28,8 +28,8 @@ export const Profile = () => {
       <Header />
       <Container style={{ height: "100%", paddingTop: "100px" }}>
         <div className="d-flex justify-content-between">
-          <i class="fa-solid fa-10x fa-user pro_icon"></i>
-          <div className="shadow-lg p-5 mb-5 bg-white rounded profile_section ">
+          <i className="fa-solid fa-10x fa-user pro_icon"></i>
+          <div className="shadow-lg p-4 mb-4 bg-white rounded profile_section ">
             <h4 id="account_heading">Account Information</h4>
 
             <div className="shadow-lg p-3 mb-5 bg-white rounded profile_div">
