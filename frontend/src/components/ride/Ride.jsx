@@ -33,6 +33,7 @@ export const Ride = () => {
   const stripe = useStripe();
   const elements = useElements();
   const payBtn = useRef();
+  const cardHolderRef = useRef();
 
   const [inputState, setInputState] = useState({
     userEmail: localStorage.getItem('email'),
@@ -46,6 +47,7 @@ export const Ride = () => {
   const [cars, setCars] = useState([]);
   const [admin, setAdmin] = useState();
   const [error, setError] = useState({});
+  const [btnDisabled, setBtnDisabled] = useState(false);
   let name, value;
   const handleChange = (event) => {
     name = event.target.name;
@@ -76,6 +78,7 @@ export const Ride = () => {
   }
 
   const distanceHandler = (event) => {
+    setBtnDisabled(true);
     event.preventDefault();
     if (inputState.source && inputState.destination) {
       setInputState({
@@ -179,14 +182,14 @@ export const Ride = () => {
             name: localStorage.getItem('name'),
             email: inputState.userEmail,
             address: {
-              line1: `${inputState.source} - ${inputState.destination} - ${inputState.distance}Km`,
+              line1: `${cardHolderRef.current.value}'s - ${inputState.source} - ${inputState.destination} - ${inputState.distance}Km`,
             },
           },
         },
       });
       if (result.error) {
         payBtn.current.disabled = false;
-        alert(result.error);
+        toast.error(result.error.message);
       } else {
         if (result.paymentIntent.status === 'succeeded') {
           inputState.paymentInfo = {
@@ -233,6 +236,7 @@ export const Ride = () => {
                 onChange={handleChange}
                 placeholder="Pickup Location"
                 variant="standard"
+                disabled={btnDisabled}
               />
 
               <p className="error">{error.source}</p>
@@ -244,6 +248,7 @@ export const Ride = () => {
                 onChange={handleChange}
                 placeholder="Drop Location"
                 variant="standard"
+                disabled={btnDisabled}
               />
               <p className="error">{error.destination}</p>
               <br />
@@ -331,6 +336,7 @@ export const Ride = () => {
                     type="text"
                     placeholder="Card Holder Name"
                     required
+                    ref={cardHolderRef}
                   />
                 </div>
                 <input
