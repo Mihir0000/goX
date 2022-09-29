@@ -1,186 +1,199 @@
 /********** Template CSS **********/
 .dashboard {
-    background-color: #1b1e1f;
+  background-color: #1b1e1f;
 }
 :root {
-    --primary: #eb1616;
-    --secondary: #191c24;
-    --light: #929ac76c;
-    --dark: #000000;
+  --primary: #eb1616;
+  --secondary: #191c24;
+  --light: #929ac76c;
+  --dark: #000000;
 }
 
 .back-to-top {
-    position: fixed;
-    display: none;
-    right: 45px;
-    bottom: 45px;
-    z-index: 99;
+  position: fixed;
+  display: none;
+  right: 45px;
+  bottom: 45px;
+  z-index: 99;
 }
 
 /*** Spinner ***/
 #spinner {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s ease-out, visibility 0s linear 0.5s;
-    z-index: 99999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-out, visibility 0s linear 0.5s;
+  z-index: 99999;
 }
 
 #spinner.show {
-    transition: opacity 0.5s ease-out, visibility 0s linear 0s;
-    visibility: visible;
-    opacity: 1;
+  transition: opacity 0.5s ease-out, visibility 0s linear 0s;
+  visibility: visible;
+  opacity: 1;
 }
 
 /*** Button ***/
 .btn {
-    transition: 0.5s;
+  transition: 0.5s;
 }
 
 .btn-square {
-    width: 38px;
-    height: 38px;
+  width: 38px;
+  height: 38px;
 }
 
 .btn-sm-square {
-    width: 32px;
-    height: 32px;
+  width: 32px;
+  height: 32px;
 }
 
 .btn-lg-square {
-    width: 48px;
-    height: 48px;
+  width: 48px;
+  height: 48px;
 }
 
 .btn-square,
 .btn-sm-square,
 .btn-lg-square {
-    padding: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: normal;
-    border-radius: 50px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: normal;
+  border-radius: 50px;
 }
 
 /* --- dashboard controls--- */
 
 .controls_container {
-    /* background-color: rgba(0, 255, 255, 0.603); */
-    background-image: url(https://cutewallpaper.org/22/rainy-sky-wallpapers/6110601.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    height: 100vh;
-    color: white;
+  /* background-color: rgba(0, 255, 255, 0.603); */
+  background-image: url(https://cutewallpaper.org/22/rainy-sky-wallpapers/6110601.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100%;
+  min-height: 100vh;
+  color: white;
 }
 
 .control_card {
-    display: flex;
-    border-radius: 20px;
-    box-shadow: 0px 8px 16px 4px #9e9e9e;
-    padding: 0 !important;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    width: 65%;
-    height: max-content;
+  display: flex;
+  border-radius: 20px;
+  box-shadow: 0px 8px 16px 4px #9e9e9e;
+  padding: 0 !important;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 65%;
+  height: max-content;
 }
 
 .w_card {
-    background-image: url('https://media.istockphoto.com/photos/rush-in-the-city-picture-id1190475811?b=1&k=20&m=1190475811&s=170667a&w=0&h=H9hNibvEy2PPBaZn1hej9vwNrtutvb50pY5_MexsA4M=');
-    background-size: cover;
-    width: 50%;
-    padding-left: 0;
-    border-bottom-left-radius: 20px;
-    border-top-left-radius: 20px;
+  background-image: url('https://media.istockphoto.com/photos/rush-in-the-city-picture-id1190475811?b=1&k=20&m=1190475811&s=170667a&w=0&h=H9hNibvEy2PPBaZn1hej9vwNrtutvb50pY5_MexsA4M=');
+  background-size: cover;
+  width: 50%;
+  padding-left: 0;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
 }
 
 .controls {
-    padding: 40px;
-    width: 50%;
+  padding: 40px;
+  width: 50%;
 }
 .controls h5 {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .switches {
-    justify-items: right;
-    padding-right: 0;
-    margin-right: 0;
-    margin-bottom: 10px;
+  justify-items: right;
+  padding-right: 0;
+  margin-right: 0;
+  margin-bottom: 10px;
 }
 
 .time-font {
-    font-size: 50px;
+  font-size: 50px;
 }
 
 .sm-font {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .med-font {
-    font-size: 28px;
+  font-size: 28px;
 }
 
 .large-font {
-    font-size: 60px;
+  font-size: 60px;
 }
 
 .setPriceBtn {
-    border: 1px solid blue;
-    padding: 6px 15px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px blue;
-    transition: all 0.5s;
-    width: 30%;
+  border: 1px solid blue;
+  /* padding: 6px 15px; */
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px blue;
+  transition: all 0.5s;
+  width: 30%;
+  height: 37px;
 }
 
 .setPriceBtn:hover {
-    background-color: rgba(0, 0, 255, 0.637);
-    color: white;
+  background-color: rgba(0, 0, 255, 0.637);
+  color: white;
 }
-.carTypeButton{
-    border: 1px solid blue;
-    padding: 10px 25px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px blue;
-    margin: 15px;
-    transition: all 0.5s;
+.carTypeButton {
+  border: 1px solid blue;
+  padding: 10px 15px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px blue;
+  margin: 10px;
+  transition: all 0.5s;
+  width: 50%;
 }
-.carTypeButton:hover{
-    background-color: rgba(0, 0, 255, 0.637);
-    color: white;
+.carTypeButton:hover {
+  background-color: rgba(0, 0, 255, 0.637);
+  color: white;
+}
+
+.fa-trash-can {
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.fa-trash-can:hover {
+  transform: scale(1.4);
+  color: red;
 }
 
 .form-switch .form-check-input {
-    height: 25px;
-    width: 50px;
+  height: 25px;
+  width: 50px;
 }
 
 .basePriceInput {
-    border: 1px solid gray;
-    border-radius: 8px;
-    height: 35px;
-    width: 30%;
+  border: 1px solid gray;
+  border-radius: 8px;
+  height: 35px;
+  width: 50%;
+}
+.basePriceIn {
+  width: 30%;
 }
 
 .selectPriceInput {
-    border: 1px solid gray;
-    border-radius: 8px;
-    height: 35px;
-    width: 40%;
-    padding-left: 10px;
-    margin-left: 10px;
+  border: 1px solid gray;
+  border-radius: 8px;
+  height: 35px;
+  width: 30%;
 }
 
 .rainFrostInput {
-    height: 30px;
-    width: 70px;
-    border: none;
-    border-radius: 5px;
+  height: 30px;
+  width: 70px;
+  border: none;
+  border-radius: 5px;
 }
-.base_price h5{
-    text-align: left;
+.base_price h5 {
+  text-align: left;
 }
 .inpt-cont {
   border: 1px solid grey;
@@ -192,216 +205,214 @@
 
 /*** Layout ***/
 .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 250px;
-    height: 100vh;
-    overflow-y: auto;
-    background: #191c24;
-    transition: 0.5s;
-    z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 250px;
+  height: 100vh;
+  overflow-y: auto;
+  background: #191c24;
+  transition: 0.5s;
+  z-index: 999;
 }
 
 .content {
-    margin-left: 250px;
-    min-height: 100vh;
-    background: #000000;
-    transition: 0.5s;
+  margin-left: 250px;
+  min-height: 100vh;
+  background: #000000;
+  transition: 0.5s;
 }
 
 @media (min-width: 992px) {
-    .sidebar {
-        margin-left: 0;
-    }
+  .sidebar {
+    margin-left: 0;
+  }
 
-    .sidebar.open {
-        margin-left: -250px;
-    }
+  .sidebar.open {
+    margin-left: -250px;
+  }
 
-    .content {
-        width: calc(100% - 250px);
-    }
+  .content {
+    width: calc(100% - 250px);
+  }
 
-    .content.open {
-        width: 100%;
-        margin-left: 0;
-    }
+  .content.open {
+    width: 100%;
+    margin-left: 0;
+  }
 }
 
 @media (max-width: 991.98px) {
-    .sidebar {
-        margin-left: -250px;
-    }
+  .sidebar {
+    margin-left: -250px;
+  }
 
-    .sidebar.open {
-        margin-left: 0;
-    }
+  .sidebar.open {
+    margin-left: 0;
+  }
 
-    .content {
-        width: 100%;
-        margin-left: 0;
-    }
+  .content {
+    width: 100%;
+    margin-left: 0;
+  }
 }
 
 /*** Navbar ***/
 
 .sidebar .navbar .navbar-nav .nav-link {
-    padding: 7px 20px;
-    color: #929ac76c;
-    font-weight: 500;
-    border-left: 3px solid #191c24;
-    border-radius: 0 30px 30px 0;
-    outline: none;
+  padding: 7px 20px;
+  color: #929ac76c;
+  font-weight: 500;
+  border-left: 3px solid #191c24;
+  border-radius: 0 30px 30px 0;
+  outline: none;
 }
 
 .sidebar .navbar .navbar-nav .nav-link:hover,
 .sidebar .navbar .navbar-nav .nav-link.active {
-    color: #eb1616;
-    background: #000000;
-    border-color: #eb1616;
+  color: #eb1616;
+  background: #000000;
+  border-color: #eb1616;
 }
 
 .sidebar .navbar .navbar-nav .nav-link i {
-    width: 40px;
-    height: 40px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #000000;
-    border-radius: 40px;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+  border-radius: 40px;
 }
 
 .sidebar .navbar .navbar-nav .nav-link:hover i,
 .sidebar .navbar .navbar-nav .nav-link.active i {
-    background: #191c24;
+  background: #191c24;
 }
 
 .sidebar .navbar .dropdown-toggle::after {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    border: none;
-    content: '\f107';
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    transition: 0.5s;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  border: none;
+  content: '\f107';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  transition: 0.5s;
 }
 
 .sidebar .navbar .dropdown-toggle[aria-expanded='true']::after {
-    transform: rotate(-180deg);
+  transform: rotate(-180deg);
 }
 
 .sidebar .navbar .dropdown-item {
-    padding-left: 25px;
-    border-radius: 0 30px 30px 0;
-    color: #929ac76c;
+  padding-left: 25px;
+  border-radius: 0 30px 30px 0;
+  color: #929ac76c;
 }
 
 .sidebar .navbar .dropdown-item:hover,
 .sidebar .navbar .dropdown-item.active {
-    background: #000000;
+  background: #000000;
 }
 
 .content .navbar .navbar-nav .nav-link {
-    margin-left: 25px;
-    padding: 12px 0;
-    color: #929ac76c;
-    outline: none;
+  margin-left: 25px;
+  padding: 12px 0;
+  color: #929ac76c;
+  outline: none;
 }
 
 .content .navbar .navbar-nav .nav-link:hover,
 .content .navbar .navbar-nav .nav-link.active {
-    color: #eb1616;
+  color: #eb1616;
 }
 
 .content .navbar .sidebar-toggler,
 .content .navbar .navbar-nav .nav-link i {
-    width: 40px;
-    height: 40px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #000000;
-    border-radius: 40px;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+  border-radius: 40px;
 }
 
 .content .navbar .dropdown-item {
-    color: #929ac76c;
+  color: #929ac76c;
 }
 
 .content .navbar .dropdown-item:hover,
 .content .navbar .dropdown-item.active {
-    background: #000000;
+  background: #000000;
 }
 
 .content .navbar .dropdown-toggle::after {
-    margin-left: 6px;
-    vertical-align: middle;
-    border: none;
-    content: '\f107';
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    transition: 0.5s;
+  margin-left: 6px;
+  vertical-align: middle;
+  border: none;
+  content: '\f107';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  transition: 0.5s;
 }
 
 .content .navbar .dropdown-toggle[aria-expanded='true']::after {
-    transform: rotate(-180deg);
+  transform: rotate(-180deg);
 }
 
 @media (max-width: 575.98px) {
-    .content .navbar .navbar-nav .nav-link {
-        margin-left: 15px;
-    }
+  .content .navbar .navbar-nav .nav-link {
+    margin-left: 15px;
+  }
 }
-
-
 
 /*** Testimonial ***/
 .progress .progress-bar {
-    width: 0px;
-    transition: 2s;
+  width: 0px;
+  transition: 2s;
 }
 
 /*** Testimonial ***/
 .testimonial-carousel .owl-dots {
-    margin-top: 24px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
+  margin-top: 24px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 .testimonial-carousel .owl-dot {
-    position: relative;
-    display: inline-block;
-    margin: 0 5px;
-    width: 15px;
-    height: 15px;
-    border: 5px solid #eb1616;
-    border-radius: 15px;
-    transition: 0.5s;
+  position: relative;
+  display: inline-block;
+  margin: 0 5px;
+  width: 15px;
+  height: 15px;
+  border: 5px solid #eb1616;
+  border-radius: 15px;
+  transition: 0.5s;
 }
 
 .testimonial-carousel .owl-dot.active {
-    background: #000000;
-    border-color: #eb1616;
+  background: #000000;
+  border-color: #eb1616;
 }
 
 .dashboard_content {
-    padding: 20px;
-    padding-top: 30px;
+  padding: 20px;
+  padding-top: 30px;
 }
 
 .all_users {
-    background-image: url(https://wallpapercave.com/wp/wp2665743.jpg);
-    min-height: 100vh;
+  background-image: url(https://wallpapercave.com/wp/wp2665743.jpg);
+  min-height: 100vh;
 }
 
 .user_table {
-    padding: 40px;
-    background-color: transparent;
+  padding: 40px;
+  background-color: transparent;
 }
 .tablecell {
-    color: rgb(221, 219, 219) !important;
+  color: rgb(221, 219, 219) !important;
 }
