@@ -23,39 +23,41 @@ export const Profile = () => {
   }, []);
 
   return (
-    <div id="profile_body" style={{ height: "100vh" }}>
+    <div id="profile_body">
       {userData?.role !== "user" && <Sidebar />}
       <Header />
-      <Container style={{ height: "75vh", paddingTop: "100px" }}>
-        <div className="shadow-lg p-3 mb-5 bg-white rounded profile_section ">
-          <h4 id="account_heading">Account Information</h4>
+      <Container style={{ height: "100%", paddingTop: "100px" }}>
+        <div className="d-flex justify-content-between">
+          <i class="fa-solid fa-10x fa-user pro_icon"></i>
+          <div className="shadow-lg p-5 mb-5 bg-white rounded profile_section ">
+            <h4 id="account_heading">Account Information</h4>
 
-          <div className="shadow-lg p-3 mb-5 bg-white rounded profile_div">
-            <img
-              className="profile_icon"
-              src="https://img.icons8.com/color/96/000000/customer-skin-type-7.png"
-              alt="usericon"
-            />
-            Name: {userData?.userName}
-          </div>
-          <div className="shadow-lg p-3 mb-5 bg-white rounded profile_div">
-            <img
-              className="profile_icon"
-              alt="role"
-              src="https://img.icons8.com/external-basicons-color-danil-polshin/100/000000/external-abstract-abstract-basicons-color-danil-polshin-9.png"
-            />
-            Role: {userData?.role}
-          </div>
-          <div className="shadow-lg p-3 mb-5 bg-white rounded profile_div">
-            <img
-              className="profile_icon"
-              src="https://img.icons8.com/color/96/000000/new-post.png"
-              alt="mailicon"
-            />
-            Email: {userData?.userEmail}
+            <div className="shadow-lg p-3 mb-5 bg-white rounded profile_div">
+              <img
+                className="profile_icon"
+                src="https://img.icons8.com/color/96/000000/customer-skin-type-7.png"
+                alt="usericon"
+              />
+              Name: {userData?.userName}
+            </div>
+            <div className="shadow-lg p-3 mb-5 bg-white rounded profile_div">
+              <img
+                className="profile_icon"
+                alt="role"
+                src="https://img.icons8.com/external-basicons-color-danil-polshin/100/000000/external-abstract-abstract-basicons-color-danil-polshin-9.png"
+              />
+              Role: {userData?.role}
+            </div>
+            <div className="shadow-lg p-3 mb-5 bg-white rounded profile_div">
+              <img
+                className="profile_icon"
+                src="https://img.icons8.com/color/96/000000/new-post.png"
+                alt="mailicon"
+              />
+              Email: {userData?.userEmail}
+            </div>
           </div>
         </div>
-        <i class="fa-solid fa-10x fa-user pro_icon"></i>
       </Container>
       {userData?.role === "user" && <Bnav />}
     </div>

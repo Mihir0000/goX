@@ -2,9 +2,10 @@
   text-align: left;
 }
 
-@media (min-width: 1025px) {
+/* @media (min-width: 1025px) { */
   .ride_body {
-    background-image: url(../../assets/bgac.webp);
+    /* background-image: url(../../assets/bgac.webp); */
+    background-image: url(https://cdnb.artstation.com/p/assets/images/images/024/338/949/large/curtis-moroney-render-final-1.jpg?1582088357&dl=1);
     background-position: left bottom;
     background-repeat: no-repeat;
     background-size: 40% !important;
@@ -74,7 +75,7 @@
     background-color: rgba(0, 0, 255, 0.397);
     color: white;
   }
-}
+/* } */
 
 /* -- car card --  */
 

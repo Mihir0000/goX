@@ -31,16 +31,14 @@ a:hover {
     padding-right: 48%;
   }
   #home_body {
-    background-image: url(https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-1.2.1&w=1080&fit=max&q=80&fm=jpg&crop=entropy&cs=tinysrgb);
+    background: linear-gradient(to left,rgba(0, 0, 0, 0.564),rgba(91, 140, 255, 0.388)),url(https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-1.2.1&w=1080&fit=max&q=80&fm=jpg&crop=entropy&cs=tinysrgb);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+    background-attachment: fixed;
+    min-height: 100vh;
+    height: 100%;
 
-  }
-  .home_body2 {
-    background-color: rgba(0, 0, 0, 0.564);
-    height: 100vh;
   }
 }
 
