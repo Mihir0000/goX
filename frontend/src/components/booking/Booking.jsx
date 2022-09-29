@@ -39,31 +39,50 @@ export const Booking = () => {
 
   return (
     <div className="booking_body">
-      <div className="booking_body2">
-        <Header />
-        <div id="booking_info">
-          {bookingData?.allTrip?.length !== 0 ? (
-            <>
-              <h5 className="pt-5 text-white">Booking Details</h5>
-              <hr />
-              <br />
-              <Box
-                sx={{ flexGrow: 1 }}
-                style={{ overflowY: "scroll", height: "80vh" }}
-              >
-                <Grid container spacing={2}>
-                  {bookingData?.allTrip?.map((e, index) => (
-                    <Grid item xs={4} key={index}>
-                      <div className="booking">
-                        {e?.tripStatus !== "endTrip" &&
-                        e?.tripStatus !== "cancel" ? (
+      <Header />
+      <div id="booking_info">
+        {bookingData?.allTrip?.length !== 0 ? (
+          <>
+            <h5 className="pt-5 text-white">Booking Details</h5>
+            <hr />
+            <br />
+            <Box
+              sx={{ flexGrow: 1 }}
+              style={{ overflowY: "scroll", height: "80vh" }}
+            >
+              <Grid container spacing={2}>
+                {bookingData?.allTrip?.map((e, index) => (
+                  <Grid item xs={4} key={index}>
+                    <div className="booking">
+                      {e?.tripStatus !== "endTrip" &&
+                      e?.tripStatus !== "cancel" ? (
+                        <div
+                          style={{
+                            float: "right",
+                          }}
+                        >
+                          <lottie-player
+                            src="https://assets1.lottiefiles.com/packages/lf20_qa602yhl.json"
+                            background="transparent"
+                            speed="1"
+                            style={{
+                              width: "40px",
+                              height: "40px",
+                              marginLeft: "10px",
+                            }}
+                            loop
+                            autoplay
+                          ></lottie-player>
+                        </div>
+                      ) : (
+                        e?.tripStatus === "cancel" && (
                           <div
                             style={{
                               float: "right",
                             }}
                           >
                             <lottie-player
-                              src="https://assets1.lottiefiles.com/packages/lf20_qa602yhl.json"
+                              src="https://assets7.lottiefiles.com/private_files/lf30_rp0vziqi.json"
                               background="transparent"
                               speed="1"
                               style={{
@@ -71,78 +90,56 @@ export const Booking = () => {
                                 height: "40px",
                                 marginLeft: "10px",
                               }}
-                              loop
+                              // loop
                               autoplay
                             ></lottie-player>
                           </div>
-                        ) : (
-                          e?.tripStatus === "cancel" && (
-                            <div
-                              style={{
-                                float: "right",
-                              }}
-                            >
-                              <lottie-player
-                                src="https://assets7.lottiefiles.com/private_files/lf30_rp0vziqi.json"
-                                background="transparent"
-                                speed="1"
-                                style={{
-                                  width: "40px",
-                                  height: "40px",
-                                  marginLeft: "10px",
-                                }}
-                                // loop
-                                autoplay
-                              ></lottie-player>
-                            </div>
-                          )
-                        )}
-                        <p>
-                          <strong>Booked At: </strong>{" "}
-                          {changeDate(e?.createdAt)}
-                        </p>
-                        <p>
-                          <strong>From :</strong> {e?.source}
-                        </p>
-                        <p>
-                          <strong>To :</strong> {e?.destination}
-                        </p>
-                        <p>
-                          <strong>Distance :</strong> {e?.distance}km
-                        </p>
-                        <p>
-                          <strong>Ride Preferred:</strong> {e?.carType}
-                        </p>
-                        <p>
-                          <strong>Amount:</strong> ₹ {e?.amount}
-                        </p>
-                        <p>
-                          <strong>Ride Status :</strong> {e?.tripStatus}
-                        </p>
-                      </div>
-                    </Grid>
-                  ))}
-                </Grid>
-              </Box>
-            </>
-          ) : (
-            <div style={{ height: "80vh" }}>
-              <div id="booking_lottie">
-                <lottie-player
-                  src="https://assets8.lottiefiles.com/packages/lf20_mmwivxcd.json"
-                  background="transparent"
-                  speed="1"
-                  style={{ width: "100px", height: "100px" }}
-                  loop
-                  autoplay
-                ></lottie-player>
-              </div>
-              <h4>No Booking</h4>
+                        )
+                      )}
+                      <p>
+                        <strong>Booked At: </strong> {changeDate(e?.createdAt)}
+                      </p>
+                      <p>
+                        <strong>From :</strong> {e?.source}
+                      </p>
+                      <p>
+                        <strong>To :</strong> {e?.destination}
+                      </p>
+                      <p>
+                        <strong>Distance :</strong> {e?.distance}km
+                      </p>
+                      <p>
+                        <strong>Ride Preferred:</strong> {e?.carType}
+                      </p>
+                      <p>
+                        <strong>Amount:</strong> ₹ {e?.amount}
+                      </p>
+                      <p>
+                        <strong>Ride Status :</strong> {e?.tripStatus}
+                      </p>
+                    </div>
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
+          </>
+        ) : (
+          <div style={{ height: "80vh" }}>
+            <div id="booking_lottie">
+              <lottie-player
+                src="https://assets8.lottiefiles.com/packages/lf20_mmwivxcd.json"
+                background="transparent"
+                speed="1"
+                style={{ width: "100px", height: "100px" }}
+                loop
+                autoplay
+              ></lottie-player>
             </div>
-          )}
-        </div>
-        <Bnav />
+            <h4>No Booking</h4>
+          </div>
+        )}
       </div>
+      <Bnav />
     </div>
   );
 };

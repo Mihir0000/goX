@@ -1,7 +1,6 @@
 .profile_section {
   text-align: left;
-  padding-top: 60px;
-  /* margin-top: 90px; */
+  width: 45%;
 }
 
 .profile_section h4 {
@@ -14,42 +13,30 @@
   margin-right: 10px;
 }
 
-@media (min-width: 1025px) {
+/* @media (min-width: 1025px) { */
   #profile_body {
-    /* background-image: url(../../assets/bgac.webp); */
     background-image: url(https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700323120.jpg);
-    /* background-position: left bottom; */
     background-position: center;
     background-repeat: no-repeat;
-    background-size:cover ;
-    height: 100vh;
-    /* background-size: 40% !important; */
-    /* background-color: rgb(35, 37, 39); */
+    background-size: cover;
+    min-height: 100vh;
+    height: 100%;
     background-attachment: fixed;
-    /* padding: 40px !important; */
     margin: 0px !important;
-  }
-  .profile_section {
-    width: 40%;
-    margin-left: 35rem;
-    padding: 25px !important;
-  }
-  .profile_div {
-    margin-bottom: 25px !important;
   }
   #account_heading {
     padding-bottom: 30px;
     padding-top: 20px;
   }
-  .pro_icon{
-    position: fixed;
-    display: flex;
-    align-items: flex-start;
+  .pro_icon {
     color: rgb(233, 231, 231);
-    bottom: 100px;
-    margin-left: 20px;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    width: 40%;
+    font-size: 250px;
   }
-}
+/* } */
 
 @media (min-width: 768px) and (max-width: 1024px) {
 }
@@ -57,4 +44,5 @@
 @media (min-width: 481px) and (max-width: 767px) {
 }
 
-@media (min-width: 320px) and (max-width: 480px) {}
+@media (min-width: 320px) and (max-width: 480px) {
+}
