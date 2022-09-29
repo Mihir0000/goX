@@ -146,6 +146,36 @@ router.route('/admin/addCar').post(async (req, res) => {
   }
 });
 
+router.route('/admin/removeCar').put(async (req, res) => {
+  const { removeCar, userEmail } = req.body;
+  const user = await userModel.findOne({ userEmail });
+  if (!user) {
+    res.status(500).send({ message: 'Invalid User' });
+  } else if (user.role === 'admin') {
+    let admin = await adminDashboardModel.findOne({});
+    if (admin) {
+      let allCar = admin.carInfo;
+      if (allCar.length === 0) {
+        res.status(500).send({ message: 'Car Not Found !!' });
+      }
+      let car = allCar.filter((i) => i.carType !== removeCar);
+      await adminDashboardModel.updateOne(
+        {},
+        {
+          $set: {
+            updateAt: Date.now(),
+            lastUpdate: userEmail,
+            carInfo: [...car],
+          },
+        }
+      );
+      res.status(200).send({ message: 'Car Delete Successfully.' });
+    }
+  } else {
+    res.status(402).send({ message: "Sorry, You're not Admin !!" });
+  }
+});
+
 router.route('/admin/setPrice').get(async (req, res) => {
   let setPrice = await adminDashboardModel.findOne({});
   res.status(200).send(setPrice);
